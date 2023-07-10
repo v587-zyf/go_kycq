@@ -1,0 +1,112 @@
+syntax = "proto3";
+package pbserver;
+
+import "common.proto";
+
+message SyncUserInfoNtf {
+    int32 userId 			= 1;
+    string openId 			= 2;
+    int32 serverId 			= 3;
+	int32 serverIndex		= 4;
+	int32 channelId 		= 5;
+    string nickname 		= 6;
+    int32 vip 				= 8;
+    int64 combat 			= 9;
+	int32 createTime 		= 10;
+	string avatar 			= 11;
+	int32 recharge 			= 13;
+	int64 gold 				= 14;
+	int32 ingot 			= 15;
+	int32 taskId 			= 16;
+	int32 lastRechargeTime	= 17;
+	int32 offlineTime		= 18;
+	int32 syscStatus		= 19;
+	int64 exp               = 20;
+	int32 loginTime         = 21;
+	int32 tokenRecharge		= 22;
+	repeated SyscHeroInfo heros = 50;
+}
+
+message SyscHeroInfo{
+	int32 heroIndex = 1;
+	int32 sex 		= 2;
+	int32 level 	= 3;
+	int32 job 		= 4;
+	int64 combat 	= 5;
+}
+
+message CCSToGsCrossFsIdChangeNtf{
+	int32 crossFsId = 1;
+}
+
+message RechageCcsToGsReq{
+	string  oid = 1;			//平台订单
+	string  gameOrder = 2;		//游戏订单
+	int32 	money = 3;			//充值金额
+	int32 	coin=4;				//收益金额
+}
+
+message RechageGsToCcsAck{
+	int32 result = 1;
+	string msg	=2;
+}
+
+
+message RechargeApplyReq{
+	int32 userId  		= 1;
+	int32 payType 		= 2;
+	int32 payTypeId		= 3;
+	int32 payNum		= 4;
+}
+
+message RechargeApplyAck{
+	string orderId		= 1;
+}
+
+
+//封禁 解封
+message BanInfoCcsToGsReq{
+	string openId =1;
+	int32 userId = 2;
+	bool isRemove = 3;		//是否解除
+}
+
+//发送邮件
+message MailSendCCsToGsReq{
+
+	string 	mailId 		= 1;
+	string 	title 		= 2;
+	string 	content 	= 3;
+	int32 validityDay	= 4;
+	repeated ItemUnit items = 5;	//多物品
+	repeated int32 userIds =6;
+	int32 highVip 		= 7;
+	int32 lowVip 		= 8;
+	int32 highLevel 	= 9;
+	int32 lowLevel 		= 10;
+	bool isOnline		= 11;
+	int32 highRecharge  = 12;
+	int32 lowRecharge	= 13;
+}
+
+message MailSendGsToCcsAck{
+
+}
+
+message FuncStateUpdateReq{
+}
+
+
+//更新公告
+message UpAnnouncementNowReq{
+}
+
+
+//更新跑马灯
+message UpPaoMaDengNowReq{
+}
+
+message SetDayRechargeNumNtf{
+	int32 serverId = 1;
+	int32 rechargeNum = 2;
+}

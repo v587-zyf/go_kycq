@@ -1,0 +1,35 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message PingReq {
+  bool isActive = 1;
+}
+
+message PingAck {
+  int64 ts = 1; // 服务器时间(毫秒)
+}
+
+
+// 设置
+message PreferenceSetReq{
+	repeated Preference preference = 1;
+}
+
+message PreferenceSetAck{
+	repeated Preference preference = 1;
+}
+
+// 获取配置
+message PreferenceLoadReq{
+	
+}
+
+message PreferenceLoadAck{
+	repeated Preference preference = 1;
+}
+
+message FuncStateCloseNtf{
+	repeated int32 closeFuncId = 1;
+}

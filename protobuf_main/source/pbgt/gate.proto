@@ -1,0 +1,62 @@
+syntax = "proto3";
+package pbgt;
+
+//服务器之间ping
+message ServerPingReq{
+   int32 serverId = 1;
+}
+
+message ServerPingAck{
+   int32 serverId = 1;
+}
+
+message HandShakeReq {
+  int32 gateSeq = 1;
+}
+
+message HandShakeAck {
+  int32 serverSeq = 1; // server编号
+}
+
+message UserQuitRpt {
+
+}
+
+message UserQuitNtf {
+	string reason = 1;
+}
+
+message UserFightInfoNtf{
+	int32 fightId = 1;			//战斗Id
+	int32 crossFightServerId=2; //跨服Id 
+}
+
+
+// 路由客户端与gs之间的消息，可从gate发往gs，也可从gs发往gate
+message RouteMessage {
+  bytes msg = 1;
+}
+
+// gs通过gate进行全局广播
+message BroadcastNtf {
+  repeated uint32 sessionIds = 1;   // 需要发送的客户端sessionId
+  bytes msg = 2;
+}
+
+message BroadcastByFS {
+  map<uint32,uint32> sessionIds = 1;   // 需要发送的客户端sessionId
+  bytes msg = 2;
+  int32 msgId = 3;
+}
+
+message GateMessageToFS {
+  bytes msg = 1;
+  int32 crossServerId=2;//
+  int32 serverId = 3;//
+}
+
+message FSMessageToGate {
+  bytes msg = 1;
+  int32 crossServerId=2;//
+  int32 serverId = 3;//
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+
+//进入活动
+message EnterDailyActivityReq{
+	int32 activityId = 1;	//dailyActivity表id
+	int32 stageId = 2;		//泡点Pk 关卡Id
+}
+
+//日常活动推送结果
+message DailyActivityResultNtf{
+	int32 activityId = 1;
+}
+
+//列表
+message DailyActivityListReq{}
+message DailyActivityListAck{
+	repeated DailyActivityInfo list = 1;
+}
+
+message DailyActivityInfo{
+	int32 activityId = 1;	//dailyActivity表id
+	int64 startTime = 2;	//活动开始时间
+	int64 endTime = 3;		//结束时间
+}

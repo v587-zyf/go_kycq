@@ -1,0 +1,22 @@
+{
+  "types": [
+    {
+      "type": "console",
+      "color": true
+    },
+    {
+      "type": "file",
+      "filename": "logs/serverMerge.log",
+      "maxlines": 1000000,
+      "maxsize": 102400000,
+      "daily": true,
+      "maxdays": 2,
+      "rotate": true,
+      "category": "default"
+    }
+  ],
+  "levels": {
+    "default": "DEBUG"
+  },
+  "logPath": "/"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "genproto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "./index.js -f ../proto/main.idmap -g jsonschema",
+    "gengo": "./index.js -f ../proto/main.idmap -g go -o ./tmp/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "change-case": "^3.0.1",
+    "dustjs-helpers": "^1.7.3",
+    "dustjs-linkedin": "^2.7.5",
+    "fs-extra": "^2.1.2",
+    "glob": "^7.1.1",
+    "glob-array": "^0.1.2",
+    "jison": "^0.4.17",
+    "protobufjs": "^5.0.1"
+  },
+  "dependencies": {
+    "protobuf-jsonschema": "^1.1.0"
+  }
+}

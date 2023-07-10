@@ -1,0 +1,23 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//月卡购买
+message MonthCardBuyReq{
+	int32 id = 1;	//monthCard表id
+}
+message MonthCardBuyAck{
+	int32 id = 1;
+	int32 monthCardType = 2;
+	MonthCardUnit monthCard = 3;
+}
+
+//月卡领取每日礼包
+message MonthCardDailyRewardReq{
+	int32 monthCardType = 1;	//月卡类型
+}
+message MonthCardDailyRewardAck{
+	int32 monthCardType = 1;
+	GoodsChangeNtf goods = 2;  	//物品变化
+}

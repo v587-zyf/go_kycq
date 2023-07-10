@@ -1,0 +1,34 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//神兵激活
+message GodEquipActiveReq{
+	int32 heroIndex = 1;	//武将索引
+	int32 id 		= 2;	//神兵id
+}
+message GodEquipActiveAck{
+	int32 heroIndex 	= 1;	//武将索引
+	GodEquip godEquip 	= 2;	//神兵信息
+}
+
+//神兵升级
+message GodEquipUpLevelReq{
+	int32 heroIndex = 1;	//武将索引
+	int32 id 		= 2;	// 神兵id
+}
+message GodEquipUpLevelAck{
+	int32 heroIndex 	= 1;	//武将索引
+	GodEquip godEquip 	= 2;	//神兵信息
+}
+
+//神兵血炼
+message GodEquipBloodReq{
+	int32 heroIndex  = 1;
+	int32 godEquipId = 2;
+}
+message GodEquipBloodAck{
+	int32 heroIndex   = 1;
+	GodEquip godEquip = 2;
+}

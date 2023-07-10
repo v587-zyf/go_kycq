@@ -1,0 +1,52 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//打开页面
+message ArenaOpenReq{}
+
+message ArenaOpenAck{
+	repeated RankInfo three = 1; //前三
+	repeated ArenaRank arenaRank = 2; //4个挑战列表
+	int32 dareNum = 3;	  //剩余挑战次数
+	int32 buyDareNum = 4; //今日购买次数
+	int32 buyDareNums = 5;//总共购买次数
+	int32 ranking = 6;	  //名次
+}
+
+//进入战斗
+message EnterArenaFightReq{
+	int32 challengeUid 		= 1; //挑战用户id
+	int32 challengeRanking = 2;	//挑战用户排名
+}
+
+message ArenaFightNtf{
+	int32 result = 1; //挑战结果
+	GoodsChangeNtf goods = 2;
+	int32 myRank  = 3;	//我的排名
+	int32 seasonScore = 4;
+}
+
+//购买次数
+message BuyArenaFightNumReq{}
+
+message BuyArenaFightNumAck{
+	int32 dareNum = 1;	  //剩余挑战次数
+	int32 buyDareNum = 2; //今日购买次数
+	int32 buyDareNums = 3;//总共购买次数
+	GoodsChangeNtf goods = 4;
+}
+
+//刷新对手
+message RefArenaRankReq{}
+
+message RefArenaRankAck{
+	repeated ArenaRank arenaRank = 1; //4个挑战列表
+	repeated RankInfo three = 2; //前三
+}
+
+message ArenaRank {
+	int32 ranking = 1; //排名
+	BriefUserInfo userinfo = 2;	//用户信息
+}

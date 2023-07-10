@@ -1,0 +1,42 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//头衔升级
+message LabelUpReq{}
+message LabelUpAck{
+	int32 id = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//头衔转职
+message LabelTransferReq{
+	int32 job = 1;
+}
+message LabelTransferAck{
+	int32 job = 1;
+	int32 transfer = 2;
+}
+
+//每日奖励
+message LabelDayRewardReq{}
+message LabelDayRewardAck{
+	bool dayReward 			= 1; //每日领取状态 
+	GoodsChangeNtf goods 	= 2;
+}
+
+//获取任务进度
+message LabelTaskReq{}
+
+//任务进度
+message LabelTaskNtf{
+	int32 labelId = 1;
+	map<int32,LabelTaskUnit> taskInfo = 2;
+}
+message LabelTaskUnit{
+	int32 taskId 	 	  = 1; //任务id
+	repeated int32 value  = 2; //当前进度
+	repeated int32 cfgVal = 3; //配置的参数
+	bool isOver			  = 4; //是否完成
+}

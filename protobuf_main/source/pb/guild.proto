@@ -1,0 +1,215 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+
+
+message GuildLoadInfoReq{}
+
+message GuildLoadInfoAck{
+   GuildInfo guildInfo = 1;
+}
+
+
+//创建工会
+message CreateGuildReq{
+	string  GuildName = 1;	
+	string  GuildIcon = 2; //工会旗帜
+	string  Notice = 3; //门派公告
+}
+
+message CreateGuildAck{
+   GuildInfo guildInfo = 1;
+    	bool success  = 2;
+}
+
+
+//申请加入门派的战力限制
+message JoinGuildCombatLimitReq{
+	int64 combat = 1;
+	int32 isAgree = 2;
+}
+
+message JoinGuildCombatLimitAck{
+	bool success = 1;
+	int64 limitCombat = 2;
+	int32 isAgree = 3;
+}
+
+//修改公告
+message ModifyBulletinReq{
+	string content = 1;
+}
+
+message ModifyBulletinAck{
+	bool success = 1;
+	string content = 2;
+}
+
+
+
+
+//退出工会
+message QuitGuildReq{}
+
+message QuitGuildAck{
+ 	bool success  = 1;
+}
+
+//踢出工会
+message KickOutReq{
+	int32 kickUserId  = 1; //被踢的玩家id
+}
+
+message KickOutAck{
+	int32 joinCd = 1; //被踢后xx时间内不能加入
+	int32 kickUserId = 2;
+}
+
+
+//弹劾会长
+message ImpeachPresidentReq{}
+
+message ImpeachPresidentAck{
+	bool success  = 1;
+}
+
+
+
+//查看信息
+message GuildCheckMemberInfoReq{
+	int32 userId  = 1;
+}
+
+message GuildCheckMemberInfoAck{
+   GuildInfo guildInfo = 1;
+}
+
+//申请加工会
+message ApplyJoinGuildReq{
+	int32 guildId = 1;
+}
+
+message ApplyJoinGuildAck{
+	bool success  = 1;
+}
+
+
+//任命
+message GuildAssignReq {
+  int32 id       = 1;
+  int32 position = 2; // enum guild_position
+}
+
+message GuildAssignAck {
+  bool success = 1;
+  int32 assignUserId = 2;
+  int32 nowPosition = 3;
+  map<int32,int32> positionCount     = 4; //职位占领情况  
+  
+}
+
+//工会列表
+message AllGuildInfosReq{}
+
+message AllGuildInfosAck{
+	repeated GuildInfo guildInfo = 1;
+}
+
+//解散工会
+message DissolveGuildReq{}
+
+message DissolveGuildAck{
+ bool success = 1;
+}
+
+//处理申请列表是否同意玩家加入门派
+message JoinGuildDisposeReq{
+	bool isAgree = 1; 
+	int32 applyUserId = 2;
+}
+
+message JoinGuildDisposeAck{
+	bool success = 1; 
+	repeated BriefUserInfo applyUserInfo = 2;
+	bool isHaveJoinGuild = 3;
+}
+
+//门派申请加入列表
+message GetApplyUserListReq{}
+
+message GetApplyUserListAck{
+   repeated BriefUserInfo applyUserInfo = 1;
+}
+
+
+message GuildInfo {
+  int32         guildId              = 1;
+  string        GuildName            = 2;
+  int32         guildLv              = 3;  //工会等级
+  int32         joinCd               = 4;  //下次可以申请加入门派的时间戳(开服第一天不生效)
+  repeated      GuildMenberInfo guildMenberInfo      = 5;  //工会成员信息
+  string        notice               = 6;//公会公告
+  int64		    combat				 = 8; //战斗力
+  int32         isAutoAgree          = 9; //是否自动同意
+  map<int32,int32> positionCount     = 10; //职位占领情况     
+  int32         onlineUser           = 11; //在线人数    
+  int32         GuildContributionValue = 12; //公会贡献度
+  int32         serverId             = 13;
+  int32         guildPeopleNum       = 14;
+  int32         huiZhangLv           = 15;
+  string        huiZhangName         = 16;
+}
+
+message GuildMenberInfo{
+ int32	  userId = 1; //成员id
+ int32    position = 2;//职位
+ int32    offlineTime = 3;//离线时间
+ int32    guildCapital = 4; //工会资金
+ int32    guildContribution = 5; //工会贡献值
+ string   nickName = 6; //昵称
+ string   avatar = 7; //头像
+ int32    lv  = 8; //等级
+ int32    combat  = 9; //等级
+ int32    job = 10;
+ int32    sex = 11;
+}
+
+
+
+message JoinGuildSuccessNtf{
+ int32     userId = 1;
+ int32	  guildId = 2; 
+ bool     success = 3;  // true:加门派,false:退门派
+}
+
+
+//一键处理申请列表是否同意玩家加入门派
+message AllJoinGuildDisposeReq{
+	bool isAgree = 1; 
+}
+
+message AllJoinGuildDisposeAck{
+	repeated BriefUserInfo applyUserInfo = 2;
+	bool isFullState = 3;//是否处理人数超了加入上限
+}
+
+
+message ApplyJoinGuildReDotNtf{}
+
+
+//弹劾会长成功后广播
+message ImpeachPresidentNtf{
+  int32 newHuiZhangUserId = 1;
+  int32 nowPosition = 2;
+  int32 oldHuiZhangUserId = 3;
+  int32 nowPosition1 = 4;
+}
+
+
+message BroadcastGuildChangeNtf{
+	int32 types = 1;
+	repeated int32 userInfos = 2;
+	map<int32,int32> positionCount     = 4; //职位占领情况 
+	repeated      GuildMenberInfo guildMenberInfo      = 5;  //工会成员信息
+}

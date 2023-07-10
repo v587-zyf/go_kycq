@@ -1,0 +1,50 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//列表
+message MaterialStageLoadReq {}
+message MaterialStageLoadAck {
+  map<int32,MaterialStage> materialStage = 1;	//材料副本(类型,信息)
+}
+
+//战斗
+message EnterMaterialStageFightReq{
+	int32 stageId = 1;
+}
+message MaterialStageFightResultNtf{
+	int32 materialType 	= 1;
+	int32 stageId		= 2;
+	int32 result 		= 3;
+	int32 dareNum 		= 4;
+	GoodsChangeNtf goods = 5;
+	int32 nowLayer		= 6;
+	int32 lastLayer		= 7;
+}
+
+//扫荡
+message MaterialStageSweepReq{
+	int32 stageId = 1;
+}
+message MaterialStageSweepAck{
+	int32 materialType = 1;
+	int32 sweepNum = 2;
+	GoodsChangeNtf goods = 3;
+}
+
+//购买次数推送
+message MaterialStageBuyNumNtf{
+	int32 materialType 	= 1;	//类型
+	int32 buyNum		= 2;	//购买次数
+}
+
+//购买次数
+message MaterialStageBuyNumReq{
+	int32 materialType 	= 1;	//类型
+	bool use			= 2;	//是否购买并使用
+}
+message MaterialStageBuyNumAck{
+	int32 materialType 	= 1;
+	int32 buyNum		= 2;
+}

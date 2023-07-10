@@ -1,0 +1,49 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//信息加载
+message TreasureShopLoadReq{}
+message TreasureShopLoadAck{
+	int32 buyNum 		= 1; //已购买次数
+	bool refreshFree	= 2; //刷新是否免费
+	int64 refreshTime 	= 3; //下次刷新时间
+	map<int32,bool> shop = 4; //商品列表(shopId,是否添加购物车)
+	map<int32,int32> car = 5; //购物车(shopId,数量)
+	int64 endTime		= 6; //活动结束时间
+}
+
+//变更购物车
+message TreasureShopCarChangeReq{
+	int32 shopId = 1;
+	bool isAdd = 2;
+}
+message TreasureShopCarChangeAck{
+	map<int32,int32> car = 1;
+	int32 shopId = 2;
+	bool isAdd = 3;
+	map<int32,bool> shop = 4;
+}
+
+//购买
+message TreasureShopBuyReq{
+	repeated int32 shop = 1; //购买商品(商品id,购买数量)
+}
+message TreasureShopBuyAck{
+	int32 buyNum 		 = 1;
+	GoodsChangeNtf goods = 2;
+	map<int32,bool> shop = 4; //商品列表(shopId,是否添加购物车)
+	map<int32,int32> car = 5; //购物车(shopId,数量)
+}
+
+//手动刷新
+message TreasureShopRefreshReq{}
+
+//手动或自动刷新推送
+message TreasureShopRefreshNtf{
+	map<int32,bool> shop = 1;
+	int64 refreshTime 	 = 2; //下次刷新时间
+	map<int32,int32> car = 3; //购物车
+	bool refreshFree	 = 4; //刷新是否免费
+}

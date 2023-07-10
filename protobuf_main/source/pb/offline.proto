@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message OfflineAwardLoadReq {}
+
+message OfflineAwardLoadAck {
+  int64 offlineTimes = 1;//离线时间 秒
+  int64 getExpNum  = 2; //
+}
+
+
+message OfflineAwardGetReq {}
+
+message OfflineAwardGetAck {
+  GoodsChangeNtf goods = 1;		//奖励道具
+  bool isGet = 2;
+}

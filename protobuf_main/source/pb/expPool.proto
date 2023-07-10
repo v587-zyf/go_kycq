@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+
+message ExpPoolLoadReq{
+}
+
+message ExpPoolLoadAck{
+	int32  worlLvl = 2;  //世界等级
+	int64  expPool = 3; //经验池	
+}
+
+
+//玩家升级
+message ExpPoolUpGradeReq{
+	int32 index = 1; //武将标识
+	int32 times = 2; //升级次数
+}
+
+message ExpPoolUpGradeAck{
+	int32  heroIndex = 1; //武将信息
+	int32  Lvl = 2; //武将等级
+}
+
+
+

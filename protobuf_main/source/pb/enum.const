@@ -1,0 +1,1165 @@
+enum Sex {
+  MALE   = 1;
+  FEMALE = 2;
+}
+
+enum Job {
+  zhanshi 	= 1;	//战士
+  fashi 	= 2;	//法师
+  daoshi 	= 3;	//道士
+}
+
+enum Platform{
+  IOS = 0;
+  Android = 1;
+}
+
+enum ItemType {
+	TOP	      				= 1; //顶级道具数据
+	equip					= 3; //装备
+	gift_bag				= 4; //礼包
+	zodiac					= 5; //生肖装备
+	prop					= 6; //道具
+	kingarms				= 7; //帝器
+	dragonarms				= 8; //龙器
+	special_caution 		= 9; //特戒
+	skill 					= 10; //技能书
+	contribution    		= 11; //贡献值
+	optionalGift    		= 12; //自选宝箱
+	firstRechargeDiscount	= 13; //首充优惠券
+	hpRecover	 			= 20; //继续回血药
+	mpRecover				= 21; //继续回蓝药
+	potion     				= 23; //药水 瞬回
+	randomStone     		= 24; //随机石
+	backCity     			= 25; //回城卷
+	randomGift    			= 26; //随机宝箱
+	rechargeItem			= 27; //充值道具
+	redPacket				= 28; //红包
+	fitHolyEquip			= 29; //合体圣装
+	chuanShiEquip			= 30; //传世装备
+	title					= 31; //称号
+	miJi					= 32; //秘籍
+	godBloodItem			= 33; //神兵血炼
+	dabaoMySteryItem		= 34; //打宝秘境体力卷轴
+	monthCardItem			= 35; //月卡道具
+	expPill					= 36; //经验丹
+	privilegeActive			= 37; //特权卡激活
+	payToken				= 99; //支付代币
+	reinItem				= 101; //转生材料
+	skilItem				= 102; //技能材料	
+	talentItem				= 103; //天赋材料
+	dictateItem 			= 104; //主宰装备材料
+	strengthItem 			= 105; //强化材料
+	jewelItem 				= 106; //宝石
+	insideItem 				= 107; //内功材料
+	panaceaItem 			= 108; //灵丹材料
+	fabaoItem 				= 109; //法宝材料
+	dragonItem 				= 110; //龙器材料
+	holyarmsItem 			= 111; //神兵材料
+	wingItem 				= 112; //羽翼材料
+	magicCircleItem 		= 113; //法阵材料
+	areaItem 				= 114; //领域材料
+	juexueItem 				= 115; //绝学材料
+	petItem 				= 116; //战宠材料
+	officialItem 			= 117; //官职材料
+	fitItem 				= 118; //合体材料
+	atlasItem 				= 119; //图鉴材料
+	fasionItem 				= 120; //时装材料
+	holyBeastItem 			= 121; //圣兽材料
+	elfItem 				= 122; //小精灵材料
+	cutTreasureItem 		= 123; //神刀技材料
+	clearItem 				= 124; //洗练材料
+	guildItem 				= 125; //公会材料
+	composeItem 			= 126; //装备合成材料
+	fitClothItem 			= 127; //合体圣装材料
+	ringItem 				= 128; //特戒材料
+	fieldFightItem 			= 129; //野战
+	competitveItem 			= 130; //竞技场
+	treasureItem 			= 131; //寻龙探宝
+	baokuItem 				= 132; //神机宝库
+	miningItem 				= 133; //挖矿
+	bossFightItem 			= 134; //野外/暗殿首领卷轴
+	warOrderItem 			= 135; //战令材料
+	copyFightItem 			= 136; //副本材料
+	dayItem 				= 137; //日常任务活跃度
+	chuanShiEquipItem 		= 138; //传世装备材料
+	ancientSkillItem 		= 139; //远古神技材料
+	ancientTreasureItem 	= 140; //远古宝物材料
+	chuanshiStrengthenItem 	= 141; //传世强化材料
+	dabaoEquipItem			= 142; //打宝神器材料
+}
+
+enum ItemId {
+  exp         	= 1;	//经验
+  lv		  	= 2;	//玩家等级
+  vipExp		= 3;	//vip经验
+  vipLv			= 4; 	//vip等级
+  ingot         = 5;   	//元宝
+  gold        	= 6;   	//金币
+  chuanqiBi		= 7;	//传奇币
+  randomStone	= 8; 	//随机石
+  backCity		= 9; 	//回城卷
+  honor         = 10;   //荣誉
+  warOrderExp	= 12;	//战令经验
+  bindingIngot  = 13;   //绑定元宝
+  goldIngot     = 14;   //金锭
+}
+
+enum Property {
+	Combat      		= 1000;		//战斗力
+	Hp          		= 1010;     //生命值
+	HpRate      		= 1012;     //生命值%
+	HpModuleRate		= 1013;     //生命值%
+	PattMin     		= 1020;     //最小物理攻击
+	PattMax     		= 1021;     //最大物理攻击
+	PattRate    		= 1022;     //物理攻击%
+	PattModuleRate    	= 1023;     //物理攻击%
+	MattMin     		= 1030;     //最小法术攻击
+	MattMax     		= 1031;     //最大法术攻击
+	MattRate    		= 1032;     //法术攻击%
+	MattModuleRate    	= 1033;     //法术攻击%
+	TattMin     		= 1040;     //最小道术攻击
+	TattMax     		= 1041;     //最大道术攻击
+	TattRate    		= 1042;     //道术攻击%
+	TattModuleRate    	= 1043;     //道术攻击%
+	Lucky       		= 1050;     //幸运值
+	DefMin      		= 1060;     //最小防御值
+	DefMax      		= 1061;     //最大防御值
+	DefRate     		= 1062;     //防御值%
+	DefModuleRate     	= 1063;     //防御值%
+	AdfMin      		= 1070;     //最小魔防值
+	AdfMax      		= 1071;     //最大魔防值
+	AdfRate     		= 1072;     //防御值%
+	AdfModuleRate     	= 1073;     //防御值%
+	MP          		= 1080;     //魔法值
+	Speed       		= 1090;     //移速
+	Hit         		= 1100;     //命中值
+	HitRate     		= 1102;     //命中%
+	Miss        		= 1110;     //闪避值
+	MissRate    		= 1112;     //闪避%
+	Crit        		= 1120;     //暴击率
+	UnCrit      		= 1130;     //抗暴率
+	AddCritHit  		= 1140;     //暴击伤害增加
+	RedCritHit  		= 1150;     //暴击伤害减少
+	DeadHurt    		= 1160;     //额外伤害
+	UnDeadHurt  		= 1170;     //额外减伤
+	Palsy       		= 1180;     //麻痹几率
+	UnPalsy     		= 1190;     //麻痹抗性
+	IgnoreDef   		= 1200;     //无视防御
+	CutRatio    		= 1210;     //切割比例
+	Cut         		= 1220;     //切割值
+	AttSpeed    		= 1240;     //攻速
+	AddW        		= 1250;     //对战士伤害增加
+	RedW        		= 1260;     //对战士伤害减少
+	AddM        		= 1270;     //对法师伤害增加
+	RedM        		= 1280;     //对法师伤害减少
+	AddT        		= 1290;     //对道士伤害增加
+	RedT        		= 1300;     //对道士伤害减少
+	Suck        		= 1330;     //吸血值
+	SuckRatio   		= 1331;     //吸血比例
+	UnSuck      		= 1340;     //抗吸血比例
+	RedHurt 			= 1390;		//受到伤害减少
+	AddHurt				= 1400;		//最终伤害增加
+	AddExp      		= 2000;     //经验效率增加
+	AddGold     		= 2010;     //金币效率增加
+	AddPlayer			= 2100; 	//对玩家伤害减少
+	RedPlayer			= 2200; 	//对玩家伤害增加
+	Reflex				= 2300; 	//伤害反射固定值
+	ReflexRatio			= 2400; 	//伤害反射比例
+	RageRatio			= 2500; 	//狂暴一击几率
+	UnRageRatio			= 2600; 	//狂暴一击几率抗性
+	RageHurt			= 2700; 	//狂暴伤害
+	UnRageHurt			= 2800; 	//狂暴承伤
+	AddSkill			= 2900; 	//技能伤害增加
+	RedSkill			= 3000; 	//技能伤害减少
+	BlockRatio			= 3100; 	//格挡几率
+	UnBlockRatio		= 3200; 	//格挡减少比例
+	FatalRatio			= 3300; 	//致命一击几率
+	UnFatalRatio		= 3400; 	//致命一击抗性
+	AddFatal			= 3500; 	//致命一击增伤
+	RedFatal			= 3600; 	//致命一击减伤
+	AttPets				= 3710;		//宠物攻击
+	AttPetsRate			= 3712;		//宠物攻击%
+	AttAll				= 3810;		//所有角色攻击
+	AttRateAll			= 3812;		//所有角色攻击%
+	AttModuleRateAll	= 3813;		//所有角色攻击%
+	DefAll				= 3910;		//所有角色防御
+	AdfAll				= 4000;		//提升最小魔防和最大魔防
+	AddKill 			= 4200;		//对怪斩杀几率
+	RedKill 			= 4300;		//对怪斩杀抗性
+	KillRate 			= 4400;		//对怪斩杀比例
+	Kill 				= 4500;		//对怪斩杀增伤
+	RedHurtMon 			= 4600;		//怪物伤害减少
+	SuckRatioMon 		= 4700;		//对怪吸血
+	FakeCombat			= 4800;		//给角色加额外战力
+}
+
+enum PropertyModule {
+	playerLv			= 1;	//玩家等级
+	equipStrength		= 2;	//装备强化
+	equipNormal			= 3;	//普通装备
+	fabao				= 4;	//法宝
+	rein				= 5;	//转生
+	wing				= 6;	//羽翼
+	atlas				= 7;	//图鉴(纯图鉴)
+	dragonEquip			= 8;	//龙器
+	kingarms			= 9;	//帝器
+	zodiac				= 10;	//生肖
+	clear				= 11;	//洗练
+	dictate				= 12;	//主宰装备
+	panacea				= 13;	//灵丹
+	jewel				= 14;	//宝石
+	inside				= 15;	//内功
+	fashion				= 16;	//时装(武器)
+	official			= 17;	//官职
+	holyarms			= 18;	//至尊法器
+	ring				= 19;	//特戒
+	godEequip			= 20;	//神兵
+	juexue				= 21;	//绝学
+	pet					= 22;	//战宠
+	area				= 23;	//领域
+	expLv           	= 25;   //经验池武将等级
+	magicCircle			= 26;	//法阵
+	fashionCloth		= 27;	//时装(衣服)
+	talent				= 28;	//天赋
+	fit					= 29;	//合体
+	monthCard			= 30;	//特殊卡
+	achievement     	= 31;   //成就徽章
+	talentGeneral		= 32;	//通用天赋
+	elf					= 33;	//精灵
+	holyBeast       	= 34;   //圣兽
+	fitHolyEquip		= 35;	//合体圣装
+	vip					= 36;	//vip
+	skill				= 37;	//技能
+	chuanShiEquip		= 38;	//传世装备
+	atlasWear			= 39;	//图鉴(穿戴上的)
+	ancientSkill		= 40;	//远古神技
+	title				= 41;	//称号
+	miJi            	= 42;   //秘籍
+	yuanGuBaoWu     	= 43;   //远古宝物
+	chuanShiStrengthen 	= 44;	//传世装备强化
+	petAppendage		= 45;	//战宠附体
+	godEquipBlood		= 46;	//神兵血炼
+	dabaoEquip			= 47;	//打宝神器
+	label				= 48;	//头衔
+	privilege			= 49;	//特权
+}
+
+enum RankType {
+	level 			= 1; //等级榜
+	combat 			= 2; //战力榜
+	tower 			= 3; //爬塔榜
+	arena 			= 4; //竞技场
+	combatZhanshi 	= 5; //战士战力排行榜
+	combatFashi 	= 6; //法师战力排行榜
+	combatDaoshi 	= 7; //道士战力排行榜
+	awaken			= 8; //神威榜
+	jewel			= 9; //宝石榜
+	wing			= 10; //神翼榜
+	combatJewel     = 11; //宝石战力榜
+	combatWing		= 12; //神翼战力榜
+	combatFaBao     = 13; //法宝战力榜
+	combatShengBing = 14; //神兵战力榜
+	combatJueXue    = 15; //绝学战力榜
+	combatEquip     = 16; //装备战力榜
+	combatZhenFa    = 17; //阵法排行榜
+	combatLongQi    = 18; //龙器排行榜
+	shabake_guild	= 19; //沙巴克公会排行
+	combatRing		= 20; //特戒榜
+	combatPet		= 21; //战宠榜
+	combatAncient	= 22; //远古榜
+	combatChuanShi	= 23; //装备和传世装备战力之和排行
+	combatFit		= 24; //合体榜
+	combatDaBao		= 25; //打宝神器榜
+}
+
+
+enum FashionType {
+	weapon 	= 1;		//时装武器
+	cloth	= 2;		//时装衣服
+}
+
+enum ChatType {
+	system 	= 1;		//系统
+	world 	= 2;		//世界
+	guild 	= 3;		//行会
+	team 	= 4; 		//组队
+	private	= 5;		//私聊
+}
+
+enum SkillRangeType{
+
+	line = 1;		//线性
+	square = 2;		//方形
+	squareHalf = 3;	//半方形
+}
+
+enum SkillTargetType {
+	ememy = 1;		//敌方
+	friend = 2;		//友方
+}
+
+enum EquipPos{
+	one = 1;  	// 主武器右
+	two = 2;  	// 项链
+	three = 3;	// 头盔
+	four = 4; 	// 衣服
+	five = 5; 	// 腰带
+	six = 6;  	// 鞋子
+	seven = 7;	// 戒指(1)
+	eight = 8;	// 手镯(1)
+	nine = 9;	// 戒指(2)
+	ten = 10;	// 手镯(2)
+}
+
+enum EquipType {
+    weaponR 	= 1; 	//：主武器右
+	weaponL 	= 2; 	//：项链
+	HELMET 		= 3; 	//：头盔
+	CLOTHES		= 4;	//：衣服
+	belt 		= 5;	//：腰带
+	SHOES 		= 6;	//：鞋子
+	RING 		= 7;	//：戒指（2个）
+	bracelet 	= 8;	//：手镯（2个）
+}
+
+
+enum BuffType{
+	paralysis 					= 1;	//麻痹
+	freeze 						= 2;	//冰冻
+	flame 						= 3;	//火焰
+	invincible 					= 4;	//无敌
+	poisoning 					= 5;	//中毒
+	decHurt 					= 6;	//减伤
+	addPropByPro 				= 7;	//提升固定值百分比属性
+	decPropByPro 				= 8;	//降低固定值百分比属性
+	addPropByFixed 				= 9;	//提升固定值属性
+	decPropByFixed 				= 10;	//降低固定值属性
+	addHpByFixed 				= 11;	//回血药
+	addMpByFixed 				= 12;	//回蓝药
+	addHpMpFixed 				= 13;	//回血回蓝药
+	addHpBySkillFixed 			= 14;	//技能回血 固定值
+	getOtherBuff 				= 15;	//获取其他buff
+	decHurtFixed				= 16;	//吸收伤害                                                                                                                       
+	poisoningPro				= 17;	//百分比中毒
+	bleedingPro					= 18;	//流血效果
+	burningPro					= 19;	//灼烧效果
+	hold						= 20;	//定身
+	mark						= 22;	//添加印记A
+	aspdAddPro					= 25;	//攻速增加
+	beFatalReoverHp				= 26;	//受致命一击回血
+	attackAddByHp				= 27;	//生命越低伤害越高
+	silent						= 28;	//沉默目标
+	addHpBySkillHurtPro			= 29;	//技能恢复伤害百分比生命
+	addHpBySkillPro				= 30;	//技能恢复百分比生命
+	treatBan					= 31;	//禁疗
+	treatAdd					= 32;	//提升治疗效果
+	treatLess					= 33;	//降低治疗效果
+	addHurtByFire				= 34;	//所有火焰系技能伤害提升
+	weak						= 36;	//虚弱
+	treatAddByHp				= 37;	//生命越低治疗越高
+	hurtToTreat					= 38;	//伤害转化成治疗
+	addPropByAtk				= 39;	//增加攻击力百分比属性
+	lessPropByAtk				= 40;	//降低攻击力百分比属性
+	poisoningByAtk				= 41;	//根据攻击力掉血	
+	burningByAtk				= 42; 	//攻击系数灼烧
+    dizziness					= 43; 	//晕眩
+    bleedingByAtk				= 44; 	//攻击系数流血   
+	suck						= 45; 	//吸血回复自身
+	backHurt 					= 48; 	//反弹伤害
+	clearSkillCd				= 49;	//刷新技能CD
+	confusion 					= 50; 	//混乱
+	relive						= 51;	//复活
+	mpToHp						= 52;	//魔法抵挡
+	skillHurtAdd				= 53;	//技能伤害增加
+	skillCd						= 54;	//技能不进CD
+	cutSkill					= 55;	//切割打宝
+	fitLimit					= 56;	//限制合体
+	addHurt						= 57;	//易伤
+	immune						= 58;	//免疫delbuff
+	triggerPropMust				= 59;	//必触发某个属性
+	groundBuff					= 60;	//地面buff
+	skillInvalid				= 61;	//技能无效
+	recoveryHp					= 62;	//间隔回血
+	desRecoveryHp				= 63;	//抑制回血
+	poisoningByAtkForMonster	= 64;	//对怪攻击系数中毒
+	petrifiedForMonster			= 65;	//对怪石化
+
+}
+enum MailStatus{
+	unread = 0;
+	read = 1;
+}
+
+enum SceneDir {
+	bottom       = 4;
+	right_bottom = 3;
+	right        = 2;
+	right_top    = 1;
+	top          = 0;
+	left_top     = 7;
+	left         = 6;
+	left_bottom  = 5;
+}    
+
+enum HurtType{
+	normal 		= 1;	//普通
+	crit		= 2;	//暴击
+	official 	= 3;	//神威
+	fatalHurt	= 4;	//致命一击
+	rage		= 5; 	//狂暴
+}               
+
+
+//场景对象类型
+enum SceneObjType {
+  NIL0     		= 0;
+  USER     		= 1;	//玩家
+  MONSTER  		= 2;	//怪物
+  Item	   		= 3;	//道具
+  Pet	   		= 4;	//战宠
+  Collection 	= 5;	//采集物
+  Fit			= 6;	//合体
+  Summon		= 7;	//召唤物
+  Buff			= 8;	//buff
+}
+
+// 0--走  1---跑
+enum MoveType {
+  walk 		= 0;
+  run 		= 1;
+  randomStone = 2;	//随机石
+}
+
+enum ResultFlag {
+  FAIL    = 0;
+  SUCCESS = 1;
+}
+
+enum CopyResult {
+  VICTORY = 1; //胜利
+  DEFEAT  = 2; //失败
+}
+
+enum Condition {
+  USER_LEVEL                  	= 1;  	//主角等级达到%s级
+  user_rebirth_lv				= 2;  	//转生等级
+  user_combat					= 3;  	//战力
+  user_stage_pass				= 4;  	//通关关卡
+  user_vip_lv					= 5;  	//vip等级
+  limit_time					= 6;  	//时间(秒)
+  active_month_card_sliver		= 7;	//激活白银月卡
+  active_month_card_gold		= 8;	//激活黄金月卡
+  server_openTime				= 10; 	//开服天数
+  user_sex						= 11; 	//性别(0男,1女)
+  job							= 12; 	//职业(1战士,2法师,3道士)
+  killMonster					= 15; 	//击杀怪物
+  gotoNpc						= 16; 	//指定npc
+  costGold						= 17; 	//耗金币
+  costChuanQIBi					= 18; 	//消耗传奇币
+  costIngot						= 19; 	//消耗元宝
+  one_hero_lv					= 20;	//1角色等级
+  two_hero_lv					= 21;	//2角色等级
+  three_hero_lv					= 22;	//3角色等级
+  one_strengthen_lv				= 23;	//1角色全身强化等级
+  two_strengthen_lv				= 24;	//2角色全身强化等级
+  three_strengthen_lv			= 25;	//3角色全身强化等级
+  pet_lv						= 26;	//战宠等级
+  now_hero_lv					= 27;	//当前角色等级
+  equip_lv						= 28;	//装备阶数--
+  tower							= 29;	//试炼塔挑战层数
+  inside_lv						= 30;	//内功阶数
+  recharge_all_check            = 31;   //连冲奖励领取
+  fit_lv						= 32;	//合体等级
+  spendIngot					= 33;	//累计消费元宝
+  taskNums                      = 34;   //完多少个主线任务
+  zhanshi_combat				= 35;	//战士战力达到&--
+  fashi_combat					= 36;	//法师战力达到&
+  daoshi_combat					= 37;	//道士战力达到&
+  shabake_guild_rank			= 38;	//沙巴克积分排名第&的公会会长
+  unlock_hero					= 39;	//解锁&个角色
+  all_hero_wear_equip			= 40;	//全角色共穿戴&件装备
+  all_hero_unlock_fashion		= 41;	//全角色共解锁&件时装
+  all_hero_wear_chuanshi_equip	= 42;	//全角色共穿戴&件传世装备
+  all_hero_wear_dictate			= 43;	//全角色共穿戴&件主宰装备
+  all_hero_wear_fit_holy_equip 	= 44;	//全角色穿戴&件合体圣装
+  active_fit_skill				= 45;	//激活&个合体技能
+  all_hero_wear_ring			= 46;	//全角色共佩戴&个特戒
+  active_pet					= 47;	//激活&只战宠
+  continuous_sign				= 48;	//连续签到&天
+  first_recharge				= 49;	//首次充值
+  buy_seven_investment			= 50;	//购买七日投资
+  add_guild						= 51;	//加入一个公会
+  become_guild_president		= 52;	//成为公会会长
+  become_guild_vice_president	= 53;	//成为公会副会长
+  become_guild_elders			= 54;	//成为公会长老
+  pet_appendage					= 60;	//&战宠附体达到&级(战宠id,对应等级id)
+  privilege_open				= 61;	//开启特权
+  level_between					= 62;	//等级区间(lv->lv)
+  recover						= 100;	//回收装备
+  kill_small_monster            = 200;  //击杀任意小怪
+  learn_to_wear_skill           = 201;  //学习佩戴技能 
+  wear_equip                    = 202;  //穿戴装备
+  qianghua_equip                = 204;  //强化装备
+  challenge_stage               = 205;  //挑战关卡
+  upgrade_skill                 = 206;  //升级技能
+  tiao_zhan_shen_yi_fu_ben      = 207;  //挑战神翼副本
+  upgrade_shen_yi_1             = 208;  //升级神翼
+  upgrade_shen_yi_2             = 209;  //升级神翼
+  unlock_second_hero            = 210;  //解锁第二角色
+  unlock_three_hero             = 211;  //解锁第三角色
+  challenge_oneTime_ge_ren_boss = 212;  //挑战一次个人boss
+  activate_tu_jian              = 213;  //激活图鉴
+  challenge_jin_yan_fu_ben      = 214;  //挑战一次经验副本
+  upgrade_vip_lv                = 215;  //将vip经验提升至1级
+  challenge_vip_boss            = 216;  //挑战vipBoss
+  he_cheng_lin_dan              = 217;  //合成灵丹
+  use_lin_dan                   = 218;  //使用灵丹
+  kill_ye_wai_boss              = 219;  //击杀野外boss
+  xiang_qian_bao_shi            = 220;  //镶嵌1颗宝石
+  xiang_qian_bao_shi_1          = 221;  //全身宝石达到：10级
+  challenge_jin_ji_chang        = 222;  //挑战一次竞技场
+  get_daily_task                = 223;  //领取一次日常任务奖励
+  xiu_lian_nei_gong             = 224;  //修炼一次内功
+  xiu_lian_nei_gong_1           = 225;  //修炼内功至3阶
+  upgrade_shen_bin              = 226;  //提升一次神兵
+  upgrade_shen_bin_1            = 227;  //提升神兵至2阶
+  go_to_wa_kuang                = 228;  //前往挖矿一次
+  activate_zhan_chong           = 229;  //激活一只战宠
+  upgrade_zhan_chong            = 230;  //提升战宠一次
+  upgrade_zhan_chong_1          = 231;  //将任意一只战宠升至2阶
+  upgrade_guan_xian             = 232;  //将官衔提升至官职1
+  get_one_time_cheng_jiu_award  = 233;  //领取一次成就奖励
+  kill_shou_lin                 = 234;  //击败挂机地图首领
+  upgrade_equip                 = 235;  //任意角色的主宰装备的总等级达到指定等级
+  second_hero_wear_skill        = 236;  //第二角色位的角色激活指定技能
+  third_hero_wear_skill         = 237;  //第三角色位的角色激活指定技能
+  wear_tu_jian                  = 238;  //任意角色装备指定数量的图鉴
+  all_heros_wear_assign_equip   = 239;  //三个角色总共穿戴&件指定阶数品质的装备
+  all_heros_qiang_hua_lv        = 240;  //三个角色强化总等级之和，达到指定级数时完成任务
+  upgrade_nei_gong              = 241;  //任意角色内功达到指定等级时，完成任务，填insideArt表的grade和order字段
+  npc_chat                      = 242;  //在NPC3个格子范围内，并打开对话面板
+  elf_lv						= 243;	//小精灵等级
+  holyarms_grade				= 244;	//至尊法器总阶数
+  atlas_star					= 245;	//图鉴总星数
+  challenge_qiang_hua_fu_ben    = 246;  //挑战强化副本
+  upgrade_jin_lin_lv            = 247;  //小精灵升至&级
+  upgrade_shen_shou             = 248;  //升级圣兽
+  upgrade_sheng_dao_skill       = 249;  //神刀技升至&级
+  two_dictate_grade				= 250;	//两角色主宰平均&阶
+  three_dictate_grade			= 251;	//三角色主宰平均&阶
+  three_wing_grade				= 252;	//三角色神翼总阶数达到&阶
+  two_inside_grade				= 253;	//两角色内功达到&阶
+  three_inside_grade			= 254;	//三角色内功达到&阶
+  strengthen_lv					= 255;	//当前角色强化等级
+  two_wing						= 256;	//任意两角神翼达到&阶&星
+  three_wing					= 257;	//三角神翼达到&阶&星
+  kill_unknown_boss             = 258;  //击败未知首领
+  daily_task_liveness           = 259;  //每日任务活跃度达到&点
+  challenge_field_leader        = 260;  //挑战&次野外首领 进入地图就算完成
+  an_dian_leader                = 261;  //挑战&次暗殿首领 进入地图就算完成
+  dabao_equip_grade				= 262;	//打宝神器升至阶(类型,阶)
+  tian_fu_allLv                 = 263;  //天赋总等级达到（&/&)级		
+  tou_xian_lv                   = 264;  //头衔升至&级
+  dao_bao_shen_qi_allLv         = 265;  //打宝神器总等级升至&级
+  active_yuan_gu_skill_num      = 266;  //激活（&/&）个远古神技
+  chuan_si_qiang_hua_allLv      = 267;  //传世强化总等级达到（&/&）级
+  level_max_limit			    = 268;  //高于&级不可进入
+  
+  all_kill_user					= 600;	//击败&个玩家（三角色都击杀）--
+  all_hero_dragon_equip_grade	= 601;	//全角色龙器累计升到&阶
+  ring_strengthen_lv			= 602;	//特戒累计强化到&级
+  holyarms_up_grade				= 603;	//法宝累计升到&阶(战宠id,对应等级id)
+  juexue_up_lv					= 604;	//绝学累计升到&级(战宠id,对应阶级id)
+  all_hero_area_up_lv			= 605;	//全角色领域累计升到&级
+  all_hero_magicCircle_up_star	= 606;	//全角色法阵累计升到&星
+  all_hero_holy_beast_up_star	= 607;	//全角色圣兽累计升到&星
+  competive_win					= 608;	//竞技场连胜&场
+  all_skill_up_lv				= 609;	//全角色技能累计升到&级
+  pet_up_lv						= 610;	//&战宠升到&级
+  pet_up_grade					= 611;	//&战宠升到&阶
+  active_jue_xue_skill          = 612;  //激活&个绝学技能
+  wear_chuan_shi_equip          = 613;  //三角色穿戴&件&阶传世装备
+  zhan_chong_all_lv             = 614;  //战宠总等级达到&级
+  dao_bao_mi_jin_boss_kill_nums = 615;  //打宝秘境BOSS累计击杀&个
+  competive_all_win             = 617;  //竞技场all胜利X次
+  xiang_qian_bao_shi_max_lv     = 618;  //宝石累计等级最大值
+  pet_up_break					= 619;	//&战宠升到&突破
+  kill_stage_monster            = 620;  //前往&击杀&只怪	stageid，数量	
+  all_online					= 1011;	//累计在线&分钟
+  all_card_activity				= 1021;	//累计寻宝&次(神机宝库)
+  all_treasure					= 1031;	//累计探宝&次(寻龙探宝)
+  all_recharge_day				= 1041;	//累计充值&天
+  all_buy_open_gift				= 1051;	//累计购买&个开服礼包
+  all_competive_win				= 1061;	//竞技场累计胜利&次
+  all_kill_worldleader			= 1071;	//累计击杀&个世界首领
+  all_kill_ancient_boss			= 1081;	//累计击杀&个远古首领
+  all_finish_daily_task			= 1091;	//累计完成&日常任务
+  all_daily_task_liveness		= 1101;	//累计活跃度达到&
+  all_finish_copy				= 1111;	//累计通关&次副本
+  all_sign						= 1121;	//累计签到&天
+  all_kill_monster				= 1002;	//累计击败指定首领&次(44,monsterId,num|44,monsterId,num)
+  one_equip_intensify_max_lv    = 1003; //单件装备强化到多少等级
+  all_kill_stage				= 1012;	//累计击杀stage次数(stageId,num)
+  three_inside_chong            = 1131; //内功all重
+  xiao_jin_lin_up_lv            = 1141; //小精灵每提升X级提升X属性
+  te_jie_qiang_hua_times        = 1151; //特戒每强化X级提升X属性
+  tiao_zhan_an_dian_boss        = 1161; //挑战（&/&)次暗殿首领		
+  tiao_zhan_yuan_gu_boss        = 1171; //挑战（&/&）次远古首领
+  consume_gold					= 1181;	//消耗金币
+  join_guild					= 1191;	//加入公会次数
+  kill_boss_num                 = 1201; //击杀xx个boss
+  kill_monster_num              = 1211; //累计击杀xx个小怪
+  recharge_daily				= 1221;	//每日累计充值额度
+}
+
+//成就
+enum AchievementType{
+  cheng_jiu_zhu_xian_ren_wu     = 1;  //成就系统用 主线任务  
+  cheng_jiu_hero_lv             = 2;  //角色等级
+  cheng_jiu_kill_boss_num       = 3;  //击杀boss数量
+  cheng_jiu_equip_max_lv        = 4;  //单件装备强化的最高的等级
+  cheng_jiu_monster_kill_num    = 5;  //小怪击杀数量
+  cheng_jiu_competitve_win_num  = 6;  //竞技场胜利场次
+  cheng_jiu_get_assist_num      = 7;  //获得协助的次数
+}
+
+
+enum ConditionType{
+	all 	= 1;		//全部满足
+	justOne = 2;		//满足之一
+}
+
+enum ItemColor {
+  WHITE  = 1;       //白
+  GREEN  = 2;       //绿
+  BLUE   = 3;       //蓝
+  PURPLE = 4;       //紫
+  YELLOW = 5;       //橙 金
+  RED    = 6;       //红
+  BLACK  = 7;       //黑 
+}
+
+enum DisplayType {
+  EQUIP = 0;	//装备
+  FASHION = 1;	//时装
+}
+
+enum FunctionId {
+  SHOP_OPEN			= 108;	//商城
+  FIELD_FIGHT       = 115;  //野战
+  WING_OPEN			= 134;	//神翼
+  WORLD_LEADER      = 161;  //世界首领
+  ELF_OPEN			= 164;	//小精灵
+  OPEN_GIFT_OPEN	= 271;	//开服礼包
+  TREASURE_SHOP 	= 284;  //多宝阁
+}
+
+enum ZodiacType{
+  RAT 		= 1;	//鼠
+  OX 		= 2;	//牛
+  TIGER 	= 3;	//虎
+  RABBIT 	= 4;	//兔
+  DRAGON 	= 5;	//龙
+  SNAKE 	= 6;	//蛇
+  HORSE 	= 7;	//马
+  SHEEP 	= 8;	//羊
+  MONKEY 	= 9;	//猴
+  ROOSTER 	= 10;	//鸡
+  DOG 		= 11;	//狗
+  PIG 		= 12;	//猪
+}
+
+enum KingarmsType{
+  SHENYU		= 1;	//神御
+  CANBAO		= 2;	//残暴
+  BAOJI 		= 3;	//暴击
+  QINGYU		= 4;	//轻语
+  XUENIU 		= 5;	//血牛
+  HUIMIE		= 6;	//毁灭
+  CHUANCHENG	= 7;	//传承
+  SHENLI		= 8;	//神力
+}
+
+enum SkillPos{
+  one	= 1;	//从左到右第一个
+  two	= 2;	//第二个
+  three = 3;	//第三个
+  four	= 4;	//第四个
+  five	= 5;	//第五个
+  six	= 6;	//放普通攻击用
+}
+
+enum SkillType{
+  ORDINARY 	= 1;	//普通攻击
+  ACTIVE 	= 2;	//主动
+  PASSIVE 	= 3;	//被动
+  Unique	= 4;	//合击
+  PASSIVE2 	= 5;	//被动2（属性类被动技能）
+}
+
+enum SkillEffectType{
+	attack 	= 1;		//攻击技能
+	treat	= 2;		//治疗技能
+}
+
+enum UniqueSkillPos{
+  ONE = 1;
+  TWO = 2;
+  THREE = 3;
+}
+
+enum DragonarmsType{
+  DOULI		= 1;	//斗笠
+  DUNPAI	= 2;	//盾牌
+  XUNZHANG	= 3;	//勋章
+  HUFU		= 4;	//护符
+  LONGXIN	= 5;	//龙心
+}
+
+enum FightModel{
+  PEACE = 0;	//和平
+  WHOLE = 1;	//全体
+}
+
+enum BlessType{
+  SUCCESS	= 1;	//成功
+  FAIL		= 2;	//失败
+  INVALID	= 3;	//无效
+}
+
+enum SpecialEquipType{
+  ZODIAC	 = 1;	//生肖
+  DRAGONARMS = 2;	//龙器
+  KINGARMS	 = 3;	//帝器
+}
+
+enum DictateType{
+  WUQI 	 	= 1;	//武器
+  KAIJIA 	= 2;	//铠甲
+  HUWANZUO	= 3;	//左护腕
+  JIEZHIZUO = 4;	//左戒指
+  YAODAI	= 5;	//腰带
+  TOUKUI	= 6;	//头盔
+  XIANGLIAN	= 7;	//项链 
+  HUWANYOU	= 8;	//右护腕
+  JIEZHIYOU	= 9;	//右戒指
+  XUEZI		= 10;	//靴子 
+}
+
+enum JewelPos{
+  ONE	= 1;	//左
+  TWO	= 2;	//右
+  THREE	= 3;	//下
+}
+
+enum InsideType{
+  ONE 	= 1;
+  TWO 	= 2;
+  THREE = 3;
+  FOUR 	= 4;
+}
+
+enum InsideSkillType{
+  ONE = 1;
+  TWO = 2;
+}
+
+enum RingPos{
+  LEFT = 1;
+  RIGHT = 2;
+}
+
+enum RingPhantomPos{
+  ONE = 1;
+  TWO = 2;
+  THREE = 3;
+}
+
+enum RingSkillId{
+  ONE = 1;
+  TWO = 2;
+}
+
+enum AreaType{
+  ONE 	= 1;	//杀神
+  TWO 	= 2;	//狂暴
+  THREE = 3;	//轮回
+  FOUR 	= 4;	//巫术
+  FIVE	= 5;	//修罗
+  SIX	= 6;	//自然
+}
+
+enum ResetType{
+  SIGN 				= 1;	//签到
+  MINING 			= 2;	//挖矿
+  EXPSTAGE 			= 3;	//经验副本
+  DARKPALACE 		= 4;	//暗殿boss
+  COMPETITVE  		= 5; 	//竞技场5点发放赛季奖励
+  FIELDFIGHT 		= 6;  	//野战每日5点记录七天活跃玩家数据
+  FIELDBOSS			= 7;	//野外boss
+  PERSONBOSS		= 8;	//个人boss
+  VIPBOSS			= 9;	//vipBoss
+  MATERIALSTAGE		= 10;	//材料副本
+  SHOP				= 11;	//商城
+  MonthCard			= 12;	//月卡
+  DailyTask     	= 13;   //每日任务
+  FirstRecharge		= 14;	//首充
+  DailyPack_Day 	= 15;	//每日任务(每日)
+  DailyPack_Week 	= 16;	//每日任务(每周)
+  WarOrder			= 17;	//战令
+  ONLINE			= 18;	//在线奖励
+  DailyRank         = 19;   //每日排行
+  CARD              = 20;   //抽卡
+  TREASURE          = 21;   //转盘
+  OPENDAY			= 22;	//重置开服日期
+  CONTRECHARGE		= 23;	//连续充值
+  WORLD_LEADER      = 24;   //世界首领
+  ANCIENTBOSS		= 25;	//远古首领
+  TREASURE_SHOP		= 26;	//多宝阁
+  HELLBOSS			= 27;	//炼狱首领
+  LOTTERY           = 28;   //摇彩
+  TOWER				= 29;	//试炼塔
+  LABEL				= 30;	//头衔
+  RedPacketUseNums  = 31;   //红包使用额度重置
+}
+
+enum GuildPosition{
+	HUIZHANG = 1; //会长
+	FUHUIZHANG = 2; //副会长
+	ZHANGLAO = 3; //长老
+	CHENGYUAN = 4; //成员
+}
+
+enum ShopType{
+  WEEK_LIMIT	= 1;	//每周限购
+  YUANBAO		= 2;	//元宝商店
+  HONOR			= 3;	//荣誉商店
+}
+
+enum DailyActivityType{
+  PAODIAN		= 1;	//泡点pk
+  MAGIC_TOWER	= 2;	//九层魔塔
+}
+
+enum VipPrivilege{
+  COMPETITVE_FREENUM		= 1;	//每日竞技场免费次数增加&次
+  COMPETITVE_BUYNUM			= 2;	//每日竞技场购买次数增加&次
+  FIELDFIGHT_FREENUM		= 3;	//每日野战免费次数增加&次
+  FIELDFIGHT_BUYNUM			= 4;	//每日野战购买次数增加&次
+  MINING_FREENUM			= 5;	//每日挖矿免费次数增加&次
+  MINING_BUYNUM				= 6;	//每日挖矿购买次数增加&次
+  SHOP_DISCOUNT 			= 7;	//商店商品折扣为&折
+  EXPSTAGE_FIGHTNUM 		= 8;	//每日经验副本挑战次数增加&次
+  MATERIALSTAGE_FIGHTNUM	= 9;	//每日材料副本挑战次数增加&次
+  DARKPALACE_FREENUM		= 10;	//每日暗殿免费次数增加&次
+  DARKPALACE_BUYNUM			= 11;	//每日暗殿购买次数增加&次
+  FIELDBOSS_FREENUM			= 12;	//每日野外BOSS免费次数增加&次
+  FIELDBOSS_BUYNUM			= 13;	//每日野外BOSS购买次数增加&次
+  CHAT_FONT					= 14;	//激活聊天字体
+  TITLE						= 15;	//获得称号
+  ATTR						= 16;	//属性提升,effectid
+  quickPick					= 17;	//快速拾取（一键拾取）
+  HANGUP_EXP				= 18;	//挂机经验增加(万分比)
+  EQUIP_RECOVERY			= 19;	//装备回收增加(万分比)
+  AUCTION_SERVICE_CHARGE	= 20;	//交易行手续费(万分比)
+  DAILYTASK_RESOURCES_BACK	= 21;	//每日任务资源找回消耗活跃度减少(万分比)
+  COMPETITVE_DAILY_REWARD 	= 22;	//竞技场每日奖励增加(万分比)
+  EXPSTAGE					= 23;	//经验副本收益增加(万分比)
+  REVIVE_FREENUM			= 24;	//每日免费复活次数增加
+  EQUIP_STRENGTH_AUTO_UP_LV	= 25;	//一键强化
+  EQUIP_STRENGTH_AUTO_BREAK	= 26;	//一键突破
+  COPY_SWEEP				= 27;	//扫荡副本
+  COMPETITVE_MULTIPLE_GET	= 28;	//竞技场多倍领取
+  INSIDE_AUTO_UP			= 29;	//内功一键修炼
+  CUTTREASURE_AUTO			= 30;	//自动释放切割
+  EQUIP_RECOVER_AUTO		= 31;	//自动回收
+  ELF_FEED_AUTO				= 32;	//自动喂养小精灵
+  NEI_GONG_TEN_LEVEL		= 33;	//内功开启十连升级
+  GJ_AUTO_FIGHT_BOSS		= 34;	//开启自动挂机功能
+  CUTTREASURE_RESET_CD		= 35;	//神刀技冷却重置
+  HELLBOSS_FREENUM			= 36;	//每日炼狱首领免费次数增加&次
+  HELLBOSS_BUYNUM			= 37;	//每日炼狱首领购买次数增加&次
+  ANCIENT_BOSS_FREENUM		= 38;	//每日远古BOSS免费次数增加&次
+  ANCIENT_BOSS_BUYNUM		= 39;	//每日远古BOSS购买次数增加&次
+  RED_PACKET_GET_NUM        = 40;   //红包领取额度 
+  STRIKE_BACK        		= 41;   //反击
+  ELF_RECOVER_LIMIT_ADD		= 42;	//精灵回收上限增加
+}
+
+enum DailyTaskActivityType{
+  JING_YAN_FU_BEN		= 1;	//经验副本
+  KUANG_DONG_ZHENG_DUO 	= 2;	//矿洞抢夺
+  JING_JI_CHANG		    = 3;	//竞技场
+  YE_ZHAN 		        = 4;	//野战
+  YU_YI_FU_BEN          = 5;    //羽翼副本
+  JIN_BI_FU_BEN         = 6;    //金币副本
+  TONG_TIAN_TA          = 7;    //通天塔
+  GUA_JI_BOSS           = 8;    //挂机BOSS
+  DUO_REN_AN_DIAN_BOSS  = 9;   //多人暗殿BOSS
+  DUO_REN_YE_WAI_BOSS   = 10;   //多人野外BOSS
+  GE_REN_BOSS           = 11;   //个人BOSS
+  VIP_GE_REN_BOSS       = 12;   //VIP个人BOSS
+  GONG_HUI_GOU_HUO      = 13;   //公会篝火
+  QIANG_HUA_FU_BEN      = 14;   //强化副本
+}
+
+enum MonthCardStatus{
+  OPEN 		= 1;
+  CLOSE 	= 2;
+}
+
+enum MonthCardType{
+  SLIVER = 1;	//白银
+  GOLD	 = 2;	//黄金
+}
+
+enum MaterialStageType{
+  WING		= 1;	//羽翼副本
+  GOLD		= 2;	//金币副本
+  STRENGTH	= 3;	//强化副本
+  FASHION	= 4;	//时装副本
+}
+
+enum FitSkillType{
+  ZHUDONG = 1;	//主动
+  BEIDONG = 2;	//被动
+}
+
+enum ComposeType{
+  ITEM 	= 1; //道具
+  EQUIP = 2; //装备
+}
+
+enum LimitedGiftType{
+  INSIDE 	= 1; //内功
+  JEWEL	 	= 2; //宝石
+  LEVEL	 	= 3; //等级
+  PET	 	= 4; //战宠
+  STRENGTH 	= 5; //强化
+  DICTATE 	= 6; //主宰
+  FASHION	= 7; //时装
+  REIN		= 8; //转生
+}
+
+enum LimitedGiftBuyType{
+  INGOT	= 1;	//元宝
+  MONEY = 2;	//直购
+}
+
+enum LimitedGiftGradeStatus{
+  UP 	= 1;	//升
+  DOWN 	= 2;	//降
+  KEEP	= 3;	//不变
+}
+
+enum LimitedGiftGrade{
+  ONE 	= 1;
+  TWO 	= 2;
+  THREE = 3;
+  FOUR 	= 4;
+  FIVE 	= 5;
+}
+
+enum DailyPackType{
+  DAY 	= 1;
+  WEEK 	= 2;
+}
+
+enum WarOrderCondition{
+  KILL_MONSTER			= 1;	//击杀&只&关卡类型的怪物(数量|关卡类型)
+  WEEK_LOGIN_DAY 		= 2;	//本轮战令周期内的第几周的登录天数(第几周|登录天数)
+  BUY_SHOP_GOODS		= 3;	//购买&件指定商店类型的商品(件数|商店类型)
+  AUCTION_SELL			= 4;	//拍卖行成功出售&件道具
+  AUCTION_BUY			= 5;	//拍卖行成功购买&件道具
+  COMPLETE_COPY			= 6;	//通关&次指定类型的副本(次数|关卡类型)
+  COMPETIVE_NUM			= 7;	//参与过&次竞技场战斗
+  SHABAKE_NUM			= 8;	//参与过&次沙巴克活动
+  PAODIAN_NUM			= 9;	//参与过&次激情闭关活动
+  FIELDFIGHT_NUM		= 10;	//参与过&次野战
+  MINING_NUM			= 11;	//挖矿&次
+  GUILDBONFIRE_NUM		= 12;	//参与过&次公会篝火活动
+  GET_ITEM				= 13;	//获得&个&道具
+  KILL_MONSTERAI_ONE	= 14;	//击杀&只小怪（monster表类型为1的怪）
+  KILL_MONSTERAI_TWO	= 15;	//击杀&只BOSS（monster表类型为2的怪）
+  KILL_USER				= 16;	//击杀&名玩家
+  ONLINE				= 17;	//本轮战令周期内的总在线时长（单位：分钟）
+}
+
+enum ElfSkillPos{
+  One = 1;
+  Two = 2;
+  Three = 3;
+}
+
+
+enum TreasureType{
+  One = 1;
+  Two = 2;
+  Three = 3;
+  Four = 4;
+  OneRoundTimes = 12;
+}
+
+enum HolyBeastType{
+	ZHUQUE = 1;  	// 朱雀
+	XUANWU = 2;  	// 炫舞
+	QINGLONG = 3;	// 青龙
+	BAIHU = 4; 	// 白虎
+}
+
+enum FitHolyEquipPos{
+  ONE 	= 1;	//武器
+  TWO 	= 2;	//衣服
+  THREE = 3;	//头盔
+  FOUR	= 4;	//项链
+  FIVE	= 5;	//手镯(左)
+  SIX	= 6;	//戒指(右)
+  SEVEN	= 7;	//腰带
+  EIGHT	= 8;	//鞋子
+  NINE	= 9;	//手镯(右)
+  TEN	= 10;	//戒指(右)
+}
+
+enum MoneyPayType{
+  VIP 				= 1;	//vip
+  LIMITED_GIFT 		= 2;	//限时礼包
+  WARORDER_LUXURY 	= 3;	//豪华战令
+  RECHARGE			= 4;	//充值
+  WARORDER_EXP		= 5;	//战令经验
+  DAILY_PACK		= 6;	//每日、每周礼包
+  GROW_FUND			= 7;	//成长基金
+  MONTH_CARD		= 8;	//月卡
+  TREASURE          = 9;    //寻龙探宝,购买寻龙令
+  DAILYRANKBUYGIFT  = 10;   //每日排行礼包购买
+  SEVENINVESTMENT   = 11;   //七日礼包
+  OPEN_GIFT			= 12;	//开服礼包
+  FIRST_RECHARGE	= 13;	//首充
+}
+
+enum FunctionType {
+  BAG 			= 1;	//背包
+  FABAO 		= 2;	//法宝
+  WING 			= 3;	//羽翼
+  REIN 			= 4;	//转生
+  ATLAS 		= 5;	//图鉴
+  MATERIAL 		= 6;	//材料副本
+  ARENA 		= 7;	//竞技场
+  ARENAROLL 	= 8;	//竞技场碾压
+}
+
+
+
+enum GuildBrocastType {
+	kickUser	      	   = 1;	 //踢人
+    delGuild               = 2;  //解散工會
+	tanHeHuiZhang          = 3;  //弹劾会长
+	applyUser              = 4;  //任命 
+	zhuanRangHuiZhang      = 5;  //转让会长
+	applyQuit              = 6;  //申请退出
+	chuLiShenQingUser      = 7;  //处理申请列表玩家
+	autoChuLiShenQingUser  = 8;  //一键处理申请列表玩家
+	JoinGuild              = 9;  //只要是玩家加入门派的相关操作都用这个类型
+}
+
+
+enum RedPointType{
+	OwnGuildAuctionHaveItems = 1; //自己公会拍卖行掉落东西
+	OwnGuildAuctionNoItems = 2;   //自己公会拍卖行东西全被拍掉
+	UpItemSold   = 3; //自己上架的物品被拍掉
+	UpItemBeBid  = 4; //自己上架的物品被竞拍
+}
+
+enum RedPointState{
+	Bright = 1;//亮
+	NoBright = 0; //不亮
+}
+
+enum IsBagFullState{
+  NotFull 	= 0;
+  Full		= 1;
+}
+
+enum ChuanShiPos{
+  WuQi 			= 1;  //武器	
+  YiFu 			= 2;  //衣服
+  TouKui 		= 3;  //头盔
+  XiangLian 	= 4;  //项链
+  ZuoShouZhuo 	= 5;  //左手镯
+  YouShouZhuo 	= 6;  //右手镯
+  ZuoJieZhi 	= 7;  //左戒指
+  YouJieZhi 	= 8;  //右戒指
+  YaoDai 		= 9;  //腰带
+  XieZi 		= 10; //鞋子
+}
+
+enum AuctionErrCode{
+	upOk = 1;             //上架成功
+	errDb = 2;            //操作数据库失败
+	errCfg = 3;           //没找到配置
+	errNoItem = 4;        //背包中没有此物品
+	errCanNotUp =5;       //不能拍卖
+	errNotInPeriod = 6;   //不在上架时间内
+	errLimitDaily = 7;    //已达每日收入上限
+	errTogetherLimit = 8; //最多同时上架xx个物品
+	errUpCount = 9;       //上架数量 <= 0
+    errSetPrice = 10;     //定价超过浮动上限
+    errOverCount = 11;    //超过上架数量上限
+}
+
+enum ScrolingType {
+	jiHuoBaiYingKa = 1;     //激活白银卡
+	jiHuoBaiHuangJinKa = 2; //激活黄金卡
+	gouMaiZhanLin = 3;      //购买战令
+	gouMaiQiRiTouZhi = 4;   //购买七日投资
+	chouka = 5;             //抽卡获得高品质道具
+	killGet = 6;            //击杀获得高品质道具
+	shabakeBegin = 7;       //沙巴克开启
+	anDianBossDrop = 8;     //暗殿BOSS掉落XX品质以上
+	worldLeaderOpen = 9;    //世界首领开启
+	kaiFuBuy   = 10;        //购买开服直购
+	lianChongHaoLi = 11;    //领取连充豪礼
+	fightHelp = 12;    		//战斗协助
+	lottery   = 13;         //摇彩文案
+	ancientBoss = 14;       //远古首领
+	hellBoss  = 15;         //炼狱首领
+	daBao     = 16;         //打宝地图
+	shabakeGate = 17;       //沙巴克城门攻破
+	huangcheng = 18;        //沙巴克皇城将军被击杀
+	privilegeOpen = 19;		//特权开通
+	killMonster = 20;
+}
+
+enum DailyPackBuyType{
+  INGOT	= 1;	//元宝
+  MONEY = 2;	//直购
+}
+
+//需要 condition 判断添加的属性
+enum ConditionAttributeType {
+	StrengthenLink 	= 1;		//强化连携属性
+	AncientTreasureStar = 2;	//远古宝物升星
+ 	AncientTreasureJueXing = 3;	//远古宝物觉醒
+	AncientTreasureTaoZhuang = 4; 	//远古宝物套装
+}
+
+enum ChuanShiStrengthenStone{
+  LUCK 		= 1; //幸运石
+  PROTECT 	= 2; //保级石
+  RISE		= 3; //必升石
+}
+
+enum AppletsType{
+  Pursuit 	= 1;//追击教主
+  Bow 		= 2;//弓箭传说
+  Number	= 3;//数字传说
+}
+
+enum LabelType{
+  civil_service 	= 1; //文官
+  military_general 	= 2; //武将
+}
+
+enum Subscribe{
+	HOOK	= 1;
+}

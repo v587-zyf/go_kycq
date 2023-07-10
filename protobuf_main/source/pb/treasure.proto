@@ -1,0 +1,119 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//设置弹框状态
+message SetTreasurePopUpStateReq {
+  int32 state = 1;		//1:关闭 0:开启
+}
+
+message SetTreasurePopUpStateAck {
+  int32 state = 1;		//1:关闭 0:开启
+}
+
+
+//选择奖励
+message ChooseTreasureAwardReq{
+	int32 type  = 1; //a,,b,c,d 级
+	repeated int32 index = 2;
+	int32 isReplace = 3; //替换物品:1
+	int32 replaceIndex = 4; //需要替换的物品索引
+}
+
+message ChooseTreasureAwardAck{
+	int32 type  = 1; //a,,b,c,d 级
+	repeated int32 index = 2;
+	repeated int32 itemId = 3;
+	map<int32,ChooseInfo> choosItems = 4; //key:type  value已经选择的奖励
+	map<int32,ChooseInfo> haveGetItems = 5; //key:type  value已经获得的奖励
+	int32 isReplace = 6; //替换物品:1
+	int32 replaceIndex = 7; //需要替换的物品索引
+}
+
+message ChooseInfo{
+ repeated int32 items = 1;
+}
+
+
+//购买寻龙令
+message BuyTreasureItemReq{}
+
+message BuyTreasureItemAck{
+	map<int32,int32> haveBuyTimes = 1;
+	GoodsChangeNtf goods = 2;		//奖励道具
+}
+
+
+// 申请转盘
+message TreasureApplyGetReq {}
+
+
+message TreasureApplyGetAck {
+  repeated int32 items = 1;    //抽到的所有物品
+  int32 treasureTimes = 2;     //抽奖次数
+  GoodsChangeNtf goods = 3;	   //奖励道具
+  map<int32,ChooseInfo> choosItems = 4; //key:type  value已经选择的奖励
+  map<int32,ChooseInfo> haveGetItems = 5; //key:type  value已经获得的奖励
+  repeated TreasureInfoUnit myTreasureInfo = 6; //我的抽卡信息
+  repeated TreasureInfoUnit serverTreasureInfo = 7; //本服抽卡信息
+  int32 randomType   = 8; 
+}
+
+// 转盘信息
+message TreasureInfosReq {
+}
+
+message TreasureInfosAck {
+	int32 treasureTimes = 1; //一个抽了多少次
+	repeated TreasureInfoUnit myTreasureInfo = 2; //我的抽卡信息
+	repeated TreasureInfoUnit serverTreasureInfo = 3; //本服抽卡信息
+	repeated int32 haveGetRoundId = 4; //已经领取过的积分福利
+	map<int32,int32> HaveBuyTimes = 5;//已经购买了几次寻龙令
+	map<int32,ChooseInfo> choosItems = 6; //key:type  value已经选择的奖励
+	map<int32,ChooseInfo> haveGetItems = 7; //key:type  value已经获得的奖励
+	int32 season = 8;
+	int32 popUpState = 9;
+	int32 mergeMark = 10; //是否需要使用创建服务的开服天数 1:需要  2:赛季重置后 取主服务器openDay
+}
+
+// 返回键抽卡信息
+message TreasureInfoUnit {
+  int32 itemId = 1; 	// 奖励id
+  int32 count   = 2;    // 物品数量
+  int32 time = 3; 		// 抽卡时间
+  string userName = 4;	// 玩家名字
+  int32 type = 5;       //抽卡类型
+}
+
+message TreasureInfoNtf {
+  int32 itemId = 1; 		// 奖励id
+  int32 time = 2; 		// 抽卡时间
+  string userName = 3;	// 玩家名字
+}
+
+
+
+//领取每轮福利
+message GetTreasureIntegralAwardReq{
+   int32 id   = 1;
+}
+
+message GetTreasureIntegralAwardAck{
+    repeated int32 haveGetIndex = 1; //已经领取过的
+	int32 treasureTimes = 2; //抽奖次数
+}
+
+
+//抽卡信息
+message TreasureDrawInfoReq {}
+
+
+message TreasureDrawInfoAck {
+  repeated TreasureInfoUnit myTreasureInfo = 1; //我的抽卡信息
+  repeated TreasureInfoUnit serverTreasureInfo = 2; //本服抽卡信息
+}
+
+
+message TreasureCloseNtf{
+	bool isClose = 1;
+}

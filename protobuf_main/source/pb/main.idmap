@@ -1,0 +1,1177 @@
+package pb
+pbfiles "*.proto"
+include "enum.const"
+
+
+1 ErrorAck 0
+2 PingReq 1
+3 PingAck 0
+
+10 TopDataChangeNtf 1
+11 BagDataChangeNtf 1
+12 BagEquipDataChangeNtf 1
+98 DebugAddGoodsReq 1
+99 DebugAddGoodsAck 0
+
+100 EnterGameReq 1
+101 EnterGameAck 0
+102 CreateUserReq 1
+103 CreateUserAck 0
+104 KickUserNtf 0
+105 UserPropertyNtf 0
+106 CreateHeroReq 1
+107 CreateHeroAck 0
+
+//客户端设置
+108 PreferenceSetReq 1
+109 PreferenceSetAck 0
+110 PreferenceLoadReq 1
+111 PreferenceLoadAck 0
+
+
+//随机昵称
+112 RandNameReq 1
+113 RandNameAck 0
+
+//角色外显
+114 DisplayNtf 0
+
+//攻击状态
+115 ChangeFightModelReq 1
+116 ChangeFightModelAck 0
+
+//重置推送
+117 ResetNtf 0
+
+118 CrossFightOpenNtf 0
+
+//修改昵称
+119 ChangeHeroNameReq 1
+120 ChangeHeroNameAck 0
+
+121 UserRechargeNumNtf 0
+122 RechargFulfilledNtf 0
+123 RechargeApplyPayReq 1
+124 RechargeApplyPayAck 0
+125 UserRedPacketGetNumNtf 0
+
+//用户登录
+126 UserOnlineNtf 0
+127 UserOffLineNtf 0
+
+//用人民币直购
+128 MoneyPayReq 1
+129 MoneyPayAck 0
+
+130 FuncStateCloseNtf 1
+131 UserInGameOkReq 1
+132 UserSubscribeReq 1
+133 UserSubscribeAck 0
+
+//200-219 背包
+200 BagInfoReq 1
+201 BagInfoNtf 0
+202 BagSpaceAddReq 1
+203 BagSpaceAddAck 0
+204 BagSortReq 1
+205 BagSortAck 0
+206 GiftUseReq 1
+207 GiftUseAck 0
+208 EquipRecoverReq 1
+209 EquipRecoverAck 0
+210 ItemUseReq 1
+211 ItemUseAck 0
+212 EquipDestroyReq 1
+213 EquipDestroyAck 0
+
+//220-259 装备
+220 EquipChangeReq 1
+221 EquipChangeAck 0
+222 EquipLockReq 1
+223 EquipLockAck 0
+224 EquipRemoveReq 1
+225 EquipRemoveAck 0
+230 EquipStrengthenReq 1
+231 EquipStrengthenAck 0
+232 EquipBlessNtf 0
+233 EquipStrengthenAutoReq 1
+234 EquipStrengthenAutoAck 0
+
+//260-279 法宝
+260 FabaoActiveReq 1
+261 FabaoActiveAck 0
+262 FabaoUpLevelReq 1
+263 FabaoUpLevelAck 0
+264 FabaoSkillActiveReq 1
+265 FabaoSkillActiveAck 0
+
+//280-299 羽翼
+280 WingUpLevelReq 1
+281 WingUpLevelAck 0
+282 WingSpecialUpReq 1
+283 WingSpecialUpAck 0
+284 WingSpecialNtf 0
+285 WingUseMaterialReq 1
+286 WingUseMaterialAck 0
+287 WingWearReq 1
+288 WingWearAck 0
+
+//300-319 战斗准备 普通关卡
+300 StageFightStartReq 1
+301 StageFightStartAck 0
+302 StageFightEndReq 1
+303 StageFightEndNtf 0
+304 LeaveFightReq 1
+305 LeaveFightAck 0
+306 KillMonsterReq 1
+307 KillMonsterAck 0
+308 StartStageBossFightReq 1
+309 StageBagChangeNtf 1
+310 StageGetHookMapRewardReq 1
+311 StageGetHookMapRewardAck 0
+
+//320-329 个人boss
+320 PersonBossLoadReq 1
+321 PersonBossLoadAck 0
+322 EnterPersonBossFightReq 1
+323 PersonBossFightResultNtf 0
+324 EnterPersonBossFightAck 0
+325 PersonBossSweepReq 1
+326 PersonBossSweepAck 0
+327 PersonBossDareNumNtf 0
+
+//330-339 神兵
+330 HolyActiveReq 1
+331 HolyActiveAck 0
+332 HolyUpLevelReq 1
+333 HolyUpLevelAck 0
+334 HolySkillActiveReq 1
+335 HolySkillActiveAck 0
+336 HolySkillUpLvReq 1
+337 HolySkillUpLvAck 0
+
+//340-369 挖矿
+340 MiningLoadReq 1
+341 MiningLoadAck 0
+342 MiningUpMinerReq 1
+343 MiningUpMinerAck 0
+344 MiningBuyNumReq 1
+345 MiningBuyNumAck 0
+346 MiningStartReq 1
+347 MiningStartAck 0
+348 MiningRobReq 1
+349 MiningRobAck 0
+350 MiningRobListReq 1
+351 MiningRobListAck 0
+352 MiningListReq 1
+353 MiningListAck 0
+354 MiningDrawLoadReq 1
+355 MiningDrawLoadAck 0
+356 MiningDrawReq 1
+357 MiningDrawAck 0
+358 MiningRobBackReq 1
+359 MiningRobBackAck 0
+360 MiningInReq 1
+361 MiningRobFightAck 0
+362 MiningRobBackFightAck 0
+363 MiningInAck 0
+
+//370-379 领域
+370 AreaUpLvReq 1
+371 AreaUpLvAck 0
+
+//390-399 转生
+380 ReinActiveReq 1
+381 ReinActiveAck 0
+382 ReincarnationReq 1
+383 ReincarnationAck 0
+384 ReinCostBuyReq 1
+385 ReinCostBuyAck 0
+386 ReinCostUseReq 1
+387 ReinCostUseAck 0
+388 ReinCostBuyNumRefNtf 0
+
+//400-410 商城
+400 ShopListReq 1
+401 ShopListAck 0
+402 ShopBuyReq 1
+403 ShopBuyAck 0
+404 ShopWeekResetNtf 0
+
+//411-430 爬塔
+411 TowerRankRewardReq 1
+412 TowerRankRewardAck 0
+416 TowerSweepReq 1
+417 TowerSweepAck 0
+420 OpenTowerReq 1
+421 OpenTowerAck 0
+422 EnterTowerFightReq 1
+423 TowerFightResultNtf 0
+424 TowerFightContinueReq 1
+425 ToweryDayAwardReq 1
+426 ToweryDayAwardAck 0
+427 TowerLotteryReq 1
+428 TowerLotteryAck 0
+429 TowerLvNtf 0
+
+
+//430-449 图鉴
+430 AtlasActiveReq 1
+431 AtlasActiveAck 0
+432 AtlasUpStarReq 1
+433 AtlasUpStarAck 0
+434 AtlasGatherActiveReq 1
+435 AtlasGatherActiveAck 0
+446 AtlasGatherUpStarReq 1
+447 AtlasGatherUpStarAck 0
+448 AtlasWearChangeReq 1
+449 AtlasWearChangeAck 0
+
+//450-469 野外首领
+450 FieldBossLoadReq 1
+451 FieldBossLoadAck 0
+452 EnterFieldBossFightReq 1
+453 FieldBossFightResultNtf 0
+454 FieldBossBuyNumReq 1
+455 FieldBossBuyNumAck 0
+456 FieldBossNtf 0
+457 EnterFieldBossFightAck 0
+458 BeatBackInfoNtf 0
+459 FieldBossFirstReq 1
+460 FieldBossFirstAck 0
+
+//470-489 世界首领
+470 EnterWorldBossFightReq 1
+471 WorldBossFightResultNtf 0
+472 WorldBossInfoNtf 0
+
+//490-509 材料副本
+490 MaterialStageLoadReq 1
+491 MaterialStageLoadAck 0
+492 EnterMaterialStageFightReq 1
+493 MaterialStageFightResultNtf 0
+494 MaterialStageSweepReq 1
+495 MaterialStageSweepAck 0
+496 MaterialStageBuyNumNtf 0
+497 MaterialStageBuyNumReq 1
+498 MaterialStageBuyNumAck 0
+
+//510-529 vipboss
+510 VipBossLoadReq 1
+511 VipBossLoadAck 0
+512 EnterVipBossFightReq 0
+513 VipBossFightResultNtf 1
+514 EnterVipBossFightAck 0
+515 VipBossSweepReq 1
+516 VipBossSweepAck 0
+517 VipBossDareNumNtf 0
+
+//530-549 经验副本
+530 ExpStageFightReq 1
+531 ExpStageDareNumNtf 0
+532 ExpStageFightResultNtf 0
+533 ExpStageDoubleReq 1
+534 ExpStageDoubleAck 0
+535 ExpStageRefNtf 0
+536 ExpStageBuyNumNtf 0
+537 ExpStageSweepReq 1
+538 ExpStageSweepAck 0
+539 ExpStageBuyNumReq 1
+540 ExpStageBuyNumAck 0
+
+//550-569 竞技场
+550 ArenaOpenReq 1
+551 ArenaOpenAck 0
+552 EnterArenaFightReq 1
+553 ArenaFightNtf 0
+556 BuyArenaFightNumReq 1
+557 BuyArenaFightNumAck 0
+558 RefArenaRankReq 1
+559 RefArenaRankAck 0
+
+//570-579 龙器
+570 DragonEquipUpLvReq 1
+571 DragonEquipUpLvAck 0
+
+//580-589 特殊装备(龙,帝,生肖)
+580 SpecialEquipChangeReq 1
+581 SpecialEquipChangeAck 0
+582 SpecialEquipRemoveReq 1
+583 SpecialEquipRemoveAck 0
+
+//590-599 主宰装备
+590 DictateUpReq 1
+591 DictateUpAck 0
+
+//600-609 灵丹
+600 PanaceaUseReq 1
+601 PanaceaUseAck 0
+
+//620-639 技能
+620 SkillUpLvReq 1
+621 SkillUpLvAck 0
+622 SkillChangePosReq 1
+623 SkillChangePosAck 0
+624 SkillChangeWearReq 0
+625 SkillChangeWearAck 0
+626 SkillResetReq 1
+627 SkillResetAck 0
+628 SkillUseReq 1
+629 SkillUseNtf 0
+630 ClearSkillCdNtf 0
+
+//640-649 合成
+640 ComposeReq 1
+641 ComposeAck 0
+642 ComposeEquipReq 1
+643 ComposeEquipAck 0
+644 ComposeChuanShiEquipReq 1
+645 ComposeChuanShiEquipAck 0
+
+//660-669 法阵
+660 MagicCircleUpLvReq 1
+661 MagicCircleUpLvAck 0
+662 MagicCircleChangeWearReq 1
+663 MagicCircleChangeWearAck 0
+
+//670-679 洗练
+670 ClearReq 1
+671 ClearAck 0
+
+//680-689 宝石
+680 JewelMakeReq 1
+681 JewelMakeAck 0
+682 JewelUpLvReq 1
+683 JewelUpLvAck 0
+684 JewelChangeReq 1
+685 JewelChangeAck 0
+686 JewelRemoveReq 1
+687 JewelRemoveAck 0
+688 JewelMakeAllReq 1
+689 JewelMakeAllAck 0
+
+//690-700 签到
+690 SignReq 1
+691 SignAck 0
+692 SignRepairReq 1
+693 SignRepairAck 0
+694 CumulativeSignReq 1
+695 CumulativeSignAck 0
+696 SignResetNtf 0
+
+//710-730 邮件
+710 MailReadReq 1
+711 MailReadAck 0
+712 MailRedeemReq 1
+713 MailRedeemAck 0
+714 MailNtf 0
+715 MailLoadReq 1
+716 MailLoadAck 0
+717 MailRedeemAllReq 1
+718 MailRedeemAllAck 0
+719 MailDeleteReq 1
+720 MailDeleteAck 0
+721 MailDeleteAllReq 1
+722 MailDeleteAllAck 0
+
+//731-750 排行榜
+731 RankLoadReq 1
+732 RankLoadAck 0
+733 RankWorshipReq 1
+734 RankWorshipAck 0
+
+//751-780 聊天
+751 ChatMessageNtf 0
+752 ChatMessageListReq 1
+753 ChatMessageListAck 0
+754 ChatSendReq 1
+755 ChatSendAck 0
+756 ChatBanNtf 0
+757 ChatBanRemoveNtf 0
+
+//781-799 内功
+781 InsideUpStarReq 1
+782 InsideUpStarAck 0
+783 InsideUpGradeReq 1
+784 InsideUpGradeAck 0
+785 InsideUpOrderReq 1
+786 InsideUpOrderAck 0
+787 InsideSkillUpLvReq 1
+788 InsideSkillUpLvAck 0
+789 InsideAutoUpReq 1
+790 InsideAutoUpAck 0
+
+//800-819 任务
+800 TaskInfoNtf 0
+801 TaskDoneReq 1
+802 TaskDoneAck 0
+803 TaskNpcStateReq 1
+804 TaskNpcStateAck 0
+805 SetTaskInfoReq 1
+806 SetTaskInfoAck 0
+
+//820-829 在线奖励
+//获取在线奖励信息
+820 GetOnlineAwardInfoReq 1
+821 GetOnlineAwardInfoAck 0
+//领取在线奖励
+822 GetOnlineAwardReq 1
+823 GetOnlineAwardAck 0
+
+//830-839 时装
+830 FashionUpLevelReq 1
+831 FashionUpLevelAck 0
+// 时装穿戴
+832 FashionWearReq 1
+834 FashionWearAck 0
+
+//840-849 官职
+840 OfficialUpLevelReq 1
+841 OfficialUpLevelAck 0
+
+//850-869 特戒
+850 RingWearReq 1
+851 RingWearAck 0
+852 RingRemoveReq 1
+853 RingRemoveAck 0
+854 RingStrengthenReq 1
+855 RingStrengthenAck 0
+856 RingPhantomReq 1
+857 RingPhantomAck 0
+858 RingSkillUpReq 1
+859 RingSkillUpAck 0
+860 RingFuseReq 1
+861 RingFuseAck 0
+862 RingSkillResetReq 1
+863 RingSkillResetAck 0
+
+//880-890神兵
+880 GodEquipActiveReq 1
+881 GodEquipActiveAck 0
+882 GodEquipUpLevelReq 1
+883 GodEquipUpLevelAck 0
+884 GodEquipBloodReq 1
+885 GodEquipBloodAck 0
+
+//890-900绝学
+890 JuexueUpLevelReq 1
+891 JuexueUpLevelAck 0
+
+//900-919 战宠
+900 PetActiveReq 1
+901 PetActiveAck 0
+902 PetUpLvReq 1
+903 PetUpLvAck 0
+904 PetUpGradeReq 1
+905 PetUpGradeAck 0
+906 PetBreakReq 1
+907 PetBreakAck 0
+908 PetChangeWearReq 1
+909 PetChangeWearAck 0
+910 PetAppendageReq 1
+911 PetAppendageAck 0
+
+//920-940 竞技场
+920 CompetitveLoadReq 1  //打开竞技场页面
+921 CompetitveLoadAck 0
+922 BuyCompetitveChallengeTimesReq 1  //竞技场挑战次数购买
+923 BuyCompetitveChallengeTimesAck 0
+924 RefCompetitveRankReq 1   //刷新对手
+925 RefCompetitveRankAck 0
+926 GetCompetitveDailyRewardReq 1
+927 GetCompetitveDailyRewardAck 0
+928 EnterCompetitveFightReq 1
+929 CompetitveFightNtf 0
+930 CompetitveMultipleClaimReq 1
+931 CompetitveMultipleClaimAck 0
+
+//941-955野战
+941 FieldFightLoadReq 1
+942 FieldFightLoadAck 0
+943 EnterFieldFightReq 1
+944 FieldFightNtf 0
+945 BuyFieldFightChallengeTimesReq 1
+946 BuyFieldFightChallengeTimesAck 0
+947 RefFieldFightRivalUserReq 1
+948 RefFieldFightRivalUserAck 0
+
+//956-979暗殿boss
+956 DarkPalaceDareNumNtf 0
+961 DarkPalaceLoadReq 1
+962 DarkPalaceLoadAck 0
+963 EnterDarkPalaceFightReq 1
+964 DarkPalaceFightResultNtf 0
+965 DarkPalaceBuyNumReq 1
+966 DarkPalaceBuyNumAck 0
+967 DarkPalaceBossNtf 0
+968 EnterDarkPalaceHelpFightReq 1
+969 DarkPalaceHelpFightResultNtf 0
+
+//970-980 经验池
+970 ExpPoolLoadReq 1
+971 ExpPoolLoadAck 0
+972 ExpPoolUpGradeReq 1
+973 ExpPoolUpGradeAck 0
+
+//981-1000 仓库
+981 WarehouseInfoReq 1
+982 WarehouseInfoNtf 0
+983 WareHouseSpaceAddReq 1
+984 WareHouseSpaceAddAck 0
+985 WarehouseAddReq 1
+986 WarehouseAddAck 0
+987 WarehouseShiftOutReq 1
+988 WarehouseShiftOutAck 0
+989 WarehouseSortReq 1
+990 WarehouseSortAck 0
+
+//1001-1019天赋
+1001 TalentUpLvReq 1
+1002 TalentUpLvAck 0
+1003 TalentResetReq 1
+1004 TalentResetAck 0
+
+//1020-1070 门派
+1020 GuildLoadInfoReq 1
+1021 GuildLoadInfoAck 0
+1022 CreateGuildReq 1  //创建工会
+1023 CreateGuildAck 0
+1026 QuitGuildReq 1  //退出工会
+1027 QuitGuildAck 0
+1028 KickOutReq 1   //踢出工会
+1029 KickOutAck 0
+1030 ImpeachPresidentReq 1  //弹劾会长
+1031 ImpeachPresidentAck 0
+1032 GuildCheckMemberInfoReq 1  //查看信息
+1033 GuildCheckMemberInfoAck 0
+1034 ApplyJoinGuildReq 1   //申请加工会
+1035 ApplyJoinGuildAck 0
+1036 GuildAssignReq 1  //任命
+1037 GuildAssignAck 0
+1038 AllGuildInfosReq 1 //工会列表
+1039 AllGuildInfosAck 0
+1040 DissolveGuildReq 1 //解散工会
+1041 DissolveGuildAck 0
+1042 JoinGuildCombatLimitReq 1
+1043 JoinGuildCombatLimitAck 0
+1044 JoinGuildDisposeReq 1
+1045 JoinGuildDisposeAck 0
+1046 GetApplyUserListReq 1
+1047 GetApplyUserListAck 0
+1048 ModifyBulletinReq 1
+1049 ModifyBulletinAck 0
+1050 GuildBonfireLoadReq 1
+1051 GuildBonfireLoadAck 0
+1052 GuildBonfireAddExpReq 1
+1053 GuildBonfireAddExpAck 0
+1054 EnterGuildBonfireFightReq 1
+1055 GuildBonfireFightNtf 0
+1056 GuildBonfireOpenStateNtf 0
+1057 JoinGuildSuccessNtf 1
+1058 AllJoinGuildDisposeReq 1
+1059 AllJoinGuildDisposeAck 0
+1060 ApplyJoinGuildReDotNtf 1
+1061 ImpeachPresidentNtf 1
+1062 BroadcastGuildChangeNtf 1
+
+//1071-1099 日常活动
+1071 EnterDailyActivityReq 1
+1072 DailyActivityResultNtf 0
+1073 DailyActivityListReq 1
+1074 DailyActivityListAck 0
+1075 PaodianFightEnd 0
+
+//1100-1110 沙巴克
+1100 ShaBaKeInfoReq 1
+1101 ShaBaKeInfoAck 0
+1102 EnterShaBaKeFightReq 1
+1103 ShaBaKeFightResultNtf 0
+1104 ShabakeIsOpenNtf 0
+
+//1111-1129 vip
+1111 VipGiftGetReq 1
+1112 VipGiftGetAck 0
+
+//1130-1160 拍卖行
+1130 AuctionInfoReq 1
+1131 AuctionInfoNtf 0
+1132 BidInfoReq 1
+1133 BidInfoNtf 0
+1134 BidReq 1
+1135 BidNtf 0
+1136 MyBidReq 1
+1137 MyBidNtf 0
+1138 BidItemUpdateNtf 0
+1139 AuctionPutawayItemReq 1
+1140 AuctionPutawayItemNtf 0
+1141 MyPutAwayItemInfoReq 1
+1142 MyPutAwayItemInfoAck 0
+1143 MyBidInfoItemReq 1
+1144 MyBidInfoItemAck 0
+1145 RedPointStateNtf 0
+1146 ConversionGoldIngotReq 1
+1147 ConversionGoldIngotAck 0
+
+//1161-1189 好友
+1161 FriendListReq 1
+1162 FriendListAck 0
+1163 FriendAddReq 1
+1164 FriendAddAck 0
+1165 FriendDelReq 1
+1166 FriendDelAck 0
+1167 FriendBlockAddReq 1
+1168 FriendBlockAddAck 0
+1169 FriendSearchReq 1
+1170 FriendSearchAck 0
+1171 FriendBlockListReq 1
+1172 FriendBlockListAck 0
+1173 FriendBlockDelReq 1
+1174 FriendBlockDelAck 0
+1175 FriendMsgReadReq 1
+1176 FriendMsgReadAck 0
+1177 FriendUserInfoReq 1
+1178 FriendUserInfoAck 0
+1179 FriendMsgReq 1
+1180 FriendMsgAck 0
+1181 FriendApplyAddReq 1
+1182 FriendApplyAddNtf 0
+1183 FriendApplyAgreeReq 1
+1184 FriendApplyAgreeNtf 0
+1185 FriendApplyRefuseReq 1
+1186 FriendApplyRefuseNtf 0
+1187 FriendApplyListReq 1
+1188 FriendApplyListAck 0
+
+
+//1190-1219 合体
+1190 FitUpLvReq 1
+1191 FitUpLvAck 0
+1192 FitSkillUpLvReq 1
+1193 FitSkillUpLvAck 0
+1194 FitSkillUpStarReq 1
+1195 FitSkillUpStarAck 0
+1196 FitSkillChangeReq 1
+1197 FitSkillChangeAck 0
+1198 FitSkillResetReq 1
+1199 FitSkillResetAck 0
+1200 FitFashionUpLvReq 1
+1201 FitFashionUpLvAck 0
+1202 FitFashionChangeReq 1
+1203 FitFashionChangeAck 0
+1204 FitSkillActiveReq 1
+1205 FitSkillActiveAck 0
+1206 FitEnterReq 1
+1207 FitEnterAck 0
+1208 FitCancleReq 1
+1209 FitCancleAck 0
+
+//1210-1220 累计充值
+1210 RechargeAllGetReq 1
+1211 RechargeAllGetAck 0
+1212 RechargeResetNtf 0
+
+//1221-1240 日常任务
+1221 DailyTaskLoadReq 1
+1222 DailyTaskLoadAck 0
+1223 BuyChallengeTimeReq 1
+1224 BuyChallengeTimeAck 0
+1225 GetAwardReq 1
+1226 GetAwardAck 0
+1227 ResourcesBackGetRewardReq 1
+1228 ResourcesBackGetRewardAck 0
+1229 GetExpReq 1
+1230 GetExpAck 0
+1231 ResourcesBackGetAllRewardReq 1
+1232 ResourcesBackGetAllRewardAck 0
+
+//1241-1259 月卡
+1241 MonthCardBuyReq 1
+1242 MonthCardBuyAck 0
+1243 MonthCardDailyRewardReq 1
+1244 MonthCardDailyRewardAck 0
+
+//1260-1279 首充
+1260 FirstRechargeRewardReq 1
+1261 FirstRechargeRewardAck 0
+1262 FirstRechargeNtf 0
+
+//1280-1290 每日排名
+1280 DailyRankLoadReq 1
+1281 DailyRankLoadAck 0
+1282 DailyRankGetMarkRewardReq 1
+1283 DailyRankGetMarkRewardAck 0
+1284 DailyRankBuyGiftReq 1
+1285 DailyRankBuyGiftAck 0
+
+//1291-1300 礼包
+1291 OpenGiftReq 1
+1292 OpenGiftAck 0
+
+//1301-1319 累计消费
+1301 SpendRebatesRewardReq 1
+1302 SpendRebatesRewardAck 0
+1303 SpendRebatesNtf 0
+
+//1320-1330 离线奖励
+1320 OfflineAwardLoadReq 1
+1321 OfflineAwardLoadAck 0
+1322 OfflineAwardGetReq 1
+1323 OfflineAwardGetAck 0
+
+//1331-1340 成就
+1331 AchievementLoadReq 1
+1332 AchievementLoadAck 0
+1333 AchievementGetAwardReq 1
+1334 AchievementGetAwardAck 0
+1335 ActiveMedalReq 1
+1336 ActiveMedalAck 0
+1337 AchievementTaskInfoNtf 1
+
+//1341-1359 礼包码
+1341 GiftCodeRewardReq 1
+1342 GiftCodeRewardAck 0
+
+//1360-1380 跨服擂台赛
+1360 ChallengeInfoReq 1
+1361 ChallengeInfoAck 0
+1362 ApplyChallengeReq 1
+1363 ApplyChallengeAck 0
+1364 ChallengeEachRoundPeopleReq 1
+1365 ChallengeEachRoundPeopleAck 0
+1366 BottomPourReq 1
+1367 BottomPourAck 0
+1368 ChallengeOpenNtf 0
+1369 ChallengeRoundEndNtf 0
+1370 ChallengeApplyUserInfoNtf 0
+
+//1381-1399 限时礼包
+1381 LimitedGiftNtf 0
+1382 LimitedGiftBuyReq 1
+1383 LimitedGiftBuyAck 0
+1394 LimitedGiftReq 1
+
+//1400-1419 每日礼包
+1400 DailyPackBuyReq 1
+1401 DailyPackBuyAck 0
+
+//1420-1439 成长基金
+1420 GrowFundBuyReq 1
+1421 GrowFundBuyAck 0
+1422 GrowFundRewardReq 1
+1423 GrowFundRewardAck 0
+
+//1440-1460 首领boss
+1440 WorldLeaderStartNtf 0
+1441 LoadWorldLeaderReq 1
+1442 LoadWorldLeaderAck 0
+1443 WorldLeaderEnterReq 1
+1444 WorldLeaderEnterAck  0
+1445 GetWorldLeaderRankInfoReq 1
+1446 GetWorldLeaderRankInfoAck 0
+1447 WorldLeaderEndRewardNtf 0
+1448 WorldLeaderBossHpNtf 0
+
+//1461-1499 战令
+1461 WarOrderTaskNtf 0
+1462 WarOrderTaskFinishReq 1
+1463 WarOrderTaskFinishAck 0
+1464 WarOrderTaskRewardReq 1
+1465 WarOrderTaskRewardAck 0
+1466 WarOrderBuyLuxuryReq 1
+1467 WarOrderBuyLuxuryAck 0
+1468 WarOrderBuyExpReq 1
+1469 WarOrderBuyExpAck 0
+1470 WarOrderLvRewardReq 1
+1471 WarOrderLvRewardAck 0
+1472 WarOrderExchangeReq 1
+1473 WarOrderExchangeAck 0
+1474 WarOrderLvNtf 0
+1475 WarOrderOpenReq 1
+1476 WarOrderOpenAck 0
+1477 WarOrderResetNtf 0
+
+//1500-1520 跨服沙巴克
+1500 ShaBaKeInfoCrossReq 1
+1501 ShaBaKeInfoCrossAck 0
+1502 EnterCrossShaBaKeFightReq 1
+1503 EnterCrossShaBaKeFightAck 0
+1504 CrossShabakeOpenNtf 0
+
+//1521-1539 精灵回收
+1521 ElfFeedReq 1
+1522 ElfFeedAck 0
+1523 ElfSkillUpLvReq 1
+1524 ElfSkillUpLvAck 0
+1525 ElfSkillChangePosReq 1
+1526 ElfSkillChangePosAck 0
+
+ 
+//1540-1560 寻宝
+1540 CardActivityApplyGetReq 1
+1541 CardActivityApplyGetAck 0
+1542 CardActivityInfosReq 1
+1543 CardActivityInfosAck 0
+1544 CardInfoNtf 0
+1545 GetIntegralAwardReq 1
+1546 GetIntegralAwardAck 0
+1547 CardCloseNtf 0
+
+//1561-1580 寻龙探宝
+1561 SetTreasurePopUpStateReq 1
+1562 SetTreasurePopUpStateAck 0
+1563 ChooseTreasureAwardReq 1
+1564 ChooseTreasureAwardAck 0
+1565 BuyTreasureItemReq 1
+1566 BuyTreasureItemAck 0
+1567 TreasureApplyGetReq 1
+1568 TreasureApplyGetAck 0
+1569 TreasureInfosReq 1
+1570 TreasureInfosAck 0
+1571 GetTreasureIntegralAwardReq 1
+1572 GetTreasureIntegralAwardAck 0
+1573 TreasureInfoNtf 0
+1574 TreasureDrawInfoReq 1
+1575 TreasureDrawInfoAck 0
+1576 TreasureCloseNtf 0
+ 
+//1581-1599 切割
+1581 CutTreasureUpLvReq 1
+1582 CutTreasureUpLvAck 0
+1583 CutTreasureUseReq 1
+1584 CutTreasureUseAck 0
+
+//1600-1620 圣兽
+1600 HolyBeastLoadInfoReq 1
+1601 HolyBeastLoadInfoAck 0
+1602 HolyBeastActivateReq 1
+1603 HolyBeastActivateAck 0
+1604 HolyBeastUpStarReq 1
+1605 HolyBeastUpStarAck 0
+1606 HolyBeastPointAddReq 1
+1607 HolyBeastPointAddAck 0
+1608 HolyBeastChoosePropReq 1
+1609 HolyBeastChoosePropAck 0
+1610 HolyBeastRestReq 1
+1611 HolyBeastRestAck 0
+
+//1621-1649 合体圣装
+1621 FitHolyEquipComposeReq 1
+1622 FitHolyEquipComposeAck 0
+1623 FitHolyEquipDeComposeReq 1
+1624 FitHolyEquipDeComposeAck 0
+1625 FitHolyEquipWearReq 1
+1626 FitHolyEquipWearAck 0
+1627 FitHolyEquipRemoveReq 1
+1628 FitHolyEquipRemoveAck 0
+1629 FitHolyEquipSuitSkillChangeReq 1
+1630 FitHolyEquipSuitSkillChangeAck 0
+
+//1650-1699 传世装备
+1650 ChuanShiWearReq 1
+1651 ChuanShiWearAck 0
+1652 ChuanShiRemoveReq 1
+1653 ChuanShiRemoveAck 0
+1654 ChuanShiDeComposeReq 1
+1655 ChuanShiDeComposeAck 0
+1656 ChuanshiStrengthenReq 1
+1657 ChuanshiStrengthenAck 0
+
+//1700-1720 功能预览
+1700 PreviewFunctionLoadReq 1
+1701 PreviewFunctionLoadAck 0
+1702 PreviewFunctionGetReq 1
+1703 PreviewFunctionGetAck 0
+1704 PreviewFunctionPointReq 1
+1705 PreviewFunctionPointAck 0
+
+//1721-1730 七日投资
+1721 SevenInvestmentLoadReq 1
+1722 SevenInvestmentLoadAck 0
+1723 GetSevenInvestmentAwardReq 1
+1724 GetSevenInvestmentAwardAck 0
+
+//1731-1749 连续充值
+1731 ContRechargeCycleNtf 0
+1732 ContRechargeNtf 0
+1733 ContRechargeReceiveReq 1
+1734 ContRechargeReceiveAck 0
+
+//1750-1769 开服礼包
+1750 OpenGiftBuyNtf 0
+1751 OpenGiftEndTimeReq 1
+1752 OpenGiftEndTimeAck 0
+
+//1770-1789 vip客服
+1770 VipCustomerReq 1
+1771 VipCustomerAck 0 
+
+//1790-1795 跑马灯推送
+1790 PaoMaDengNtf 0
+
+//1800-1829 远古首领
+1800 AncientBossLoadReq 1
+1801 AncientBossLoadAck 0
+1802 AncientBossBuyNumReq 1
+1803 AncientBossBuyNumAck 0
+1804 EnterAncientBossFightReq 1
+1805 EnterAncientBossFightAck 0
+1806 AncientBossFightResultNtf 0
+1807 AncientBossNtf 0
+1808 AncientBossOwnerReq 1
+1809 AncientBossOwnerAck 0
+
+//1830-1849 远古神技
+1830 AncientSkillUpLvReq 1
+1831 AncientSkillUpLvAck 0
+1832 AncientSkillUpGradeReq 1
+1833 AncientSkillUpGradeAck 0
+1834 AncientSkillActiveReq 1
+1835 AncientSkillActiveAck 0
+
+//1850-1869 守卫龙柱
+1850 EnterGuardPillarReq 1
+1851 GuardPillarResultNtf 0
+
+//1870-1889 称号
+1870 TitleActiveReq 1
+1871 TitleActiveAck 0
+1872 TitleWearReq 1
+1873 TitleWearAck 0
+1874 TitleAutoActiveNtf 0
+1875 TitleExpireNtf 0
+1876 TitleRemoveReq 1
+1877 TitleRemoveAck 0
+1878 TitleLookReq 1
+1879 TitleLookAck 0
+
+//1890-1919 公会活动
+1890 GuildActivityOpenNtf 0
+1891 GuildActivityLoadReq 1
+1892 GuildActivityLoadAck 0
+
+//1920-1940 秘籍
+1920 MiJiUpReq 1
+1921 MiJiUpAck 0
+
+//1941-1960 远古宝物
+1941 AncientTreasuresLoadReq 1
+1942 AncientTreasuresLoadAck 0
+1943 AncientTreasuresZhuLinReq 1
+1944 AncientTreasuresZhuLinAck 0
+1945 AncientTreasuresUpStarReq 1
+1946 AncientTreasuresUpStarAck 0
+1947 AncientTreasuresJueXingReq 1
+1948 AncientTreasuresJueXingAck 0
+1949 AncientTreasuresActivateReq 1
+1950 AncientTreasuresActivateAck 0
+1951 AncientTreasuresResertReq 1
+1952 AncientTreasuresResertAck 0
+1953 AncientTreasuresCondotionInfosReq 1
+1954 AncientTreasuresCondotionInfosAck 0
+
+//1961-1999 首领首杀
+1961 KillMonsterUniLoadReq 1
+1962 KillMonsterUniLoadAck 0
+1963 KillMonsterUniFirstDrawReq 1
+1964 KillMonsterUniFirstDrawAck 0
+1965 KillMonsterUniDrawReq 1
+1966 KillMonsterUniDrawAck 0
+1967 KillMonsterUniKillNtf 0
+1968 KillMonsterPerLoadReq 1
+1969 KillMonsterPerLoadAck 0
+1970 KillMonsterPerDrawReq 1
+1971 KillMonsterPerDrawAck 0
+1972 KillMonsterPerKillNtf 0
+1973 KillMonsterMilLoadReq 1
+1974 KillMonsterMilLoadAck 0
+1975 KillMonsterMilDrawReq 1
+1976 KillMonsterMilDrawAck 0
+1977 KillMonsterMilKillNtf 0
+
+//2000-2019 多宝阁
+2000 TreasureShopLoadReq 1
+2001 TreasureShopLoadAck 0
+2002 TreasureShopCarChangeReq 1
+2003 TreasureShopCarChangeAck 0
+2004 TreasureShopBuyReq 1
+2005 TreasureShopBuyAck 0
+2006 TreasureShopRefreshReq 1
+2007 TreasureShopRefreshNtf 0
+
+//2020-2049 炼狱首领
+2020 HellBossLoadReq 1
+2021 HellBossLoadAck 0
+2022 HellBossBuyNumReq 1
+2023 HellBossBuyNumAck 0
+2024 HellBossDareNumNtf 0
+2025 EnterHellBossFightReq 1
+2026 HellBossFightResultNtf 0
+2027 HellBossNtf 0
+
+//2050-2060 九重魔塔
+2050 MagicTowerEndNtf 0
+2051 MagicTowerGetUserInfoReq 1
+2052 MagicTowerGetUserInfoAck 0
+2053 MagicTowerlayerAwardReq 1
+2054 MagicTowerlayerAwardAck 0
+
+//2061-2080 摇彩
+2061 LotteryInfoReq 1
+2062 LotteryInfoAck 0
+2063 LotteryBuyNumsReq 1
+2064 LotteryBuyNumsAck 0
+2065 GetGoodLuckReq 1
+2066 GetGoodLuckAck 0
+2067 LotteryEnd 0
+2068 SetLotteryPopUpStateReq 1
+2069 SetLotteryPopUpStateAck 0
+2070 LotteryInfo1Req 1
+2071 LotteryInfo1Ack 0
+2072 LotteryGetEndAwardReq 1
+2073 LotteryGetEndAwardAck 0
+2074 BrocastBuyNumsNtf 0
+
+//2081-2100 试炼之路
+2081 TrialTaskInfoReq 1
+2082 TrialTaskInfoAck 0
+2083 TrialTaskGetAwardReq 1
+2084 TrialTaskGetAwardAck 0
+2085 TrialTaskGetStageAwardReq 1
+2086 TrialTaskGetStageAwardAck 0
+2087 TrialTaskInfoNtf 0
+
+//2101-2139 打宝
+2101 DaBaoEquipUpReq 1
+2102 DaBaoEquipUpAck 0
+2103 EnterDaBaoMysteryReq 1
+2104 DaBaoMysteryResultNtf 0
+2105 DaBaoMysteryEnergyItemBuyReq 1
+2106 DaBaoMysteryEnergyAddReq 1
+2107 DaBaoMysteryEnergyAddAck 0
+2108 DaBaoMysteryEnergyNtf 0
+
+//2140-2179 小程序
+2140 EnterAppletsReq 1
+2141 AppletsEnergyNtf 1
+2142 AppletsReceiveReq 1
+2143 AppletsReceiveAck 0
+2144 CronGetAwardReq 1
+2145 CronGetAwardAck 0
+2146 EndResultReq 1
+2147 EndResultAck 0
+
+//2180-2219 头衔
+2180 LabelUpReq 1
+2181 LabelUpAck 0
+2182 LabelTransferReq 1
+2183 LabelTransferAck 0
+2184 LabelDayRewardReq 1
+2185 LabelDayRewardAck 0
+2186 LabelTaskReq 1
+2187 LabelTaskNtf 0
+
+//2220-2249 特权
+2220 PrivilegeBuyReq 1
+2221 PrivilegeBuyAck 0
+
+//2250 -2259
+2250 GetBossFamilyInfoReq 1
+2251 GetBossFamilyInfoAck 0
+2252 EnterBossFamilyReq 1
+
+//2260-2280 首爆
+2260 FirstDropLoadReq 1
+2261 FirstDropLoadAck 0
+2262 GetFirstDropAwardReq 1
+2263 GetFirstDropAwardAck 0
+2264 GetAllFirstDropAwardReq 1
+2265 GetAllFirstDropAwardAck 0
+2266 GetAllRedPacketReq 1
+2267 GetAllRedPacketAck 0
+2268 GetAllFirstDropAwardNtf 0
+2269 FirstDropRedPointNtf 0
+
+
+//战斗8000-9000
+8000 EnterPublicCopyReq 1
+8001 EnterPublicCopyAck 0
+8102 FightPickUpReq 1
+8103 FightPickUpAck 0
+8104 FightUserReliveReq 1
+8105 FightUserReliveAck 0
+8106 FightCheerReq 1
+8107 FightCheerAck 0
+8108 FightPotionReq 1
+8109 FightPotionAck 0
+8110 FightCollectionReq 1
+8111 FightCollectionAck 0
+8112 FightGetCheerNumReq 1
+8113 FightGetCheerNumNtf 0
+8114 FightCollectionNtf 0
+8115 FightPotionCdReq 1
+8116 FightPotionCdAck 0
+8117 FightCollectionCancelReq 1
+8118 FightCollectionCancelAck 0
+8119 FightApplyForHelpReq 1
+8120 FightApplyForHelpAck 0
+8121 FightApplyForHelpNtf 0
+8122 FightAskForHelpResultReq 1
+8123 FightAskForHelpResultNtf 0
+8124 FightTeamChangeNtf 0
+8125 FightUserChangeToHelperNtf 0
+8126 FightAskForHelpResultAck 0
+8127 FightItemsAddNtf 0
+8128 FightNpcEventReq 0
+
+//Client<->Fs协议:
+9001 SceneEnterNtf 1
+9002 SceneLeaveNtf 0
+9003 SceneMoveRpt 1
+9004 SceneMoveNtf 0
+9005 AttackRpt 0
+9007 AttackEffectNtf 0
+9008 SceneDieNtf 0
+9009 SceneEnterOverNtf 0
+9010 FightHurtRankReq 1
+9011 FightHurtRankAck 0
+9013 SceneUserUpdateNtf 0
+9014 SceneUserReliveNtf 0
+9015 SceneObjHpNtf 0
+9016 GetBossOwnerChangReq 1
+9017 BossOwnerChangNtf 0
+9018 SceneObjMpNtf 0
+9019 CollectionStatusChangeNtf 1
+9020 FightEnterOkReq 1
+9021 FightStartCountDownNtf 0
+9022 FightStartCountDownOkReq 1
+9023 FightStartNtf 0
+9024 SceneUserElfUpdateNtf 1
+9025 FightCheerNumChangeNtf 1
+9026 GuardPillarFightNtf 1
+9027 MagicTowerFightNtf 1
+
+//buff
+9030 BuffChangeNtf 0
+9031 BuffDelNtf 0
+9032 BuffHpChangeNtf 0
+9033 BuffPropChangeNtf 0
+
+9040 FightUserScoreNtf 0
+
+9050 ExpStageKillInfoNtf 1
+9051 PaodianTopUserReq 1
+9052 PaodianTopUserNtf 0
+9053 GetShabakeScoresReq 1
+9054 ShabakeScoreRankNtf 0
+9055 PaoDianUserNumNtf 0
+9056 ShabakeOccupiedNtf 0
+
+9060 GetShabakeCrossScoresReq 1
+9061 ShabakeCrossScoreRankNtf 0
+9062 ShabakeCrossOccupiedNtf 0
+9063 CrossShaBaKeFightEndNtf 0
+
+9070 GetFightBossInfosReq 1
+9071 GetFightBossInfosAck 0
+9072 BossReliveNtf 0
+

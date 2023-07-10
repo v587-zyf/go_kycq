@@ -1,0 +1,67 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+// 申请抽卡
+message CardActivityApplyGetReq {
+  int32 times = 1;				//抽卡次数
+}
+
+// 抽卡结果
+message CardActivityApplyGetAck {
+  repeated int32 cards = 1;      //抽到的卡牌
+  int32 cardTime = 2; //抽卡次数
+  GoodsChangeNtf goods = 3;		//奖励道具
+  int32 type = 4;      //抽卡类型
+  repeated CardInfoUnit myDrawInfo = 5; //我的抽卡信息
+  repeated CardInfoUnit serverDrawInfo = 6; //本服抽卡信息
+  int32 integral = 7; //积分
+}
+
+// 抽卡信息
+message CardActivityInfosReq {
+}
+
+// 抽卡信息
+message CardActivityInfosAck {
+	int32 integral = 1; //积分
+    int32 totalDrawCardTimes = 2; //all抽卡次数
+	repeated CardInfoUnit myDrawInfo = 3; //我的抽卡信息
+	repeated CardInfoUnit serverDrawInfo = 4; //本服抽卡信息
+	repeated int32 haveGetIndex = 5; //已经领取过的积分福利
+	int32   nowSeason = 6;
+	int32 mergeMark = 7; //是否需要使用创建服务的开服天数 1:需要
+}
+
+// 返回键抽卡信息
+message CardInfoUnit {
+  int32 itemId = 1; 		// 奖励id
+  int32 count  = 2;
+  int32 time = 3; 		// 抽卡时间
+  string userName = 4;	// 玩家名字
+  int32 type = 5;      //抽卡类型
+}
+
+message CardInfoNtf {
+  int32 itemId = 1; 		// 奖励id
+  int32 time = 2; 		// 抽卡时间
+  string userName = 3;	// 玩家名字
+}
+
+
+
+//积分商城
+message GetIntegralAwardReq{
+   int32 index  = 1;
+   int32 times  = 2; //购买次数
+}
+
+message GetIntegralAwardAck{
+    repeated int32 haveGetIndex = 1; //已经领取过的
+	int32 integral = 2; //我的积分
+	GoodsChangeNtf goods = 3;		//奖励道具
+}
+
+message CardCloseNtf{
+	bool isClose = 1;
+}

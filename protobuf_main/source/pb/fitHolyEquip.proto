@@ -1,0 +1,49 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//合体圣装合成
+message FitHolyEquipComposeReq{
+	int32 equipId = 1;
+	int32 pos = 2;	//装备部位
+}
+message FitHolyEquipComposeAck{
+	int32 suitType = 1;
+	FitHolyEquipUnit fitHolyEquip = 2;
+}
+
+//合体圣装分解
+message FitHolyEquipDeComposeReq{
+	int32 bagPos = 1;	//背包位置
+}
+message FitHolyEquipDeComposeAck{
+  	GoodsChangeNtf goods = 1;
+}
+
+//合体圣装穿戴
+message FitHolyEquipWearReq{
+	int32 bagPos = 1;	//背包位置
+	int32 equipPos = 2;
+}
+message FitHolyEquipWearAck{
+	int32 suitType = 1;
+	FitHolyEquipUnit fitHolyEquip = 2;
+}
+
+//合体圣装卸下
+message FitHolyEquipRemoveReq{
+	int32 pos = 1;		//装备部位
+	int32 suitType = 2;
+}
+message FitHolyEquipRemoveAck{
+	int32 suitType = 1;
+	FitHolyEquipUnit fitHolyEquip = 2;
+}
+
+//合体圣装套装技能更换
+message FitHolyEquipSuitSkillChangeReq{
+	int32 suitId = 1;
+}
+message FitHolyEquipSuitSkillChangeAck{
+	int32 suitId = 1;
+}

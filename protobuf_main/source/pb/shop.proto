@@ -1,0 +1,27 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//列表
+message ShopListReq {
+    int32 shopType = 1;
+}
+message ShopListAck {
+    int32 shopType = 1;
+    ShopInfo shopList = 2;
+}
+
+//购买
+message ShopBuyReq {
+    int32 id = 1;
+	int32 buyNum = 2;
+}
+message ShopBuyAck {
+    int32 id = 1;
+    int32 buyNum = 2;
+    GoodsChangeNtf goods = 3;
+}
+
+message ShopWeekResetNtf{
+	ShopInfo shopInfo = 1;
+}

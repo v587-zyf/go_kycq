@@ -1,0 +1,31 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//远古神技激活
+message AncientSkillActiveReq{
+	int32 heroIndex = 1;
+}
+message AncientSkillActiveAck{
+	int32 heroIndex = 1;
+	AncientSkill ancientSkill = 2;
+}
+
+//远古神技升级
+message AncientSkillUpLvReq{
+	int32 heroIndex = 1;
+}
+message AncientSkillUpLvAck{
+	int32 level	= 1;
+	int32 heroIndex = 2;
+}
+
+//远古神技升阶
+message AncientSkillUpGradeReq{
+	int32 heroIndex = 1;
+}
+message AncientSkillUpGradeAck{
+	int32 grade	= 1;
+	int32 heroIndex = 2;
+}

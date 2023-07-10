@@ -1,0 +1,31 @@
+syntax = "proto3";
+package pbserver;
+
+message GsToCcsBackGuildInfoNtf{
+  string firstGuildInfo = 1;
+  int32  benFuShaBaKe = 2;
+  int32  crossFsId = 4;
+}
+
+message CcsToGsBroadShaBakeFirstGuildInfo{
+  string firstGuildInfo = 1;
+  int32  benFuShaBaKe = 2;
+}
+
+
+message Info{
+	string nickName = 1;
+	int32 sex = 2;
+	int32 job = 3;
+	int32 position = 4; //职位
+	Display display = 5;
+}
+
+message Display {
+  int32 clothItemId  	= 1;	//衣服
+  int32 clothType		= 2; 	//衣服类型
+  int32 weaponItemId 	= 3;	//武器
+  int32 weaponType 		= 4; 	//武器类型
+  int32 wingId			= 5;	//羽翼
+  int32 magicCircleLvId	= 6;	//法阵等级表id
+}

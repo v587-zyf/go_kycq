@@ -1,0 +1,28 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message TaskDoneReq {			//完成任务，领取奖励
+  int32 taskId = 1;
+}
+
+message TaskDoneAck {
+  GoodsChangeNtf goods = 1;		//奖励道具
+}
+
+message TaskNpcStateReq{}
+
+message TaskNpcStateAck{
+	int32 taskId = 1;
+	int32 process = 2;
+}
+
+message SetTaskInfoReq{
+	int32 taskId = 1;
+	int32 process = 2;
+}
+
+message SetTaskInfoAck{
+	int32 taskId = 1;
+	int32 process = 2;
+}

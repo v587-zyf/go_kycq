@@ -1,0 +1,56 @@
+syntax = "proto3";
+package pb;
+
+//进入战斗
+message ExpStageFightReq {
+	int32 stageId = 1;	//关卡ID
+}
+//获得经验后减少次数
+message ExpStageDareNumNtf{
+	int32 dareNum = 1;	//战斗次数
+}
+//战斗结算
+message ExpStageFightResultNtf{
+	int32 stageId 		= 1;	//关卡ID
+	int64 exp 			= 2;	//经验值
+	int32 monsterNum 	= 3;	//怪物数量
+	int32 grade			= 4;	//评级
+	int32 layer			= 5;	//层数
+	bool isFree			= 6;	//是否免费
+}
+//再领一次
+message ExpStageDoubleReq{
+	int32 stageId = 1;
+}
+message ExpStageDoubleAck{
+	int32 stageId = 1;
+	int64 exp = 2;
+}
+//重置
+message ExpStageRefNtf{
+	bool isRef = 1;
+}
+//购买次数增加
+message ExpStageBuyNumNtf{
+	int32 buyNum = 1;
+}
+
+//扫荡
+message ExpStageSweepReq{
+	int32 stageId = 1;
+}
+message ExpStageSweepAck{
+	int32 stageId 		= 1;	//关卡ID
+	int64 exp 	  		= 2;	//经验值
+	int32 monsterNum 	= 3;	//怪物数量
+	int32 grade			= 4;	//评级
+	int32 dareNum		= 5;	//战斗次数
+}
+
+//购买次数
+message ExpStageBuyNumReq{
+	bool use = 1;
+}
+message ExpStageBuyNumAck{
+	int32 buyNum = 1;
+}

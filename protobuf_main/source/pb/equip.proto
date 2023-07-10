@@ -1,0 +1,57 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message EquipChangeReq{
+	int32 heroIndex = 1;	//武将id
+	int32 pos = 2;		//装备位置（-1，为一键替换所有，bagpos默认为0）
+	int32 bagPos = 3;	//替换装备在背包中的位置
+}
+message EquipChangeAck{
+	int32 heroIndex = 1;	//武将id
+	map<int32, EquipUnit>     equips = 2;  //变化后的装备
+}
+
+message EquipLockReq{
+	int32 pos = 2; 	//装备在背包中位置
+}
+message EquipLockAck{
+	int32 pos 	= 2;   //装备在背包中位置
+	bool lock	= 3;	//锁定状态
+}
+
+message EquipStrengthenReq{
+	int32 heroIndex = 1;	//武将id
+	int32 pos= 2;	//强化部位(-1代表一键强化)
+}
+message EquipStrengthenAck{
+	int32 heroIndex = 1;	//武将id
+	EquipGrid equipGrids = 2; //强化后的格子数据
+	bool isUp = 3;	//强化结果
+}
+
+message EquipRemoveReq{
+	int32 heroIndex = 1;	//武将id
+	int32 pos = 2;		//装备位置
+}
+message EquipRemoveAck{
+	int32 heroIndex = 1;	//武将id
+	int32 pos = 2;		//装备位置
+}
+
+message EquipBlessNtf{
+	int32 heroIndex = 1;
+	int32 lucky		= 2;
+	int32 res		= 3;
+	EquipUnit equip = 4;
+}
+
+message EquipStrengthenAutoReq{
+	int32 heroIndex = 1;
+	bool isBreak	= 2;
+}
+message EquipStrengthenAutoAck{
+	int32 heroIndex = 1;
+	repeated EquipGrid equipGrids = 2;
+}

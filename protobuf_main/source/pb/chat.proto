@@ -1,0 +1,42 @@
+
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//聊天消息
+message ChatMessageNtf {
+  BriefUserInfo sender       = 1; // sender
+  int32         type         = 2; //类型 频道
+  string        msg          = 3; //消息内容
+  int32         ts           = 4; //发送的时间戳
+  int32  		toId         = 5; //接受者的id（私聊用）
+}
+
+//最近的聊天列表信息
+message ChatMessageListReq{
+}
+
+message ChatMessageListAck{
+	repeated ChatMessageNtf msgs = 1;
+}
+
+//请求发送聊天信息
+message ChatSendReq {
+  int32  type         = 1; //类型  频道
+  string msg          = 2; //消息
+  int32  toId         = 3; //接受者的id
+}
+
+message ChatSendAck {
+  bool  isBanSpeak   = 1;//是否被禁言
+  int32 banSpeakTime = 2;//结束时间 还有多少秒
+}
+
+message ChatBanNtf{
+	int32 endTime = 1;
+	string reason = 2;
+	
+}
+
+message ChatBanRemoveNtf{
+}

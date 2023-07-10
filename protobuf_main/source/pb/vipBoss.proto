@@ -1,0 +1,40 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+// 列表
+message VipBossLoadReq {}
+message VipBossLoadAck {
+	map<int32,int32> vipBoss = 1;	//vipBoss(stageId,次数)
+}
+
+// 战斗
+message EnterVipBossFightReq {
+	int32 stageId = 1;
+}
+message EnterVipBossFightAck {
+	int32 stageId = 1;
+    int32 dareNum = 2;
+}
+message VipBossFightResultNtf{
+    int32 stageId 			= 1;
+    int32 dareNum 			= 2;	//挑战次数(已有)
+	int32 result			= 3;	//战斗结果
+	GoodsChangeNtf goods 	= 4;  	//掉落物品
+}
+
+//扫荡
+message VipBossSweepReq{
+	int32 stageId = 1;
+}
+message VipBossSweepAck{
+	int32 stageId = 1;
+    int32 dareNum = 2;
+	GoodsChangeNtf goods = 3;
+	int32 isBagFull = 4;
+}
+
+message VipBossDareNumNtf{
+	int32 stageId = 1;
+	int32 dareNum = 2;
+}

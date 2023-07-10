@@ -1,0 +1,75 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message LotteryInfoReq{}
+
+message LotteryInfoAck{
+	repeated LotteryInfo myLotteryInfos  = 1;  //自己的奖号
+	repeated LotteryInfo allLotteryInfos = 2; //所有的奖号
+	repeated LotteryInfo winLotteryInfos = 3;//中奖者所获得的奖号
+	int32    PopUpState = 4;  //弹窗状态
+	int32    goodLuckState = 5; //接好运状态
+	BriefUserInfo winUserInfo  = 6;
+	bool     isGetAward = 7;
+}
+
+//接好运
+message GetGoodLuckReq{}
+
+message GetGoodLuckAck{
+	int32 state = 1;
+}
+
+//结算弹窗状态
+message SetLotteryPopUpStateReq{
+	int32 state  = 1;
+}
+
+message SetLotteryPopUpStateAck{
+	int32 state = 1;
+}
+
+
+//摇彩购买份数
+message LotteryBuyNumsReq{
+	int32 num = 1;  //摇彩购买份额
+}
+
+message LotteryBuyNumsAck{
+	repeated LotteryInfo LotteryInfos = 1;//奖号信息
+}
+
+message BrocastBuyNumsNtf{
+	repeated LotteryInfo LotteryInfos = 1;//奖号信息
+}
+
+message LotteryInfo{
+	int32  userId      = 1;    //玩家
+	string userName    = 2;    //玩家名字
+    int32  awardNumber = 3;    //奖号
+	int32  shareNum    = 4;    //份数
+	int64  combat      = 5;    // 总战力
+}
+
+
+
+message LotteryEnd{
+	repeated LotteryInfo winLotteryInfos = 1;//中奖者所获得的奖号
+	BriefUserInfo winUserInfo  = 2;
+}
+
+message LotteryInfo1Req{}
+
+message LotteryInfo1Ack{
+	int32  isWin = 1; //是否中奖
+	repeated itemUnit items = 2;
+	repeated LotteryInfo winLotteryInfos = 3;//中奖者所获得的奖号
+} 
+
+message LotteryGetEndAwardReq{}
+
+message LotteryGetEndAwardAck{
+	int32 getState = 1;
+	repeated itemUnit items = 2;
+} 

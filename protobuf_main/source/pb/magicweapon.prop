@@ -1,0 +1,40 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//法宝激活
+message MagicWeaponActiveReq{
+	int32 id:number; //法宝id
+}
+
+message MagicWeaponActiveAck{
+	MagicWeapon magicWeapon=1;	//法宝信息
+}
+
+//法宝升级
+message MagicWeaponStrengthenReq{
+	int32 id= 1;	//法宝id
+}
+
+message MagicWeaponStrengthenAck{
+	MagicWeapon magicWeapon=1;	//法宝信息
+}
+
+//法宝升阶
+message MagicWeaponGradeUpReq{
+	init32 id=1; 	//法宝id
+}
+
+message MagicWeaponGradeUpAck{
+	MagicWeapon magicWeapon=1;	//法宝信息
+}
+
+//法宝技能升级
+message MagicWeaponSkillLevelUpReq{
+	int32 skillId =1 ;//技能id
+}
+
+message MagicWeaponSkillLevelUpAck{
+	MagicWeaponSkill skill =1;	//技能信息
+}

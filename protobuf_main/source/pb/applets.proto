@@ -1,0 +1,49 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//进入小程序
+message EnterAppletsReq{
+	int32 appletsType = 1; //小程序类型,枚举AppletsType
+}
+
+//小程序体力推送
+message AppletsEnergyNtf{
+	int32 energy 	 = 1; //体力
+	int64 ResumeTime = 2; //上次恢复时间
+}
+
+//领取魔法射击杀怪奖励
+message AppletsReceiveReq{
+	int32 receiveId		= 1; //要领取的配置id
+}
+
+message AppletsReceiveAck{
+	int32 receiveId			= 1; //要领取的配置id
+	GoodsChangeNtf goods 	= 2; //掉落物品
+}
+
+//魔法射击定时奖励获取
+message CronGetAwardReq{
+	int32 id = 1;
+	int32 index = 2; //坚持奖励索引
+}
+
+message CronGetAwardAck{
+	GoodsChangeNtf goods 	= 2; //掉落物品
+}
+
+
+//通关奖励
+message EndResultReq{
+	int32 appletsType = 1; //小程序类型,枚举AppletsType
+	int32 id     = 2; //通关id  配置表id
+}
+
+message EndResultAck{
+    int32 appletsType       = 1; //小程序类型,枚举AppletsType
+    int32 energy 	        = 2; //体力 
+	int32 id                = 3; //通关id
+	GoodsChangeNtf  goods 	= 4; //掉落物品
+}

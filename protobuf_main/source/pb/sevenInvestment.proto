@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pb;
+
+
+message SevenInvestmentLoadReq{}
+
+message SevenInvestmentLoadAck{
+	repeated int32 haveGetIds = 1; //已領取的奖励
+	int32 activateDay = 2;         //激活天数
+
+}
+
+
+message GetSevenInvestmentAwardReq{
+   int32  id = 1; //配置表id
+}
+
+message GetSevenInvestmentAwardAck{
+  repeated int32 haveGetIds = 1; //已領取的奖励
+}

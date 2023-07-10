@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pb;
+
+//vip礼包领取
+message VipGiftGetReq{
+	int32 lv = 1;	//vip等级
+}
+message VipGiftGetAck{
+	int32 lv = 1;
+}

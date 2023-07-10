@@ -1,0 +1,5 @@
+pbfiles "*.proto"
+
+11 LoginReq 1
+5 Ping 1
+

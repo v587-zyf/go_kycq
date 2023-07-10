@@ -1,0 +1,20 @@
+// auto generated, do not edit
+
+var pb = dcodeIO.ProtoBuf.newBuilder({"populateAccessors": false})['import']({body|s}).build().pb;
+
+(function() {
+    var idMap = {{@iter obj=idMap}
+        "{$key}": "{$value}",{/iter}
+    };
+    pb.idMap = idMap;
+    pb.nameMap = {};
+    for (var key in idMap) {
+        pb.nameMap[idMap[key]] = +key;
+    }
+})();
+var api = {{#services}
+{>serviceDef package=package/}{/services}
+};
+window.pb = pb;
+window.api = api;
+

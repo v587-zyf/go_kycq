@@ -1,0 +1,78 @@
+syntax = "proto3";
+package pb;
+
+message AncientTreasuresLoadReq{}
+
+message AncientTreasuresLoadAck{
+	map<int32,AncientTreasuresInfo> AncientTreasuresInfos = 1;
+}
+
+
+message AncientTreasuresInfo{
+	int32 zhuLinLv = 1;    //注灵等级
+	int32 starLv   = 2;    //升星
+	int32 isAwakening = 3; //是否觉醒
+	int32 types = 4;
+}
+
+//远古宝物 激活
+message AncientTreasuresActivateReq{
+    int32 treasureId = 1;
+}
+
+message AncientTreasuresActivateAck{
+	int32 treasureId = 1;
+}
+
+
+
+//远古宝物 注灵
+message AncientTreasuresZhuLinReq{
+    int32 treasureId = 1;
+}
+
+message AncientTreasuresZhuLinAck{
+	int32 zhuLinLv = 1;
+	int32 treasureId = 2;
+}
+
+
+//远古宝物 升星
+message AncientTreasuresUpStarReq{
+    int32 treasureId = 1;
+} 
+
+
+message AncientTreasuresUpStarAck{
+	int32 starLv = 1;
+	int32 treasureId = 2;
+} 
+
+// 觉醒
+message AncientTreasuresJueXingReq{
+	int32  treasureId = 1;   //宝物id
+	repeated int32  chooseItemInfos = 2; //选择消耗的物品
+    int32  index = 3;   
+}
+
+message AncientTreasuresJueXingAck{
+    int32 treasureId = 1; //宝物id
+}
+
+
+//远古宝物重置
+message AncientTreasuresResertReq{
+	int32  treasureId = 1;   //宝物id
+}
+
+message AncientTreasuresResertAck{
+    int32 treasureId = 1; //宝物id
+}
+
+
+message AncientTreasuresCondotionInfosReq{}
+
+message AncientTreasuresCondotionInfosAck{
+
+	map<int32,int32> ancientTreasureConditionInfos = 1;
+}

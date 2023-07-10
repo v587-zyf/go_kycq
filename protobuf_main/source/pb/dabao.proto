@@ -1,0 +1,43 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//打宝神器升级
+message DaBaoEquipUpReq{
+	int32 equipType = 1;
+}
+message DaBaoEquipUpAck{
+	int32 equipType = 1;
+	int32 lv		= 2;
+}
+
+//打宝秘境进入
+message EnterDaBaoMysteryReq{
+	int32 stageId = 1;
+}
+
+//打宝秘境结算
+message DaBaoMysteryResultNtf{
+    int32 stageId 		 = 1;
+	int32 result		 = 2;
+	GoodsChangeNtf goods = 3;
+}
+
+//购买体力道具
+message DaBaoMysteryEnergyItemBuyReq{
+	int32 shopId = 1;
+}
+
+//增加体力
+message DaBaoMysteryEnergyAddReq{
+	int32 itemId = 1;
+}
+message DaBaoMysteryEnergyAddAck{
+	int32 itemId = 1;
+}
+
+//体力值推送
+message DaBaoMysteryEnergyNtf{
+	int32 energy = 1;
+}

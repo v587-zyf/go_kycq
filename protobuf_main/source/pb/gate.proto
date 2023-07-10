@@ -1,0 +1,130 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+// cno === 0 的消息，表示是gate自己的消息
+
+message ReportGtNoReq { //汇报gate身份
+  int32 gateNo = 1;     // gate编号
+  int32 gsNo   = 2;     // gate配置的gs编号
+}
+
+//看gs身上是否需要验证gate的编号
+message ReportGtNoAck { //汇报gate身份
+  int32  result = 1; // 0--成功  1--gateno跟配置不一致 2----gsno跟配置不一致
+  int32  gateNo   = 2; // gs上配置的gate编号
+  string gateAddr = 3; // gs上配置的gate地址
+  int32  gsNo     = 4; // gs的真实编号
+}
+
+message GsBroadCastNtf { //广播非转发消息（gate<---gs）
+  bytes msg = 1;
+}
+message GsMsgNtf { //给特定的index发消息
+  repeated int32 indexes = 1;
+  bytes          msg     = 2;
+}
+
+/* 0823 不需要了 message ReConnectTokeyRsp {  //定时给客户端
+    string tokey = 1; //可以加密
+    int32 magic = 2;
+}*/
+
+message ReConnectReq {
+  string token  = 1;
+  string openId = 2;
+  int32  magic  = 3;
+}
+message ReConnectAck {
+  int32         fail           = 1;
+  UserLoginInfo user           = 2;
+  string        reConnectToken = 99;
+}
+
+// 22 Logout       -------------主动断开 或 时钟超时
+message LogoutReq {
+  int32 reason = 1;
+}
+message LogoutAck {
+  int32 result = 1;
+}
+
+//通知gs下线    1:gate---> gs  2:gate<--- gs
+message OfflineReq { //投递时候，已经知道CNo，GNo了
+  int32 src    = 1;  // 1 from gate to gs; 2 from gs to gate
+  int32 userId = 2;
+  int32 CNo    = 3;
+  int32 reason = 4; // 1--主动下线 2---异常强制下线（双登等）
+}
+
+message ChatReq {
+  int32  typ   = 1; // 0--普通聊天 1--群聊/广播
+  int32  desId = 2; // 对方UserId
+  int32  pNo   = 3; // 对方pNo  //如果有pNo，则pNo优先，否则desId
+  string msg   = 4; //聊天内容
+}
+
+message ChatRsp {
+  int32  typ   = 1; // 0--普通聊天 1--群聊
+  int32  srcId = 2;
+  string msg   = 3; //聊天内容
+}
+
+message OnlineNumReq {
+  int32 gateNo = 1;
+}
+
+message OnlineNumAck {
+  int32 gsNo    = 1;
+  int32 onlines = 2;
+}
+
+message MsgNtf {    //全服广播
+  int32  typ   = 1; //消息类型
+  int32  srcId = 2; //消息源
+  string msg   = 3; //内容
+}
+
+// gs通知gate准备跳gs
+message PreJumpGsReq {
+  int32 cNo    = 1;
+  int32 pNo    = 2;
+  int32 userId = 3;
+}
+
+// gs通知gate进行跳gs
+message DoJumpGsReq {
+  int32 cNo    = 1;
+  int32 pNo    = 2;
+  int32 desGsNo   = 3;
+  int32 reason = 4; //原因
+  bytes args   = 5; //参数
+  int32 userId = 6; //玩家id，用于验证
+}
+// gate通知gs，玩家跳gs进入
+message JumpGsReq {
+  int32 cNo    = 1;
+  int32 pNo    = 2;
+  int32 reason = 3; //原因
+  int32 arg1   = 4; //参数
+  int32 userId = 6;
+}
+
+message BenchMarkReq {
+  int64 magic  = 1;
+  int64 magic2 = 2;
+  int64 magic3 = 3;
+  int64 magic4 = 4;
+}
+
+message BenchMarkAck {
+  int64 magic    = 1;
+  int64 magic2   = 2;
+  int64 magic3   = 3;
+  int64 magic4   = 4;
+  int64 magic100 = 100;
+}
+
+message KeepAliveRpt {
+  int32 mark = 1;
+}

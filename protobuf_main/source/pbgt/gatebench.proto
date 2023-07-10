@@ -1,0 +1,48 @@
+syntax = "proto3";
+package pbgt;
+
+// gate压力测试客户端模拟协议，gate中转的客户端与服务器之间交互的协议在这里定义
+// 协议根据编号，模拟发往gameserver和发往fightserver的不同协议
+
+enum ClientMsgType {
+  _ = 0;
+  ChatReq = 11;
+  ChatAck = 12;
+  ChatNtf = 13;
+  MoveRpt = 556;
+  MoveNtf = 557;
+}
+
+message ClientChatReq {
+  int64 timestamp = 1; // timestamp
+  int32 senderId = 2; // 发送者
+  string msg = 3; //消息
+  bool broadcast = 4; //是否需要广播
+}
+
+
+message ClientChatAck {
+  int64 sendTimestamp = 1; // 发送方协议中的timestamp
+  int32 senderId = 2; // 发送者
+}
+
+message ClientChatNtf {
+  int64 sendTimestamp = 1; // 发送方协议中的timestamp
+  int32 senderId = 2; // 发送者
+  string msg = 3; //消息
+}
+
+
+message ClientMoveRpt {
+  int64 timestamp = 1; // timestamp
+  int32 senderId = 2; // 发送者
+  int32 x = 3;
+  int32 y = 4;
+}
+
+message ClientMoveNtf {
+  int64 sendTimestamp = 1; // timestamp
+  int32 senderId = 2; // 发送者
+  int32 x = 3;
+  int32 y = 4;
+}

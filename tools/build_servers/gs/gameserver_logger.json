@@ -1,0 +1,31 @@
+{
+  "types": [
+    {
+      "type": "console",
+      "color": true
+    },
+    {
+      "type": "file",
+      "filename": "logs/gameserver.log",
+      "maxlines": 1000000,
+      "maxsize": 10240000,
+      "daily": true,
+      "maxdays": 2,
+      "rotate": true,
+      "category": "default"
+    },
+	{
+      "type": "file",
+      "color": false,
+      "category": "event",
+      "filename": "event/gameEvent1.txt",
+	  "when":false,
+	  "maxTime":1,
+	  "maxdays": 2
+    }
+  ],
+  "levels": {
+    "default": "DEBUG"
+  },
+  "logPath": "/"
+}

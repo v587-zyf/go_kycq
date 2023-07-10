@@ -1,0 +1,42 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message WingUpLevelReq{
+	int32 heroIndex = 1;	//武将id
+}
+
+message WingUpLevelAck{
+	int32 heroIndex = 1;	//武将id
+	Wing wing = 2;			//羽翼信息
+}
+
+message WingUseMaterialReq{
+	int32 heroIndex = 1;
+}
+
+message WingUseMaterialAck{
+	int32 heroIndex = 1;
+	Wing wing = 2;
+}
+
+message WingSpecialUpReq{
+	int32 heroIndex = 1;
+	int32 specialType = 2;
+}
+
+message WingSpecialUpAck{
+	int32 heroIndex = 1;
+	WingSpecialNtf wingSpecial = 2;
+}
+
+message WingWearReq{
+	int32 heroIndex = 1;
+	int32 wingId 	= 2;	//羽翼新表id
+}
+
+message WingWearAck{
+	int32 heroIndex = 1;
+	int32 wingId	= 2;
+}

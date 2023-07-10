@@ -1,0 +1,67 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//服务器通知客户端充值到账了。
+message RechargFulfilledNtf {
+  int32 ingot        = 1;		//充值获得元宝数
+  int32 payMoney     = 2;		//充值金额
+  int32 vip          = 3;		//vip
+  int32 vipExp       = 4;		//vip经验
+  int32 rechargedAll = 5;		//累计充值数
+  int32 rechargeId	 = 6;		//充值id
+}
+
+
+// 申请充值
+message RechargeApplyPayReq {
+  int32 payNum = 1;
+  int32 rechargeId = 2;
+}
+
+// 形成充值订单
+message RechargeApplyPayAck {
+  bool result 		= 1;	//申请成功
+  string payData 	= 2;	//充值数据
+  int32 rechargeId 	= 3;	//充值id
+  bool isPayToken	= 4;	//是否使用代币完成,如果为false，不请求平台支付
+}
+
+//用钱付款购买
+message MoneyPayReq{
+  int32 payType = 1;	//枚举中的MoneyPayType
+  int32 payNum 	= 2;	//支付金额
+  int32 typeId	= 3;	//支付类型对应id(如每日礼包,dailyPack表id)
+}
+
+message MoneyPayAck{
+  bool result 		= 1;	//下单成功
+  string payData 	= 2;	//订单数据
+  int32 payType 	= 3;
+  int32 payNum 		= 4;	
+  int32 typeId 		= 5;	
+  bool isPayToken	= 6;	//是否使用代币完成,如果为false，不请求平台支付
+}
+
+//充值双倍重置
+message RechargeResetNtf{
+  repeated int32 recharge = 1;
+}
+
+//连续充值进入下个周期
+message ContRechargeCycleNtf{
+  int32 cycle	= 1;
+}
+//连续充值推送
+message ContRechargeNtf{
+  map<int32,int32> recharge = 1;	//日期(20220719),金额
+}
+//连续充值领取奖励
+message ContRechargeReceiveReq{
+  int32 contRechargeId = 1;
+}
+message ContRechargeReceiveAck{
+  int32 contRechargeId = 1;
+  GoodsChangeNtf goods = 2;
+}

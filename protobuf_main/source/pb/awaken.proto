@@ -1,0 +1,32 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//打开页面
+message AwakenLoadReq{
+	int32 heroIndex = 1;
+}
+
+message AwakenLoadAck{
+	int32 heroIndex = 1;
+	map<int32,AwakenUnit> awakens = 2;	//类型，对应信息
+}
+
+//觉醒
+message AwakenReq{
+	int32 heroIndex = 1;
+	int32 pos = 2;	//类型
+}
+
+message AwakenAck{
+	int32 heroIndex = 1;
+	int32 pos = 2;	//类型
+	AwakenUnit awakenInfo = 3;	//对应信息
+	GoodsChangeNtf goods = 4;
+}
+
+message AwakenUnit{
+	int32 level = 1;	//等级
+	int32 exp = 2;		//觉醒值
+}

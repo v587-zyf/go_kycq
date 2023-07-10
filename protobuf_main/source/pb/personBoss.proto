@@ -1,0 +1,40 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//进入个人boss列表请求
+message PersonBossLoadReq {}
+message PersonBossLoadAck {
+	map<int32,int32> PersonBoss = 1;	//个人boss(stageId,次数)
+}
+
+//战斗
+message EnterPersonBossFightReq {
+    int32 stageId = 1;
+}
+message EnterPersonBossFightAck {
+    int32 stageId = 1;
+    int32 dareNum = 2;
+}
+message PersonBossFightResultNtf {
+    int32 stageId 			= 1;
+    int32 dareNum 			= 2;	//挑战次数(已有)
+	int32 result			= 3;	//战斗结果
+	GoodsChangeNtf goods 	= 4;  	//掉落物品
+}
+
+//扫荡
+message PersonBossSweepReq{
+	int32 stageId = 1;
+}
+message PersonBossSweepAck{
+	int32 stageId = 1;
+    int32 dareNum = 2;
+	GoodsChangeNtf goods = 3;
+	int32 isBagFull = 4;
+}
+
+message PersonBossDareNumNtf{
+	int32 stageId = 1;
+	int32 dareNum = 2;
+}

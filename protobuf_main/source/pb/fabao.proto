@@ -1,0 +1,32 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+// 法宝激活
+message FabaoActiveReq{
+	int32 id = 1; 		//法宝id
+}
+
+message FabaoActiveAck{
+	Fabao fabao = 1;	//法宝信息
+}
+
+// 法宝升级
+message FabaoUpLevelReq{
+	int32 id = 1;		// 法宝id
+}
+
+message FabaoUpLevelAck{
+	Fabao fabao = 1;	//法宝信息
+}
+
+// 法宝技能激活
+message FabaoSkillActiveReq{
+	int32 id = 1;		// 法宝id
+	int32 skillId = 2;	// 法宝技能id
+}
+
+message FabaoSkillActiveAck{
+	Fabao fabao = 1;		//法宝信息
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message PanaceaUseReq{
+	int32 id = 1;
+}
+
+message PanaceaUseAck{
+	int32 id = 1;
+	PanaceaInfo panacea = 2;
+}

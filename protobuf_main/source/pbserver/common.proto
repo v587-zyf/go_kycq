@@ -1,0 +1,135 @@
+syntax = "proto3";
+package pbserver;
+
+message ErrorAck {
+  int32  code    = 1;
+  string message = 2;
+}
+
+message ItemUnit{
+	int32 itemId = 1;	//道具Id
+	int32 itemNum = 2;	//道具数量
+}
+
+message ItemUnits{
+	repeated ItemUnit items = 1;	//多物品
+}
+
+message ItemUnitForPickUp{
+	int32 	itemId 		= 1;	//道具Id
+	int32 	itemNum 	= 2;	//道具数量
+	string 	owner 		= 3;	//产出玩家名字（原归属玩家名字）
+	int32 	monsterId 	= 4;	//掉落怪物id	
+	string 	dropDate	= 5;	//产出（掉落）时间
+}
+
+message HandShakeReq {
+    int32 shakeNo = 1;
+}
+
+message HandShakeAck {
+
+}
+
+message HandCloseNtf {
+    int32 sessionNo = 1;
+}
+
+
+message Actor {
+    uint32    	userId            	= 1;			//玩家Id
+	string    	nickName          	= 2;			//昵称
+	string    	avatar            	= 3;			//头像
+	int32     	vip         		= 4;			//vip
+	int32     	official     		= 5;			//官职
+	int32 		darkPalaceTimes		= 6;			//暗殿次数
+	map<int32,ActorHero> heros		= 7;			//玩家武将
+	int32       guildId     		= 8;			//门派Id
+    string      guildName   		= 9;			//门派名字
+	ActorPet	pet					= 10;			//战宠
+	ActorRedPacket redPacket		= 11;			//红包拾取信息
+	ElfInfo		elf					= 12;			//精灵
+	Skill 		cutSkill			= 13;			//切割打包技能
+	int32		helpUserId			= 14;			//被协助玩家Id
+	int64 		userCombat 			= 15;			//玩家总战力
+	int32 		stageFightNum		= 16;			//当前战斗总战斗次数
+	repeated Skill publicSkill		= 17;			//公共技能（绝学 秘籍）
+	int32 		dabaoEnergy			= 18;			//打宝秘境体力
+}
+
+message MiJiInfo{
+	repeated Skill   skills     	= 1;
+}
+
+
+message ElfInfo{
+	int32 lv = 1;
+	repeated Skill   skills     	= 2;
+}
+
+message ActorRedPacket{
+	int32 			pickNum = 1;			//红包道具拾取次数
+	int32			pickMax = 2;			//红包道具拾取上限
+	map<int32,int32> pickInfos = 3;			//红包道具拾取信息
+}
+
+message ActorHero{
+	int32 		index				= 1;
+	int32 	  	sex					= 2;
+	int32     	job			 		= 3;
+	int32		level				= 4;
+	string		nickName			= 5;
+	ActorProp prop              	= 6;
+    repeated Skill   skills     	= 7;
+	repeated Skill   uniqueskills   = 8; //合击技能
+    ActorDisplayInfo displayInfo	= 9; //显示数据
+	repeated int32 buffs			= 10; //天生buff
+	
+}
+
+message ActorDisplayInfo {
+    int32 clothItemId  		= 1; //衣服
+	int32 clothType 		= 2; //衣服类型
+	int32 weaponItemId 		= 3; //武器
+	int32 weaponType 		= 4; //武器类型
+	int32 wingId 			= 5; //羽翼
+	int32 magicCircleLvId 	= 6; //法阵等级表id
+	int32 titleId			= 7; //称号id
+	int32 labelId			= 8; //头衔id
+	int32 labelJob			= 9; //头衔职业
+}
+
+message ActorProp {
+	map<int32,int64> props =1;
+}
+
+message ActorPet{
+	int32 petId = 1;
+	int32 lv 	= 2;	//等级
+	int32 grade = 3; 	//阶级
+	int32 break = 4; 	//突破
+	repeated int32 addSkill = 5; //额外技能
+	map<int32,int64> addAttr = 6; //额外属性
+}
+
+message ActorFit {
+	int32 id = 1;
+	int32 lv = 2;
+	int32 fashionId = 3;
+	int32 fashionLv = 4;
+	repeated FitSkill skills = 5;
+	repeated int32 effect = 6;
+}
+
+message FitSkill {
+	int32 id = 1;
+	int32 lv = 2;
+	int32 star = 3;
+}
+
+message Skill {
+    int32 id  		= 1;				//技能Id
+    int32 level  	= 2;				//技能等级
+	int64 cdEndTime	= 3;				//技能结束时间
+	repeated int32 talentEffect = 4;	//激发天赋效果
+}

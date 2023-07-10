@@ -1,0 +1,87 @@
+syntax = "proto3";
+package pb;
+
+message DailyTaskLoadReq {}
+
+message DailyTaskLoadAck {
+  
+ int32 dayExp = 1;  //当前活跃度
+ int32 weekExp  = 2;  //周活跃度
+ int32 dayResourcesBackExp = 3; //资源回收日活跃度
+ repeated HaveChallengeTime haveChallengeTimes = 4;
+ repeated ResourcesBackInfo ResourcesBackInfos = 5;//资源找回信息
+ repeated int32 GetDayRewardIds = 6; //日活跃已度领取的奖励
+ repeated int32 GetWeekRewardIds = 7; //周活跃已度领取的奖励
+}
+
+
+message BuyChallengeTimeReq{
+	int32 activityId = 1; 
+}
+
+message BuyChallengeTimeAck{
+	int32 activityId = 1; //活动id
+	int32 haveChallengeTime = 2; //已经挑战的次数
+	int32 buyChallengTimes = 3; //购买了几次挑战次数
+}
+
+
+message GetExpReq{
+	int32 activityId = 1; 
+}
+
+message GetExpAck{
+ int32 dayExp = 1;  //当前活跃度
+ int32 weekExp  = 2;  //周活跃度
+ int32 dayResourcesBackExp = 3; //资源回收日活跃度
+ int32 isCanGetAward = 4; //是否可以领取
+ int32 activityId = 5; 
+}
+
+
+
+
+message GetAwardReq{
+   int32  id = 1; //配置表id
+   int32  type = 2; // 1:日活跃度 2:周活跃度
+}
+
+message GetAwardAck{
+ repeated int32 GetDayRewardIds = 6; //日活跃已度领取的奖励
+ repeated int32 GetWeekRewardIds = 7; //周活跃已度领取的奖励
+}
+
+
+message ResourcesBackGetRewardReq{
+   int32  activityId = 1; //活动id
+   int32  backTimes  = 2; //找回的次数
+   int32  useIngot   = 3; //消耗元宝
+}
+
+message ResourcesBackGetRewardAck{
+ repeated ResourcesBackInfo ResourcesBackInfos = 1;//资源找回信息
+ int32 dayResourcesBackExp = 2; //资源回收日活跃度
+}
+
+
+
+message ResourcesBackGetAllRewardReq{}
+
+message ResourcesBackGetAllRewardAck{
+ repeated ResourcesBackInfo ResourcesBackInfos = 1;//资源找回信息
+ int32 dayResourcesBackExp = 2; //资源回收日活跃度
+}
+
+
+message HaveChallengeTime {
+	int32 activityId = 1; //活动id
+	int32 haveChallengeTime = 2; //已经挑战的次数
+	int32 isGetAward = 3; //是否领取过奖励
+	int32 buyChallengTimes = 4; //购买了几次挑战次数
+}
+
+message ResourcesBackInfo {
+	int32 activityId = 1; //活动id
+	int32 residueChallengeTimes = 2; //一共可找回次数
+	int32 haveChallengeTimes = 3;  //已找回几次
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//升级
+message DictateUpReq{
+	int32 heroIndex = 1;
+	int32 body		= 2;
+}
+
+message DictateUpAck{
+	int32 heroIndex = 1;
+	DictateInfo dictateInfo = 2;
+}
+
+

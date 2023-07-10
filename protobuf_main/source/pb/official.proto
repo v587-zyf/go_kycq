@@ -1,0 +1,11 @@
+syntax = "proto3";
+package pb;
+
+// 官职升职
+message OfficialUpLevelReq{
+}
+
+message OfficialUpLevelAck{
+	int32 newLv = 1;			//新官职
+}
+

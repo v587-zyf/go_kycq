@@ -1,0 +1,694 @@
+syntax = "proto3";
+package pb;
+
+message ErrorAck {
+  int32  code    = 1;
+  string message = 2;
+}
+
+message UserLoginInfo {
+  int32  userid   					= 1;
+  string nickName 					= 2;
+  string avatar                 	= 3; 	//头像
+  int32 vipLevel					= 4;	//vip等级
+  int32 vipScore					= 5;	//vip经验
+  int32 level						= 6;    //玩家等级
+  int32 exp							= 7; 	//玩家经验
+  int64 gold						= 8; 	//玩家金币
+  int32 ingot						= 9; 	//玩家元宝 
+  int32 createTime         			= 10;	//角色创建时间 
+  int32 stageId						= 11;	//普通关卡ID
+  int32 stageWave					= 12;	//普通关卡波数  
+  int64 combat						= 14;	//战力
+  repeated HeroInfo heros			= 15;	//武将
+  Rein rein							= 16;	//转生
+  repeated ReinCost reinCost		= 17;	//转生修为丹
+  repeated Fabao fabao				= 18; 	//法宝
+  FieldBossInfo fieldBossInfo		= 19;	//野外首领
+  WorldBossInfoNtf worldBossInfo	= 20;	//下一个世界boss信息
+  int32 ArenaFightNum				= 21;	//竞技场(免费+购买)次数
+  int32 fightModel					= 22;	//战斗模式
+  TaskInfoNtf task					= 23;	//主线任务
+  map<int32,ShopInfo> shopInfo		= 24;	//商城(类型,信息)
+  int32 chuanqiBi					= 25;	//传奇币
+  map<int32,MaterialStage> materialStage 	= 26;	//材料副本(类型,信息)
+  map<int32,PanaceaInfo> panaceas	= 27;	//灵丹
+  SignInfo signInfo					= 28;	//签到
+  DayStateInfo dayStateInfo			= 29;	//通用每日状态（排行榜膜拜...）
+  int32 official					= 30;	//官职  
+  repeated Holy holy				= 31;	//神兵
+  repeated Atlas atlases 			= 32;	//图鉴
+  repeated AtlasGather atlasGathers = 33;	//图鉴集合
+  int64 miningWorkTime				= 34;	//挖矿开始时间
+  int32 miner						= 35;	//挖矿等级
+  ExpStage expStage					= 36;	//经验副本
+  map<int32,PetInfo> pets			= 37;	//战宠
+  repeated Juexue juexues			= 38;	//绝学
+  UserWear userWear					= 39;	//用户穿戴
+  int32         isHaveGetDailyCompetitveReward = 40; //是否已经领取今日竞技场每日奖励
+  int64 honour						= 41; 	//荣誉币
+  DarkPalaceInfo darkPalaceInfo		= 42;	//暗殿boss
+  map<int32,int32> personBoss		= 43;	//个人boss(stageId,次数)
+  map<int32,int32> vipBoss			= 44;	//vipBoss(stageId,次数)
+  repeated int32 vipGift			= 45;	//vip礼包(等级)
+  Fit fit							= 46;	//合体
+  int32 rechargeAll                 = 47;   //累计充值金额
+  repeated int32 accumulativeAllGetIds = 48; //累计充值奖励领取
+  map<int32,MonthCardUnit> monthCard = 49;	//月卡,季卡(档次,信息)
+  FirstRecharge firstRecharge		= 50;	//首充
+  SpendRebates spendRebates			= 51;	//累计消费
+  map<int32,int32> dailyPack		= 52;	//每日礼包(id,次数)
+  GrowFund growFund					= 53;	//成长基金
+  WarOrder warOrder					= 54;	//战令
+  int32 redPacketGetNum 			= 55;	//红包获取值
+  Elf elf							= 56;	//精灵
+  int32 cutTreasureLv				= 57;	//切割等级(只有主角色能用)
+  FitHolyEquip fitHolyEquip			= 58;	//合体圣装
+  repeated int32 recharge			= 59;	//充值过的档次
+  int32 shaBakeIsEnd                = 60;   //沙巴克是否结束
+  int32 crossShabakeIsEnd           = 61;   //跨服沙巴克是否结束
+  bool isFriendApply 				= 62;	//是否有好友申请
+  int32 bindingIngot				= 63; 	//玩家绑定元宝 
+  int32 hookupTime 					= 64;	//挂机时间
+  repeated itemUnit hookupBag		= 65;	//挂机背包奖励
+  ContRecharge contRecharge			= 66;	//连续充值
+  map<int32,int32> openGift			= 67;	//开服礼包(id,购买次数)
+  int32 crossChallengeIsApply       = 68;   //是否报名了跨服擂台赛   
+  repeated AnnouncementInfo AnnouncementInfos		= 69;	//公告信息
+  bool vipCustomer					= 70;	//vip客服
+  int32 chatBanTime					= 71;	//禁言时间
+  int32 haveUseRecharge             = 72;   //已使用掉的充值额度
+  int32 goldIngot                   = 73;   //金锭数量
+  AncientBossInfo ancientBossInfo	= 74;	//远古首领
+  repeated Title titleList			= 75;	//称号
+  repeated MiJiInfo  miJiInfos      = 76;   //秘籍技能信息  
+  map<int32,AncientTreasureInfo> ancientTreasureInfo = 77;	//远古宝物信息e
+  map<int32,int32> petAppendage		= 78;	//战宠附体(petId,lv)
+  HellBossInfo hellBossInfo			= 79;	//炼狱首领
+  int32 redPacketNum                = 80;   //使用红包增加的额度
+  map<int32,int32> daBaoEquip		= 81;	//打宝神器
+  int32 daBaoMysteryEnergy			= 82;	//打宝秘境体力值
+  int32 appletsEnergy				= 83;	//小程序体力
+  int32 appletsResumeTime			= 84;	//小程序下次体力恢复时间
+  map<int32,appletsInfo> appletsInfos = 85;	//小程序通关信息
+  Label label						= 86;	//头衔
+  repeated int32 subscribe			= 87;	//玩家订阅的消息
+  repeated int32 privilege			= 88;	//特权
+  int32 useRedPacketNum           	= 89;   //每日使用了多少金额的红包
+  int32 dailyRecharge				= 90;	//每日充值额度
+}
+
+message appletsInfo{
+	int32 stageId = 1;
+}
+
+message AncientTreasureInfo{
+	int32 zhuLinLv = 1;
+	int32 starLv = 2;
+	int32 jueXinLv = 3;
+	int32 types = 4;	
+}
+
+message MiJiInfo {
+	int32 id = 1;	//秘籍Id
+	int32 lv = 2;
+}
+
+message AnnouncementInfo {
+	int32 id = 1;
+	string title = 2;
+	string announcement = 3;
+}
+
+message HeroInfo {
+  int32 index							 = 1;	//第几个职业
+  int32 job								 = 2;	//职业
+  int32 sex 							 = 3; 	//性别
+  map<int32,EquipUnit>	equips 			 = 4;	//身上装备	
+  repeated EquipGrid equipGrids 		 = 5; 	//装备格子
+  HeroProp heroProp						 = 6; 	//武将属性
+  repeated Wing wing					 = 7;	//羽翼
+  map<int32,SpecialEquipUnit> zodiacs 	 = 8;	//生肖装备
+  map<int32,SpecialEquipUnit> kingarms 	 = 9;	//帝器
+  repeated DictateInfo dictates		 	 = 10;	//主宰装备
+  repeated WingSpecialNtf wingSpecial	 = 11;	//羽翼特殊属性
+  map<int32,JewelInfo> jewels			 = 12;	//宝石
+  string name							 = 13;	//昵称
+  InsideInfo insideInfo					 = 14;	//内功
+  map<int32,Fashion> Fashions			 = 15;	//时装
+  Wears wears							 = 16;  //穿戴总类 
+  map<int32,Ring> rings					 = 17;	//特戒
+  repeated SkillUnit skills				 = 18;	//技能
+  map<int32,int32> skillBag				 = 19;	//技能背包
+  repeated SkillUnit uniqueSkills		 = 20;	//合击技能
+  map<int32,int32> uniqueSkillBag		 = 21;	//合击技能背包
+  map<int32,GodEquip> godEquips			 = 22;	//神兵
+  map<int32,int32> area					 = 23;	//领域(类型,等级)
+  map<int32,EquipClearArr> equipClears	 = 24;	//装备洗练
+  int32 expLvl                           = 25;  //武将经验池等级
+  map<int32,int32> dragonEquip 			 = 26;	//龙器(类型,等级)
+  map<int32,int32> MagicCircle			 = 27;	//法阵(类型,表id)
+  TalentInfo talents			 		 = 28;	//天赋
+  map<int32,int32> chuanShiEquip		 = 29;	//传世装备(位置,装备id)
+  AncientSkill ancientSkill			 	 = 30;	//远古神技
+  map<int32,int32> chuanShiStrengthen	 = 31;	//传世装备强化
+}
+
+message UserWear{
+  int32 petid = 1;	//战宠id
+  int32 fitFashionId = 2;	//合体时装id
+}
+
+message Wears {
+  int32 FashionWeaponId 		= 1; //穿戴时装武器Id
+  int32 FashionClothId  		= 2; //穿戴时装衣服Id
+  repeated int32 atlasWear 		= 3; //图鉴穿戴id
+  int32 wingId					= 4; //穿戴神翼
+  int32 magicCircleLvId			= 5; //法阵等级表id
+  int32 titleId					= 6; //称号id
+}
+
+
+//简短的用户信息，用于聊天，走马灯等 消息。
+message BriefUserInfo {
+  int32  id                 = 1;  //用户id
+  string name               = 2;  //昵称
+  int32  sex	            = 3;  // enum->Sex
+  int32  lvl                = 4;  // 等级
+  int32  vip                = 5;  // vip 等级
+  int64  combat             = 6;  // 总战力
+  string avatar             = 7;  //头像
+  int32	 job				= 8;  //职业
+  int32  maxLv              = 9;  //maxHeroLv
+  int32  serverId           = 10;
+  map<int32, Display> display = 11;
+}
+
+message BriefUserInfoWithDisplay {
+  BriefUserInfo userInfo = 1;
+  DisplayNtf display            = 14;
+}
+
+//顶级数据变化
+message TopDataChangeNtf {
+  repeated TopDataChange changeInfos  = 1;
+  int32    type = 2;          			//道具来源
+}
+
+//顶级数据变化
+message TopDataChange {
+  int32 id     = 1;
+  int64 change = 2; // 变化量 可以+-
+  int64 nowNum  = 3; // 最终量
+}
+
+//背包道具变化
+message BagDataChangeNtf {
+  repeated ItemChange changeInfos  = 1;
+  int32    type = 2;          			//道具来源
+}
+
+//背包道具变化
+message ItemChange {
+  int32 position 	= 1;	//背包位置
+  int32 itemId 		= 2;	//道具Id
+  int64 change 		= 3; 	// 变化量 可以+-
+  int64 nowNum  	= 4; 	// 最终量
+  GetSource getSource = 5;		//来源
+}
+
+//背包装备变化
+message BagEquipDataChangeNtf {
+  repeated EquipChange changeInfos  = 1;
+  int32    type = 2;          			//道具来源
+}
+
+//背包道具变化
+message EquipChange {
+  int32 position 	= 1;	//背包位置
+  int32 itemId 		= 2;	//道具Id
+  int64 change 		= 3; 	// 变化量 可以+-
+  int64 nowNum  	= 4; 	// 最终量
+  EquipUnit equip 	= 5;  	//装备属性
+  GetSource getSource = 6;		//来源
+}
+
+message Item {
+  int32 itemId 		= 1; 		//配置表id
+  int64 count 		= 2;		//道具数量
+  int32 position 	= 3; 		//道具背包位置
+  EquipUnit equip 	= 4; 		//如果是装备，装备属性
+  GetSource getSource = 5;		//来源
+}
+
+message GoodsChangeNtf {
+  repeated itemUnit items = 1;
+}
+
+message itemUnit{
+  int32 itemId 		= 1; 		//配置表id
+  int64 count 		= 2;		//道具数量
+}
+
+message EquipUnit{
+  int32 	itemId 	= 1;					//道具ID
+  repeated EquipRandProp randProps = 2;	//随机属性
+  bool  	lock = 3;     //是否上锁   
+  int32 	equipIndex = 4; //装备唯一Id
+  int32	lucky = 5;		//幸运值
+}
+message EquipRandProp{
+  int32 propId 	= 1;		//随机属性id
+  int32 color 	= 2; 		//属性颜色
+  int32 value 	= 3;		//属性值
+}
+
+message EquipClearArr{
+  repeated EquipClearInfo equipClearInfo = 1;
+}
+message EquipClearInfo{
+	int32 grade 	= 1;	//阶数
+	int32 color 	= 2;	//颜色
+	int32 propId 	= 3;	//属性id
+	int32 value 	= 4;	//属性值
+}
+
+message HeroProp {
+  map<int32, int64> props   = 1;			//武将详细属性
+  map<int32, int64> modulesCombat = 2;		//武将模块战斗力
+}
+
+message TaskInfoNtf {
+  int32 taskId 	= 1;		//任务id
+  int32 process	= 2;		//任务进度
+  int32 markProcess = 3;
+}
+
+
+message DisplayNtf {
+  map<int32, Display> display = 1;
+}
+
+
+message EventNtf {
+  int32    id              = 1; //类型
+  int32    ts              = 2; //时间戳
+  repeated string args     = 3; //参数列表
+  int32           sourceId = 4; //来源的id,一般为userId.
+}
+
+message DailyConditionNtf {
+  map<int32, int32> dailyConditions = 1;
+}
+
+message PropInfo {
+  int32 key   = 1;
+  int32 value = 2;
+}
+
+
+message EquipGrid{
+  int32 pos=1;   //位置
+  int32 strength=2; //强化等级
+}
+
+message Fabao{
+  int32 id = 1; 		//法宝id
+  int32 level = 2 ; 	//等级
+  int32 exp = 3;  	//升品经验
+  repeated int32 skills = 4; //法宝技能
+}
+
+message GodEquip{
+  int32 id 		= 1; //神兵id
+  int32 level 	= 2; //等级
+  int32 blood	= 3; //血炼等级
+}
+
+message Juexue{
+  int32 id = 1; 		//绝学id
+  int32 level = 2 ; 	//等级
+}
+
+message Fashion{
+  int32 id = 1; 		//时装id
+  int32 level = 2 ; 	//等级
+}
+
+message Wing{
+  int32 id = 1;	//羽翼id
+  int32 exp = 2;	//羽翼经验
+}
+
+message WingSpecialNtf{
+  int32 specialType = 1; //阶数
+  int32 level = 2; //等级
+}
+
+message Rein{
+  int32 id = 1; 	//转生id
+  int64 exp = 2;	//修为
+}
+
+message ReinCost{
+  int32 id = 1;	//转生修为丹id
+  int32 num = 2;	//今日已购买次数
+}
+
+message Atlas{
+  int32 id = 1;	//图鉴id
+  int32 star = 2;	//星数
+  bool isActive = 3;  //是否激活
+}
+
+message AtlasGather{
+  int32 id = 1;	//图鉴集合id
+  int32 star = 2;	//图鉴集合等级
+  bool isActive = 3;  //是否激活
+}
+
+message Preference{
+  int32 key = 1;
+  string value = 2;
+}
+
+message WorldBossInfoNtf{
+  int32 id = 1;			//worldBoss表id	
+  int32 prepareTime = 2;	//预开始时间
+  int32 openTime = 3;		//开始时间
+  int32 closeTime = 4;	//结束时间
+}
+
+message VipBoss{
+  int32 stageId = 1;
+  int32 dareNum = 2;
+}
+
+message ExpStage{
+  int32 dareNum = 1;	//战斗次数(已有)
+  int32 buyNum 	= 2;	//购买次数(已有)
+  map<int32,int64> expStages = 3;	//stageId,经验
+  map<int32,int32> appraise	 = 4;	//stageId,评价
+  int32 layer	= 5;	//层数
+}
+
+message MaterialStage{
+  int32 dareNum 	= 1; //战斗次数(已有)
+  int32 buyNum 		= 2; //购买次数(已有)
+  int32 nowLayer	= 3; //到达层
+  int32 lastLayer	= 4; //通过层
+}
+
+message Display {
+  int32 clothItemId  	= 1;	//衣服
+  int32 clothType		= 2; 	//衣服类型
+  int32 weaponItemId 	= 3;	//武器
+  int32 weaponType 		= 4; 	//武器类型
+  int32 wingId			= 5;	//羽翼
+  int32 magicCircleLvId	= 6;	//法阵等级表id
+  int32 titleId			= 7;	//称号ID
+  int32 labelId			= 8;	//头衔ID
+  int32 labelJob		= 9;	//头衔职业(枚举LabelType)
+}
+
+message SpecialEquipUnit{
+  int32 itemId = 1;  //道具ID
+  GetSource getSource = 2;	//来源
+}
+
+message GetSource {
+  string map 		= 1;	//掉落地图
+  string monster 	= 2;	//掉落怪物
+  string skillUser = 3;	//角色
+  string skillDate = 4;	//时间
+}
+
+message RankInfo {
+  int32  rank      = 1;
+  int64  score     = 2; 
+  BriefUserInfo userInfo = 3;
+  Display display = 4;
+}
+
+message SkillUnit{
+  int32 skillId 	= 1;	//技能id
+  int32 level	  	= 2;	//等级
+  int64 startTime 	= 3; 	//技能cd开始时间
+  int64 endTime 	= 4; 	//技能cd结束时间
+}
+
+message ShopInfo{
+  map<int32,int32> shopItem = 1;	//id,购买次数
+}
+
+message DictateInfo{
+  int32 type 	= 1;
+  int32 level = 2;
+}
+
+message PanaceaInfo{
+  int32 numbers = 1;	//灵丹总可使用次数
+  int32 number = 2;	//灵丹已使用次数
+}
+
+message JewelInfo{
+  int32 left 	= 1;	//宝石左id
+  int32 right 	= 2;	//宝石右id
+  int32 down 	= 3;	//宝石下id
+}
+
+//通用每日状态
+message DayStateInfo{
+  int32 rankWorship = 1;		//排行榜膜拜
+  repeated int32 monthCardReceive = 2;	//月卡每日礼包领取
+}
+
+message SignInfo{
+  int32 signCount = 1;	//签到总数
+  map<int32,int32> signDay = 2;	//第几天,具体日期
+  map<int32,int32> cumulativeDay = 3; //已领取累计奖励天数
+}
+
+message InsideInfo{
+  map<int32,int32> acupoint = 1;		//穴位,id
+  map<int32,InsideSkill> insideSkill = 2;	//技能id,技能
+}
+
+message InsideSkill{
+  int32 level = 1;
+  int32 exp = 2;
+}
+
+message Holy{
+  int32 id 	= 1; 	//id
+  int32 level = 2 ; 	//等级
+  int32 exp 	= 3;  	//升品经验
+  map<int32,int32> skills = 4; //技能id,等级
+}
+
+message Ring{
+  int32 rid 		= 1;	//特戒id
+  int32 strengthen 	= 2;	//强化等级
+  int32 pid			= 3;	//强化id(ringPhantom表)
+  int32 talent		= 4;	//技能点
+  map<int32,RingPhantom> phantom = 5;	//幻灵位置,信息
+}
+
+message RingPhantom{
+  int32 talent = 1;	//剩余技能点
+  int32 phantom = 2;//幻灵类型
+  map<int32,int32> skill = 3; //技能id,等级
+}
+
+message PetInfo{
+  int32 lv = 1;				//等级
+  int32 exp = 2;			//经验
+  int32 grade = 3;			//阶级
+  int32 break = 4;			//突破
+  repeated int32 skill = 5;	//技能
+}
+
+message ResetNtf{
+  map<int32,int32> type = 1;
+  int32 newDayTime		= 2;
+}
+
+message FieldFightRivalUserInfo{
+	int32 rivalUserId = 1;//劲敌玩家名字
+    int32 rivalDifficult = 2;//劲敌困难程度 1噩梦 2 困难 3 普通	
+}
+
+message DarkPalaceInfo{
+  int32 dareNum = 1;	//奖励次数(已有)
+  int32 buyNum	= 2;	//购买次数(已有)
+  int32 helpNum	= 3;	//协助次数(已有)
+}
+
+message HellBossInfo{
+  int32 dareNum = 1;	//奖励次数(已有)
+  int32 buyNum	= 2;	//购买次数(已有)
+  int32 helpNum	= 3;	//协助次数(已有)
+}
+
+message FieldBossInfo{
+  int32 dareNum = 1;	//奖励次数(已有)
+  int32 buyNum	= 2;	//购买次数(已有)
+  bool firstReceive	= 3;	//是否首次
+}
+
+message AncientBossInfo{
+  int32 dareNum = 1;	//奖励次数(已有)
+  int32 buyNum	= 2;	//购买次数(已有)
+}
+
+message TalentInfo{
+  int32 getPoints 		= 1;	//获得天赋点
+  int32 surplusPoints 	= 2;	//剩余天赋点
+  map<int32,TalentUnit> talents = 3;	//talentWay表id,详情
+}
+message TalentUnit{
+  int32 usePoints = 1;	//使用天赋点
+  map<int32,int32> talents = 2;	//talent表id,等级
+}
+
+message Fit{
+  int64 cdStart 			= 1;
+  int64 cdEnd				= 2;
+  map<int32,int32> fashion	= 3;	//合体时装(时装id,等级)
+  map<int32,int32> skillBag	= 4;	//合体技能背包(位置,技能id)
+  map<int32,int32> lv		= 5;	//合体等级(合体id,fitLevel表id列中等级)
+  map<int32,FitSkill> skills = 6;	//合体技能(技能id,等级信息)
+}
+message FitSkill{
+  int32 lv = 1;
+  int32 star = 2;
+}
+
+message MonthCardUnit{
+  int64 startTime 	= 1;
+  int64 endTime		= 2;
+  bool isExpire		= 3;
+}
+
+message FirstRecharge{
+  bool isRecharge		= 1;	//是否首充
+  repeated int32 days 	= 2;	//已领取天数
+  int64 openDay			= 3;	//购买开始时间
+}
+
+message SpendRebates{
+  int32 countIngot 	= 1;	//总消费元宝
+  int32 ingot		= 2;	//除拍卖行消费元宝
+  repeated int32 reward = 3;	//已领取id
+  int32 cycle		= 4;	//周期
+}
+
+message GrowFund{
+  bool isBuy = 1;			//是否已购买
+  repeated int32 ids = 2;	//已领取id
+}
+
+message WarOrderTaskUnit{
+  int32 one = 1;	//1个值
+  map<int32,int32> two = 2;	//2个值(warOrderCondition表,key为类型,val为数量)
+  map<int32,int32> three = 3; //2个值(warOrderCondition表,key为道具id,val为数量)
+}
+message WarOrderTaskInfo{
+  WarOrderTaskUnit val = 1;	//任务完成度
+  bool finish 	= 2;	//是否完成
+  bool reward 	= 3;	//是否已领取奖励
+}
+message WarOrderTask{
+  map<int32,WarOrderTaskInfo> task = 1;	//任务id(周任务为序号),信息
+}
+message WarOrderReward{
+  bool elite 	= 1;	//精英
+  bool luxury 	= 2;	//豪华
+}
+message WarOrder{
+  int32 lv 			= 1;	//等级
+  int32 exp 		= 2;	//经验
+  int32 season		= 3;	//赛季
+  int64 startTime 	= 4;	//开始时间
+  int64 endTime 	= 5;	//结束时间
+  bool isLuxury		= 6;	//是否购买豪华
+  WarOrderTask task = 7;	//任务
+  map<int32,int32> exchange		   = 8;		//exchange序号,数量
+  map<int32,WarOrderTask> weekTask = 9;		//第几周,任务
+  map<int32,WarOrderReward> reward = 10;	//等级,已领取奖励
+}
+
+message Elf{
+  int32 lv 					= 1;
+  int32 exp 				= 2;
+  map<int32,int32> skills 	= 3; //技能id,等级
+  map<int32,int32> skillBag = 4; //位置,技能id
+  map<int32,int32> receiveLimit = 5; //回收上限
+}
+
+message FriendUserInfo{
+  int32 UserId = 1;	//用户id
+  int64 combat = 2; //用户总战力
+  map<int32,FriendHeroInfo> friendHeroInfo = 3;	//heroIndex,英雄信息
+}
+message FriendHeroInfo{
+  map<int32,EquipUnit>	equips 	= 1;	//装备
+  map<int32, int64> props   	= 2;	//详细属性
+  int32 job						= 3;	//职业
+  int32 sex 					= 4; 	//性别
+  int32 lv						= 5;	//等级
+  Display display 				= 6;	//外显
+  string name					= 7;	//昵称
+  int64 combat					= 8;	//战力
+}
+
+message FitHolyEquipUnit{
+  map<int32,int32> equip = 1;	//部位,id
+}
+message FitHolyEquip{
+  int32 suitId = 1;	//套装id
+  map<int32,FitHolyEquipUnit> equips = 2;	//类型,详情
+}
+
+message ContRecharge{
+  int32 cycle 				= 1;	//周期
+  map<int32,int32> recharge = 2;	//日期(20220719),金额
+  repeated int32 receive 	= 3;	//已领取id
+  int32 todayPay			= 4;	//今日充值金额
+}
+
+message PaoMaDengInfo{
+	int32   type = 1;         //0:循环播放 1:准点播放 2:间隔播放 3:活动信息
+	int32   cycleTimes = 2;   //循环播放次数
+	string  content    = 3;   //跑马灯内容
+}
+
+message PaoMaDengNtf{
+	repeated PaoMaDengInfo PaoMaDengInfos = 1;
+}
+
+message AncientSkill{
+  int32 skillId = 1;
+  int32 level = 2;
+  int32 grade = 3;
+}
+
+message Title{
+  int32 titleId 	= 1;
+  int64 startTime 	= 2;	//开始时间
+  int64 endTime 	= 3;	//结束时间
+  bool isLook		= 4;	//是否查看
+}
+
+message BriefServerInfo {
+  int32   serverId           = 1;
+  string  serverName         = 2;
+  int32   crossFsId          = 3;
+}
+
+message Label{
+  int32 labelId		= 1; //label表id
+  int32 job 		= 2; //枚举LabelType
+  int32 transfer 	= 3; //转职次数
+  bool dayReward	= 4; //每日领取状态  
+}

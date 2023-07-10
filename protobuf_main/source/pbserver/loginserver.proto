@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pbserver;
+
+message LoginKeyVerifyReq {
+  string openId = 1;
+  uint32 userId = 2;
+  string loginKey = 3;
+  string clientIp = 4; // 客户端的ip
+}
+
+message LoginKeyVerifyAck {
+  int32 result = 1; // 成功或失败
+  int32 channel = 2; //渠道
+}
+
+message LoginKeyVerifyUpdateReq {
+  string openId = 1;
+}
+

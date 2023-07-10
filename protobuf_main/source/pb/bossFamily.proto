@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+package pb;
+
+//获取bossfamily信息
+message GetBossFamilyInfoReq {
+	int32 bossFamilyType = 1;		//类型
+}
+
+////获取bossfamily信息
+message GetBossFamilyInfoAck{
+	map<int32,int32> bossFamilyInfo = 1;
+}
+
+//获取bossfamily信息
+message EnterBossFamilyReq {
+	int32 stageId = 1;		//stagetId
+}

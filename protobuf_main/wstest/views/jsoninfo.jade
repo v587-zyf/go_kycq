@@ -1,0 +1,20 @@
+
+form(request="#{request}" response="#{response}").form-horizontal
+  #editor_holder
+
+  script.
+    JSONEditor.defaults.options.theme = 'bootstrap2';
+    var schemastr = !{JSON.stringify(schema)}
+    var latestValue = null;
+    try{
+      latestValue = JSON.parse(localStorage.getItem("#{request}"))
+    }catch (err){
+    }
+    var editor = new JSONEditor(document.getElementById('editor_holder'),{
+      schema:schemastr,
+      startval:latestValue,
+      no_additional_properties: true,
+      required_by_default: true
+      });
+
+  button(type="button" id="submit").col-sm-offset-7.btn.btn-default 提交

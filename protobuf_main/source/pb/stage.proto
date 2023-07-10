@@ -1,0 +1,66 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message StageFightStartReq {
+	int32 stageId 	= 1;		//关卡ID	
+	int32 wave		=2;			//关卡波数
+}
+
+message StageFightStartAck {
+	int32 stageId 	= 1;		//关卡ID	
+	int32 wave		=2;			//关卡波数
+}
+
+message StageFightEndReq {
+	int32 stageId 	= 1;		//关卡ID	
+	int32 wave		=2;			//关卡波数
+}
+
+message StageFightEndNtf {
+  int32         stageId         = 1;  //关卡ID
+  int32         wave	        = 2;  //关卡波数
+  GoodsChangeNtf 	goods		= 3;  //掉落物品
+  bool 	onlyUpdate				= 4;  //仅更新关卡数据
+  int32 		result			= 5;  //战斗结果
+}
+
+//申请退出当前战斗
+message LeaveFightReq{
+
+}
+
+//申请退出当前战斗
+message LeaveFightAck{
+
+}
+
+message KillMonsterReq{
+	int32 monsterId = 1;	//击杀怪物Id
+	int32 killNum 	= 2;	//击杀怪物数量
+}
+
+message KillMonsterAck{
+
+}
+
+//进入关卡boss战斗
+message StartStageBossFightReq{
+
+}
+
+message StageBagChangeNtf{
+	int32 hookupTime 		= 1;	//挂机时间
+	repeated itemUnit items	= 2;	//挂机背包奖励
+	bool isOnline 			= 3;	//是否上线推送
+}
+
+message StageGetHookMapRewardReq{
+
+}
+
+message StageGetHookMapRewardAck{
+	GoodsChangeNtf 	goods	= 1;  	//物品
+	int32 hookupTime 		= 2;	//挂机时间
+	repeated itemUnit items	= 3;	//挂机背包奖励
+}

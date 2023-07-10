@@ -1,0 +1,16 @@
+package pbgt
+pbfiles "*.proto"
+
+11 HandShakeReq 1
+12 HandShakeAck 1
+15 UserQuitRpt 1
+16 UserQuitNtf 1
+17 RouteMessage 1
+19 BroadcastNtf 1
+20 UserFightInfoNtf 1
+21 BroadcastByFS 1
+23 ServerPingReq 1
+24 ServerPingAck 1
+25 GateMessageToFS 1
+26 FSMessageToGate 1
+

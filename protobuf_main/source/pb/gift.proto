@@ -1,0 +1,59 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message OpenGiftReq {
+  int32 type = 1;   //1:随机 2:选择
+  int32 itemId = 2; //礼包id
+  repeated int32 chooseItemId = 3; //自选itemId
+  int32 num = 4;
+}
+
+message OpenGiftAck {
+  GoodsChangeNtf goods = 1;		//奖励道具
+}
+
+//礼包码领取
+message GiftCodeRewardReq {
+  string code = 1;	//礼包码
+}
+message GiftCodeRewardAck{
+  string code = 1;
+  GoodsChangeNtf goods = 2;
+}
+
+//限时礼包推送
+message LimitedGiftNtf{
+  repeated LimitedGiftInfo list = 1;
+}
+
+//限时礼包购买
+message LimitedGiftBuyReq{
+  int32 type = 1;	//模块
+}
+message LimitedGiftBuyAck{
+  GoodsChangeNtf goods = 1;	//奖励道具
+  int32 type = 2;
+}
+
+//限时礼包获取
+message LimitedGiftReq{}
+
+message LimitedGiftInfo{
+  int32 type 	= 1;	//模块
+  int32 lv		= 2;	//模块等级
+  int32 grade	= 3;	//档次
+  int64 startTime = 4;
+  int64 endTime	= 5;
+}
+
+message OpenGiftBuyNtf{
+  GoodsChangeNtf goods 	= 1;
+  int32 openGiftId		= 2;
+  int32 buyNum			= 3;
+}
+//获取开服礼包时间
+message OpenGiftEndTimeReq{}
+message OpenGiftEndTimeAck{
+  int64 endTime = 1;
+}

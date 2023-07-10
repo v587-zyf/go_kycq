@@ -1,0 +1,22 @@
+{
+  "types": [
+    {
+      "type": "console",
+      "color": true
+    },
+    {
+      "type": "file",
+      "filename": "logs/fightCC.log",
+      "maxlines": 1000000,
+      "maxsize": 1024000000,
+      "daily": true,
+      "maxdays": 2,
+      "rotate": true,
+      "category": "default"
+    }
+  ],
+  "levels": {
+    "default": "DEBUG"
+  },
+  "logPath": "/"
+}

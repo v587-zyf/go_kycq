@@ -1,0 +1,39 @@
+syntax = "proto3";
+package pb;
+
+message TrialTaskInfoReq{}
+
+message TrialTaskInfoAck{
+	map<int32,TrialTaskInfo> trialTaskInfos = 1;
+	int64 endTime = 2;
+	repeated int32 haveGetStageId = 3;
+}
+
+message  TrialTaskInfo{
+	int32 nowNum = 1; //当前到达数量
+	int32 isGet = 2;  //是否领过奖励
+}
+
+
+message TrialTaskGetAwardReq{
+	int32 id = 1;
+}
+
+message TrialTaskGetAwardAck{
+	int32 id = 1;
+	int32 isGet = 2;
+}
+
+message TrialTaskGetStageAwardReq{
+	int32 id = 1;
+}
+
+message TrialTaskGetStageAwardAck{
+	int32 id = 1;
+	int32 isGet = 2;
+}
+
+message TrialTaskInfoNtf{
+	int32 id = 1;
+	int32 num = 2;
+}

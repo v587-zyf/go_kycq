@@ -1,0 +1,50 @@
+declare module Data {
+    {{range .Groups -}}
+    var {{.Name}}Ver: string;
+    {{range .Fields}}
+    {{if .IsExportArray}}var {{.ExportArrayName}}: any[];{{end}}
+    {{if .IsExportMap}}var {{.ExportMapName}}: { [index: string]: any };{{end}}
+    var {{.MaxKeyName}}: number;
+    {{- end}}
+    {{end}}
+
+    {{range .Structs}}
+    class {{.Name}} {
+        obj: any;
+        constructor(obj: any);
+        {{range $i, $field := .Fields -}}
+        {{$field.ExportName}}: {{$field.ClientExportType}};
+        {{end}}
+    }
+    {{end}}
+
+    class gameConf {
+        {{range $Key, $Value := .GameDb.GameConfs}}
+        static {{$Key}}: string;{{end}}
+    }
+    class openTypeKey {
+        {{range .GameDb.Opens}}
+        static {{.Key}}: number;{{end}}
+    }
+
+    class msgCodeKey {
+        {{range .GameDb.MsgCodes}}
+        static {{toupper .CodeKey}}: number;{{end}}
+    }
+
+    class soundCommonKey {
+        {{range .GameDb.SoundCommons}}
+        static {{.Key}}: number;{{end}}
+    }
+
+    {{range .Groups -}}
+    {{if ne .OnDemandName .Name}}
+    {{- range .Fields -}}
+    {{- if .ExportStruct}}
+    function get{{.ExportStruct.Name}}{{if ne .OnDemandGroupName ""}}{{end}}(index: number): {{.ExportStruct.Name}};
+    {{- end}}
+    {{- end}}
+    {{end}}
+    {{- end}}
+    function buildData(data: any): void;
+}

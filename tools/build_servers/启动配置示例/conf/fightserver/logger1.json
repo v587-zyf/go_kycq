@@ -1,0 +1,22 @@
+{
+  "types": [
+    {
+      "type": "console",
+      "color": true
+    },
+    {
+      "type": "file",
+      "filename": "logs/fightserver1.log",
+      "maxlines": 1000000,
+      "maxsize": 10240000,
+      "daily": true,
+      "maxdays": 2,
+      "rotate": true,
+      "category": "default"
+    }
+  ],
+  "levels": {
+    "default": "DEBUG"
+  },
+  "logPath": "/"
+}

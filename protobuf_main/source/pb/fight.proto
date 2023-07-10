@@ -1,0 +1,167 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message EnterPublicCopyReq {
+	int32 stageId = 1;	
+	int32 condition = 2;	//进入条件
+}
+
+message EnterPublicCopyAck {
+	string failReason = 1;
+}
+
+//战斗申请道具使用
+message FightItemUseReq{
+	int32 itemId	= 1;		//道具Id
+}
+//战斗申请道具使用
+message FightItemUseAck{
+	int32 itemId	= 1;		//道具Id
+	int32 useTimes	= 2;		//使用次数
+}
+
+//战斗申请复活
+message FightUserReliveReq{
+	bool safeRelive	= 1;		//安全复活
+}
+
+//战斗申请复活
+message FightUserReliveAck{
+	int32 reliveTimes 			= 1; 		//复活次数
+	int32 reliveByIngotTimes 	= 2; 		//元宝复活次数
+}
+
+
+//掉落物品拾取
+message FightPickUpReq{
+	repeated int32 dropItemIds = 1;	//掉落物品地图唯一Id
+}
+
+//掉落物品拾取
+message FightPickUpAck{
+	map<int32,itemUnit> items = 1;	//拾取的物品
+	bool isOneKey = 2;				//是否一键拾取
+	bool inMail	= 3;				//是否进入邮件
+	ErrorAck err = 4;				//异常错误码
+}
+
+//获取鼓舞次数
+message FightGetCheerNumReq{
+	
+}
+
+message FightGetCheerNumNtf{
+	int32 cheerNum = 1;			//玩家鼓舞次数
+	int32 guildCheerNum = 2;	//门派鼓舞次数
+}
+
+
+//鼓舞申请
+message FightCheerReq{
+
+}
+
+message FightCheerAck{
+	int32 cheerNum = 1;	//玩家鼓舞次数
+	int32 guildCheerNum = 2;//门派鼓舞次数
+}
+
+message FightCheerNumChangeNtf{
+	int32 guildId		= 1;		//门派Id
+	int32 guildCheerNum = 2;	//门派鼓舞次数
+}
+
+//药水使用
+message FightPotionReq{
+
+}
+
+message FightPotionAck{
+	int32 coolDown = 1;	//冷却剩余时间
+	int32 serverTime = 2; //服务器时间
+	int32 endTime = 3;	//冷却结束时间
+}
+
+message FightPotionCdReq{
+
+}
+
+message FightPotionCdAck{
+	int32 coolDown = 1;	//冷却时间
+	int32 serverTime = 2; //服务器时间
+	int32 endTime = 3;	//冷却结束时间
+}
+
+message FightCollectionReq{
+	int32 objId = 1;		//地图唯一Id
+}
+
+message FightCollectionAck{
+	int64 startTime = 1;	//采集开始时间
+	int64 endTime = 2;		//采集结束时间
+	int32 objId = 3;		//地图唯一Id
+}
+
+//推送玩家采集结束
+message FightCollectionNtf {
+	GoodsChangeNtf goods = 1; 
+}
+
+message FightCollectionCancelReq{
+	int32 objId = 1;		//地图唯一Id
+}
+
+message FightCollectionCancelAck{
+	bool result = 1;		//是否成功
+}
+
+//请求协助
+message FightApplyForHelpReq{
+	int32 helpUserId	= 1;	
+	int32 source 		= 2;	//1好友，2公会
+}
+
+message FightApplyForHelpAck{
+	int32 result = 1;
+	string failReason = 2;
+	int32 helpUserId	= 3;	
+}
+
+message FightApplyForHelpNtf{
+	int32 reqHelpUserId = 1;	//请求帮助玩家ID
+	string reqHelpName	= 2;	//请求帮助玩家名字
+	int32 stageId		= 3;	//请求帮助的关卡
+	int32 source		= 4;	//请求途径1好友 2公会
+	BriefUserInfo reqHelpUser	= 5;	//请求帮助玩家信息
+}
+
+//请求协助
+message FightAskForHelpResultReq{
+	bool isAgree		= 1;		//同意 拒绝
+	int32 reqHelpUserId	= 2;		//请求帮助的玩家ID
+	int32 helpStageId	= 3;		//请求帮助的stageId
+}
+
+//请求协助
+message FightAskForHelpResultAck{
+	bool isAgree		= 1;		//同意 拒绝
+	int32 reqHelpUserId	= 2;		//请求帮助的玩家ID
+	int32 helpStageId	= 3;		//请求帮助的stageId
+	string enterErr		= 4;		//同意进入失败错误 
+}
+
+
+message FightAskForHelpResultNtf{
+	bool 	isAgree 	= 1;
+	int32 	helpUserId 	= 2;
+	string 	name		= 3;
+}
+
+message FightItemsAddNtf{
+	int32 stageId =1;			//关卡
+	GoodsChangeNtf goods= 2; 	//物品变化
+	int32 addSource = 3;		//道具来源（0，击杀怪物，1，其他）
+}
+

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//消费返利领取
+message SpendRebatesRewardReq{
+	int32 id = 1;
+}
+message SpendRebatesRewardAck{
+	int32 id = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//推送消费额
+message SpendRebatesNtf{
+	int32 countIngot 	= 1;
+	int32 ingot			= 2;
+	int32 cycle			= 3;
+}

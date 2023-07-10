@@ -1,0 +1,74 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//野战load
+message FieldFightLoadReq{}
+
+message FieldFightLoadAck{
+	repeated FieldFightListInfo listInfo = 1; //野战玩家列表
+	int32 myCombat = 2; //我的战力
+	int32 remainChallengeTimes = 3; //剩余挑战次数
+	int32 todayCanBuyTimes = 4; // 今日可购买次数
+	int32  changeRivalCd = 5; //下次可更换对手时间戳
+	repeated FieldFightBeatBackUserInfo BeatBackOwnUserInfo = 6; //击败自己的玩家信息
+	int32   isCheckNoPromptState = 7; //是否勾选本次不在提示
+}
+
+
+
+//进入战斗
+message EnterFieldFightReq{
+	int32 challengeUid 		= 1; //挑战用户id
+	int32 isBeatBack = 2;	//是否是反击 1是反击 0 不是   反击不扣挑战次数
+}
+
+message FieldFightNtf{
+	int32 result = 1; //挑战结果
+	GoodsChangeNtf goods = 2;
+	int32 remainChallengeTimes = 3; //剩余挑战次数
+	repeated FieldFightListInfo listInfo = 4; //野战玩家列表
+	repeated FieldFightBeatBackUserInfo BeatBackOwnUserInfo = 5; //击败自己的玩家信息
+}
+
+
+//挑战次数购买 
+message BuyFieldFightChallengeTimesReq{}
+
+message BuyFieldFightChallengeTimesAck{
+	int32 residueTimes = 1;	  //剩余挑战次数
+	int32 todayCanBuyTimes = 2; //今日可购买次数
+}
+
+//刷新对手
+message RefFieldFightRivalUserReq{}
+
+message RefFieldFightRivalUserAck{
+	repeated FieldFightListInfo listInfo = 1; //野战玩家列表
+	int32  changeRivalCd = 2; //下次可更换对手时间戳
+}
+
+
+message FieldFightListInfo {
+	int32 difficultyLevel = 1; //困难等级
+	string avatar = 2;	//用户信息
+	string nickName = 3;
+	int32 combat = 4; //战力
+	int32 userLv = 5; //玩家等级
+	repeated itemUnit rewardInfos = 6;//玩家对应奖励 
+	int32 userId = 7;
+	int32 job = 8;
+	int32 sex = 9;
+}
+
+
+message FieldFightBeatBackUserInfo {
+	int32 userId = 1;
+	string nickName = 2;
+}
+
+
+message BeatBackInfoNtf{
+	repeated FieldFightBeatBackUserInfo BeatBackOwnUserInfo = 1; //击败自己的玩家信息
+}

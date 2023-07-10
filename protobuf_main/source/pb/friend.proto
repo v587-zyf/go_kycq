@@ -1,0 +1,138 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//好友列表
+message FriendListReq{}
+message FriendListAck{
+	repeated FriendInfo friendList = 1;
+}
+
+//加好友
+message FriendAddReq{
+	string userId = 1;
+}
+message FriendAddAck{
+	repeated FriendInfo friendInfo = 1;
+}
+
+//删除好友
+message FriendDelReq{
+	int64 userId = 1;
+}
+message FriendDelAck{
+	int64 userId = 1;
+}
+
+//拉黑好友
+message FriendBlockAddReq{
+	int64 userId = 1;
+}
+message FriendBlockAddAck{
+	int64 userId = 1;
+	repeated FriendInfo friendList = 2;
+}
+
+//搜索好友
+message FriendSearchReq{
+	string name = 1;	//推荐好友为空
+}
+message FriendSearchAck{
+	repeated FriendInfo friendList = 1;
+}
+
+//黑名单列表
+message FriendBlockListReq{}
+message FriendBlockListAck{
+	repeated FriendInfo friendList = 1;
+}
+
+//解除黑名单
+message FriendBlockDelReq{
+	int64 userId = 1;
+}
+message FriendBlockDelAck{
+	int64 userId = 1;
+}
+
+//查看消息
+message FriendMsgReadReq{
+	int32 friendId = 1;
+}
+message FriendMsgReadAck{
+	int32 friendId = 1;
+}
+
+//查看好友详情信息
+message FriendUserInfoReq{
+	int32 friendId = 1;
+}
+message FriendUserInfoAck{
+	FriendUserInfo friendUserInfo = 1;
+}
+
+//查看好友私聊信息
+message FriendMsgReq{
+	int32 friendId = 1;
+}
+message FriendMsgAck{
+	int32 friendId = 1;
+	repeated MsgLog msgLog 	= 2;	//聊天记录
+}
+
+//好友申请
+message FriendApplyAddReq{
+	int32 friendId = 1;
+}
+//有好友申请推送
+message FriendApplyAddNtf{
+	int32 friendId = 1;
+}
+
+//好友申请同意
+message FriendApplyAgreeReq{
+	int32 friendId = 1;
+}
+//好友申请同意推送
+message FriendApplyAgreeNtf{
+	int32 friendId = 1;
+}
+
+//好友申请拒绝
+message FriendApplyRefuseReq{
+	int32 friendId = 1;
+}
+//有好友申请拒绝推送
+message FriendApplyRefuseNtf{
+	int32 friendId = 1;
+}
+
+//好友申请列表
+message FriendApplyListReq{}
+message FriendApplyListAck{
+	repeated FriendApplyInfo applyList = 1;
+}
+
+message FriendInfo{
+	BriefUserInfo userInfo	= 1;	//用户基础信息
+	bool isOnline			= 2;	//是否在线
+	int64 outTime			= 3;	//离线时间
+	bool isRead				= 4;	//是否有未读消息
+	MsgLog lastMsg			= 5;	//最后一条消息
+}
+
+message MsgLog{
+	string msg 	= 1;	//信息
+	int64 time 	= 2;	//发送时间
+	bool isMy  	= 3;	//是否本人发送
+}
+
+message FriendApplyInfo{
+	int32 userId 	= 1;  	//用户id
+	string nickName = 2;	//昵称	
+	int32 lv		= 3;	//等级
+	string avatar   = 4;  	//头像
+	int32 job		= 5;	//职业
+	int32 sex		= 6;	//性别
+}

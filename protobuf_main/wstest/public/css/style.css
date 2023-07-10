@@ -1,0 +1,9 @@
+.myscrollable {
+  overflow-y:scroll;
+  max-height:800px;
+  height:auto;
+
+}
+ul li {list-style: none; cursor: pointer;}
+li.smart_autocomplete_highlight {background-color: #C1CE84;}
+ul { margin: 10px 0; padding: 5px; background-color: #E3EBBC; }

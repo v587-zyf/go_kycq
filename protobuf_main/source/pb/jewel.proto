@@ -1,0 +1,71 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//镶嵌1个
+message JewelMakeReq{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos 	= 3;
+	int32 itemId	= 4;
+}
+
+message JewelMakeAck{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos 	= 3;
+	JewelInfo jewel = 4;
+}
+
+//升级宝石
+message JewelUpLvReq{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos 	= 3;
+}
+
+message JewelUpLvAck{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos 	= 3;
+	JewelInfo jewel = 4;
+}
+
+//替换宝石
+message JewelChangeReq{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos 	= 3;
+	int32 itemId	= 4;
+}
+
+message JewelChangeAck{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos	= 3;
+	JewelInfo jewel = 4;
+}
+
+//卸下宝石
+message JewelRemoveReq{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos 	= 3;
+}
+
+message JewelRemoveAck{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 jewelPos	= 3;
+	JewelInfo jewel = 4;
+}
+
+//一键镶嵌
+message JewelMakeAllReq{
+	int32 heroIndex = 1;
+}
+message JewelMakeAllAck{
+	int32 heroIndex = 1;
+	map<int32,JewelInfo> jewels = 2;
+}

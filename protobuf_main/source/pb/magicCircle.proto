@@ -1,0 +1,23 @@
+syntax = "proto3";
+package pb;
+
+//法阵升级
+message MagicCircleUpLvReq{
+	int32 heroIndex 		= 1;
+	int32 magicCircleType	= 2;	//法阵类型
+}
+message MagicCircleUpLvAck{
+	int32 heroIndex 		= 1;
+	int32 magicCircleType	= 2;	//法阵类型
+	int32 excelId			= 3;	//法阵等级表id
+}
+
+//法阵穿戴
+message MagicCircleChangeWearReq{
+	int32 heroIndex 		= 1;
+	int32 magicCircleLvId	= 2;	//法阵等级表id
+}
+message MagicCircleChangeWearAck{
+	int32 heroIndex 		= 1;
+	int32 magicCircleLvId	= 2;	//法阵等级表id
+}

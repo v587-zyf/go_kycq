@@ -1,0 +1,51 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+// 图鉴激活
+message AtlasActiveReq{
+	int32 id = 1;
+}
+
+message AtlasActiveAck{
+	Atlas atlas = 1;
+}
+
+// 图鉴升星
+message AtlasUpStarReq{           
+	int32 id = 1;
+}
+
+message AtlasUpStarAck{
+	Atlas atlas = 1;
+}
+
+// 图鉴集合激活
+message AtlasGatherActiveReq{
+	int32 id = 1;
+}
+
+message AtlasGatherActiveAck{
+	AtlasGather atlasGather = 1;
+}
+
+// 图鉴集合升星
+message AtlasGatherUpStarReq{
+	int32 id = 1;
+}
+
+message AtlasGatherUpStarAck{
+	AtlasGather atlasGather = 1;
+}
+
+// 图鉴穿戴、卸下
+message AtlasWearChangeReq{
+	int32 heroIndex = 1;
+	int32 id = 2;
+}
+message AtlasWearChangeAck{
+	int32 heroIndex = 1;
+	int32 removeId = 2;
+	repeated int32 atlasWear = 3;
+}

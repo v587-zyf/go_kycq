@@ -1,0 +1,33 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//精灵喂养
+message ElfFeedReq{
+	repeated int32 positions= 1 ; //装备位置
+}
+message ElfFeedAck{
+	int32 lv = 1;
+	int32 exp = 2;
+  	GoodsChangeNtf goods= 3;
+	map<int32,int32> receiveLimit = 4; //回收上限
+}
+
+//精灵学习、升级技能
+message ElfSkillUpLvReq{
+	int32 skillId = 1;
+}
+message ElfSkillUpLvAck{
+	int32 skillId = 1;
+	int32 skillLv = 2;
+	map<int32,int32> skillBag = 3;	//位置,技能id
+}
+
+//精灵更换技能位置
+message ElfSkillChangePosReq{
+	int32 skillId = 1;
+	int32 pos = 2;
+}
+message ElfSkillChangePosAck{
+	map<int32,int32> skillBag = 1;
+}

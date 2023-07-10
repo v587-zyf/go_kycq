@@ -1,0 +1,63 @@
+{
+    "$$.Name$$Ver": {{.Ver}},
+
+    $$range .Fields$$
+    $$if .IsExportArray -$$
+    "$$.ExportArrayName$$": [
+    $$if eq .OnDemandGroupName "" -$$
+    {{$p := pointer .$$.FieldName$$}}{{range .$$.FieldName$$}}{{$p.Next}}
+    $$if .IsPlainType -$$
+    $$if .IsValueString$$"{{.}}"$$else$${{.}}$$end$$
+    $$else -$$
+    $$exportFields .$$
+    $$- end$${{if not $p.IsLast}},{{end}}{{end}}$$- end$$],
+    $$- end$$
+
+    $$if and .IsExportMap (not .IsExportArray) -$$
+    "$$.ExportMapName$$": {
+    $$if or (eq .OnDemandGroupName "") (and (eq $.Name .OnDemandGroupName) (eq .SkipOnDemandData "")) -$$
+    {{$p := pointer .$$.FieldName$$}}{{range $key, $value := .$$.FieldName$$}}{{$p.Next}}
+    $$if .IsPlainType -$$
+    "{{$key}}": $$if .IsValueString$$"{{$value}}"$$else$${{$value}}$$end$$
+    $$else -$$
+    "{{.$$.MapKeyName$$}}": $$exportFields .$$
+    $$- end$${{if  (not $p.IsLast) }},{{end}}{{end}}
+    $$- end$$},
+    $$- end$$
+    "$$.MaxKeyName$$": {{len .$$.FieldName$$}},
+    $$end$$
+
+    $$if .IsReducedExport -$$
+    "__arrmap__": {
+    $$range .Fields$$$$if and .IsExportMap .IsExportArray -$$
+    "$$.ExportArrayName$$": [{{$p := pointer .$$.FieldName$$}}{{range .$$.FieldName$$}}{{$p.Next}}{{.$$.MapKeyName$$}}{{if not $p.IsLast}},{{end}}{{end}}],
+    $$- end$$$$end$$
+    "_endtag": 1
+    },
+    $$- end$$
+
+    $$if .IsFirstGroup -$$
+   
+
+    "gameConf": {
+        {{$p := pointer .GameConfs}}{{range $key, $value := .GameConfs}}{{$p.Next}}
+        "{{$key}}": "{{$value}}"{{if not $p.IsLast}},{{end}}{{end}}
+    },
+
+    "openTypeKey": {
+        {{$p := pointer .Opens}}{{range .Opens}}{{$p.Next}}
+        "{{.Key}}": {{.Id}}{{if not $p.IsLast}},{{end}}{{end}}
+    },
+
+    "msgCodeKey": {
+        {{$p := pointer .MsgCodes}}{{range .MsgCodes}}{{$p.Next}}
+        "{{toupper .CodeKey}}": {{.Id}}{{if not $p.IsLast}},{{end}}{{end}}
+    },
+
+    "soundCommonKey": {
+        {{$p := pointer .SoundCommons}}{{range .SoundCommons}}{{$p.Next}}
+        "{{.Key}}": {{.Id}}{{if not $p.IsLast}},{{end}}{{end}}
+    },
+    $$- end$$
+    "_endtag": 1
+}

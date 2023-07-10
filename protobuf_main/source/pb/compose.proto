@@ -1,0 +1,40 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//合成
+message ComposeReq{
+	int32 heroIndex = 1;
+	int32 subId 	= 2;
+	int32 composeNum = 3;
+}
+message ComposeAck{
+	int32 heroIndex = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//合成装备
+message ComposeEquipReq{
+	int32 composeEquipSubId = 1;
+	bool isLuckyStone		= 2;	//是否使用幸运石
+	bool bigLuckyStone		= 3;	//是否使用大幸运石
+	repeated int32 bagPos	= 4;	//消耗的背包位置(只能传装备)
+	repeated int32 equipPos = 5;	//装备穿戴位置
+	repeated int32 items	= 6;	//需要消耗的物品(itemId,num,itemId,num...)
+}
+message ComposeEquipAck{
+	int32 composeEquipSubId = 1;
+	bool isLuckyStone		= 2;	//是否使用幸运石
+	bool bigLuckyStone		= 3;	//是否使用大幸运石
+	GoodsChangeNtf goods 	= 4;
+}
+
+//合成传世装备
+message ComposeChuanShiEquipReq{
+	int32 composeSubId = 1;
+}
+message ComposeChuanShiEquipAck{
+	int32 composeSubId 	 = 1;
+	GoodsChangeNtf goods = 2;
+}

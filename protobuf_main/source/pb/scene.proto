@@ -1,0 +1,508 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message Point{
+	int32 x = 1;
+	int32 y = 2;
+}
+
+message SceneObj {
+  int32 objType = 1; 		// SceneObjType
+  Point point 	= 2;		//移动坐标
+  int32 dir     = 3;
+  int32 objId   = 4; 		// 战斗场景唯一Id
+  int32 teamId  = 5; 		// reserved
+
+  int64 hp    	= 7; 		// 当前血量
+  int64 hpMax 	= 8; 		// 当前血量上限
+
+  repeated BuffInfo buffs = 9; //拥有buff
+  
+  int64 mp    	= 10; 		// 当前蓝量
+  int64 mpMax 	= 11; 		// 当前蓝量上限
+  int32 serverId = 12;		// 服务器Id
+
+  SceneUser     user     = 21; 	//根据objType n选1
+  SceneMonster  monster  = 23; 	//怪物
+  SceneItem  	item 	 = 24; 	//地图掉落物品
+  ScenePet 		pet 	 = 25;	//战宠
+  SceneCollection 		collection 	 = 26;	//采集物
+  SceneFit		fit		 = 27;	//合体
+  SceneSummon	summon	 = 28;	//召唤宠物
+  SceneBuff		buff	 = 29;	//地面buff
+  
+}
+
+message SceneUser {
+  int32  	 userId 		= 1;
+  string 	 name   		= 2;
+  Display	 display    	= 3;
+  int32      vip        	= 4;
+  int32      lvl        	= 5;
+  int32      sex        	= 6;
+  int64      combat     	= 7;
+  string     avatar     	= 8;
+  int32      job       		= 9;
+  int32		 heroIndex  	= 10;
+  int32      guildId        = 12;
+  string     guildName      = 13;
+  int32		 elfLv			= 14;	//精灵等级
+  string 	 username   	= 15; 	//玩家名
+  int32      usersex        = 16;	//玩家首选角色性别
+  int32      userjob       	= 17;	//玩家首选角色职业
+  int64 	 userHpTotal	= 18;	//玩家总血量
+  int32 	 toHelpUserId 	= 19;	//被协助者Id
+}
+
+message SceneMonster {
+  int32 idx = 1; 			// monster：配表id
+  int32 ownerUseId = 2;		//归属玩家Id
+  string ownerUserName = 3;		//归属玩家名字
+}
+
+message ScenePet {
+  int32 userId	= 1;		//归属玩家Id
+  int32 idx 	= 2; 		// pet：配表id
+}
+
+message SceneCollection{
+  int32 id 				= 1;	//收集物质Id
+  int32 collectionObjId = 2;	//采集者
+  int32 serverTime 		= 3;	//服务器时间
+  int32 endTime 		= 4;	//结束时间
+}
+
+message SceneFit{
+	int32 userId 	= 1;		//玩家Id
+	int32 fitId 	= 2;		//合体Id
+	int32 fashionId = 3;		//合体时装Id
+	int32 fashionLv = 4;		//合体时装等级
+	string name = 5;			//玩家名字
+	int32 fitLv = 6;			//合体等级
+	int32      guildId      = 7;
+	string     guildName    = 8;
+	int32      leaderJob    = 9;
+	int32      leaderSex    = 10;
+	
+}
+
+message SceneSummon{
+	int32 userId 	= 1;		//玩家Id
+	int32 summonId 	= 2;		//宠物id
+	int32 objId 	= 3;		//归属场景角色Id
+}
+
+message SceneItem{
+	int32 itemId 			= 2;	//道具Id
+	int32 itemNum 			= 3;	//掉落物品数量
+	int32 owner 			= 4;	//物品归属者Id(玩家Id)
+	int32 ownerProtectedTime = 5;	//归属者保护时间
+	int32 disappearTime 	= 6;	//消失时间
+}
+
+message SceneBuff{
+	int32 buffId	= 1;	//buffId
+	int32 userId	= 2;	//归属玩家Id
+}
+
+//角色进入场景
+message SceneEnterNtf {
+  int32 stageId 	= 1;			//配置Id
+  repeated SceneObj objs = 2; 	// obj出现
+  int32 enterType	= 3;		//0 普通进入 1 合体取消
+  bool isTower 		= 4;		//灯塔视野进入
+}
+
+//角色进入场景完成
+message SceneEnterOverNtf{
+
+}
+
+//角色离开场景
+message SceneLeaveNtf {
+  repeated int32 objIds = 1; 	// 1个或多个
+  int32 leaveType	= 2;	//0 普通离开 1 合体时离开
+  bool isTower 		= 4;		//灯塔视野进入
+}
+
+//角色死亡
+message SceneDieNtf {
+  int32 objId 				 	= 1; 	//死亡角色场景Id
+  repeated SceneObj dropItems 	= 2; 	//死亡掉落
+}
+
+//客户端攻击移动
+message SceneMoveRpt {
+  int32 objId 		= 1;		//移动玩家在战斗中Id
+  Point point 		= 2;		//移动坐标
+  int32 moveType 	= 3;		//移动方式
+}
+
+//推送角色移动
+message SceneMoveNtf {
+  int32 objId 		= 1; 			//移动玩家在战斗中Id
+  Point point 		= 2;			//移动坐标
+  bool  force 		= 3;			//强制移动
+  int32 moveType 	= 4;			//移动方式
+}
+
+message SceneUserReliveNtf{
+	SceneObj obj 		= 1;	// obj复活
+	int32 reliveType 	= 2;	//复活方式（ 0：普通复活，1：buff复活；2：技能复活； 3：消耗元宝复活）
+}
+
+message SceneUserUpdateNtf{
+	int32 objId   = 1; 		// 战斗场景唯一Id
+	SceneUser objUser = 2; 		// obj更新
+}
+
+message SceneUserElfUpdateNtf{		//精灵更新
+	int32 userId = 1;				//玩家userId
+	int32 elfLv = 2;				//精灵等级
+}
+
+//客户端攻击请求
+message AttackRpt {
+  int32    skillId      = 1;  	//技能ID
+  repeated int32 objIds = 2; 	//被攻击对象 为空则服务器自己查找
+  int32    dir     		= 3; 	//释放方向
+  Point    point 		= 4;	//坐标
+  int32    skillLevel   = 5;    //技能等级
+  int32    objId 		= 6; 	//发动攻击的玩家在战斗中Id
+  bool		isElf		= 7;	//是否精灵攻击
+}
+
+
+//攻击结果及效果返回
+message AttackEffectNtf { 
+  int32    skillId          = 1;
+  int32    attackerId       = 2; 	// attacker
+  int32    dir     		 	= 3;	//技能释放方向
+  Point    point 		 	= 4;	//坐标
+  repeated HurtEffect hurts = 5; 	// 造成伤害
+  Point    MoveToPoint		= 6;	//移动到坐标
+  int32    skillLv 			= 7;	//技能等级	
+  int32    err				= 8;	//异常
+  int64	   skillStartT		= 9;	//技能cd开始时间
+  int64	   skillStopT		= 10;	//技能cd结束时间
+  int64    serverTime		= 11;	//服务器时间 毫秒
+  int64 	mpNow			= 12;	//当前蓝量
+  bool		isElf			= 13;	//是否精灵攻击
+  string	attackerName	= 14;	//攻击者名字
+  int64 hpNow				= 15;	//攻击者血量
+}
+
+message HurtEffect {
+  int32    	objId               = 1; 	// target
+  int64    	hp                  = 2; 	// 当前hp
+  int64    	changHp             = 3; 	// hp的变化值(总伤害)
+  bool     	isDeath             = 4; 	// 是否死亡
+  bool	   	isDodge				= 5; 	// 是否闪避
+  int32    	hurtType			= 6;	// 伤害类型
+  int64    	hurt              	= 7; 	//伤害值
+  int64    	deathblow           = 8; 	//额外伤害
+  int64	   	cutHurt				= 9; 	//切割伤害
+  Point    	MoveToPoint			= 10;	//移动到坐标
+  int64	   	unBlock				= 11;	//格挡减少伤害
+  int64		reflex				= 12;	//反射伤害
+  bool 		reliveSelf 			= 13;	//是否会自己复活
+  bool 		isWuDi 				= 14;	//是否无敌
+  int64 	killHurt			= 15;	//斩杀值
+}
+
+//主动推送角色血量
+message SceneObjHpNtf{
+	int32 objId			= 1;		//目标
+	int64 hp			= 2;		//当前血量
+	int64 changeHp		= 3;		//当前血量变化值
+	int64 totalHp		= 4;		//总血量
+	int32 killerId		= 5;		//击杀者玩家Id
+	string killerName	= 6;		//击杀者玩家名字
+	int32 userId 		= 7;		//玩家Id
+	int64 userHpTotal 	= 8;		//玩家血量
+}
+
+//主动推送角色蓝量
+message SceneObjMpNtf{
+	int32 objId			= 1;		//目标
+	int64 Mp			= 2;		//当前蓝量
+	int64 changeMp		= 3;		//当前蓝量变化值
+	int64 totalMp		= 4;		//总蓝量
+}
+
+//获取战斗伤害排行榜
+message FightHurtRankReq{
+}
+
+//获取战斗伤害排行榜
+message FightHurtRankAck{
+	repeated FightRankUnit ranks = 1;
+	FightRankUnit myRank = 2;
+}
+//排行榜单元数据
+message FightRankUnit {
+	int32 rank 		= 1;	//排名
+	string name 	= 2;	//名字
+	int64 score  	= 3;	//积分
+	string serverName = 4;	//服务器名字
+	int32 userId 	= 5;	//玩家userId
+}
+
+
+//获取boss归属
+message GetBossOwnerChangReq {
+	
+}
+//获取boss归属
+message BossOwnerChangNtf {
+	int32 objId			= 1;	//bossId
+	int32 ownerObjId 	= 2;	//归属者Id
+	int32 userId 		= 3;	//归属玩家Id
+	string userName 		= 4;	//归属玩家
+}
+
+message BuffChangeNtf {
+  BuffInfo  buff                    = 1;	//添加的buff
+  repeated DelBuffInfo delBuffInfos = 2;	//删除的buff
+}
+
+message BuffDelNtf {
+  repeated DelBuffInfo delBuffInfos = 1;	//删除的buff
+}
+
+message BuffInfo {
+  int32 ownerObjId      = 1; // buff拥有者
+  int32 sourceObjId 	= 2; // buff来源
+  int32 idx      		= 3; // buff序号
+  int32 buffId   		= 4; // buffid 配置表Id
+  int64 totalTime		= 5; // buff持续时间
+  int32 ownerUserId		= 6;
+  int32 sourceUserId	= 7;
+}
+
+message DelBuffInfo {
+  int32 ownerObjId 	= 1; //buff拥有者
+  int32 idx      	= 2; //序号
+}
+
+message BuffPropChangeNtf{
+	int32 objId		= 1;	//战斗角色Id
+	int32 propId 	= 2;	//属性Id
+	int64 total 	= 3;	//当前值
+}
+
+message BuffHpChangeNtf {
+  repeated BuffHpChangeInfo buffHpChangeInfos = 1;
+}
+
+message BuffHpChangeInfo {
+  int32 ownerObjId 	= 1; 	//buff拥有者
+  int32 idx      	= 2;	//buff唯一Id
+  int32 death    	= 3; 	// 0--活 1---死亡
+  int64 changeHp 	= 4;	//血量变化
+  int64 totalHp  	= 5;	//当前血量
+  int32 killerId	= 6;	//buff来源玩家Id
+  string killerName	= 7;	//buff来源玩家名字
+}
+
+
+message MainCityEnterRpt {
+  SceneObj obj = 1;
+}
+
+message MainCityMoveRpt {
+  int32 objId = 1;
+  int32 x     = 2;
+  int32 y     = 3;
+  int32 dir   = 5;
+}
+
+message MainCityLeaveRpt {
+  int32 objId = 1;
+}
+
+message MainCityUpdateRpt {
+  SceneObj obj = 1;
+}
+
+message FightEnterOkReq{
+
+}
+
+message FightStartCountDownNtf{
+	int32 serverTime = 1;		//服务器时间
+	int32 countDownTime = 2;	//倒计时结束时间
+}
+
+message FightStartCountDownOkReq{
+
+}
+
+message FightStartNtf{
+
+}
+
+message CollectionStatusChangeNtf{
+	int32 objId 		= 1;	//采集物objId
+	int32 userObjId 	= 2;	//采集玩家Id
+	int64 startTime 	= 3;	//采集开始时间
+	int64 endTime 		= 4;	//采集结束时间
+}
+
+
+message FightTeamChangeNtf{
+	map<int32,int32> userTeamIndex = 1;		//推送玩家队伍索引变化（玩家Id=>队伍索引）
+}
+message FightUserChangeToHelperNtf{
+	int32 userId = 1;		//推玩家变更为协助者
+	int32 teamIndex = 2;	//推送玩家变更为协助者队伍索引
+}
+
+message FightNpcEventReq{
+	int32 npcId	= 1;			//NpcId
+}
+
+//-----------------系统功能模块------------------
+message ExpStageKillInfoNtf{
+	int32 killMonsterNum 	= 1;	//击杀怪物数量
+	int32 getExp 		 	= 2;	//获得经验值
+}
+
+//获取泡点占领者
+message PaodianTopUserReq{
+
+}
+//推送泡点占领者
+message PaodianTopUserNtf{
+	repeated int32 userIds = 1;
+}
+
+message PaoDianUserNumNtf{
+	map<int32,int32> userNums = 1;
+}
+
+message PaodianFightEnd{
+	int32 stageId = 1;
+}
+
+message GetShabakeScoresReq{
+
+}
+
+message ShabakeScoreRankNtf{
+	repeated ShabakeUserScore userScores = 1;		//玩家积分
+	repeated ShabakeGuildScore guildScores = 2;		//门派积分
+}
+
+message ShabakeUserScore{
+	int32 	userId 		= 1;
+	string 	userName 	= 2;
+	int32 	score 		= 3;
+	int32 	rank 		= 4;
+}
+
+message ShabakeGuildScore{
+	int32 	guildId 	= 1;
+	string 	guildName 	= 2;
+	int32	score 		= 3;
+	int32 	serverId 	= 4;
+	string serverName	= 5;	
+}
+
+message ShabakeOccupiedNtf{
+	bool isOccupy 	= 1;
+	int32 userId 	= 2;
+	string userName =3;
+	int32 guildId 	= 4;
+	string guildName = 5;
+	int32 startTime = 6;
+	int32 endTime 	= 7;
+	int32 fightStatus = 8;		//0初始状态 1城门破 2内城boss被击杀，开启皇宫传送阵  3计算归属
+}
+
+
+message GetShabakeCrossScoresReq{
+
+}
+
+message ShabakeCrossScoreRankNtf{
+	repeated ShabakeCrossServerScore serverScores = 1;		//玩家积分
+	repeated ShabakeGuildScore guildScores = 2;		//门派积分
+}
+
+message ShabakeCrossServerScore{
+	int32 	serverId 	= 1;
+	string 	serverName 	= 2;
+	int32 	score 		= 3;
+}
+
+message ShabakeCrossOccupiedNtf{
+	bool isOccupy 	= 1;
+	int32 userId 	= 2;
+	string userName =3;
+	int32 guildId 	= 4;
+	string guildName = 5;
+	int32 startTime = 6;
+	int32 endTime 	= 7;
+	int32 serverId	= 8;
+	string serverName = 9;
+}
+
+message GuardPillarFightNtf{
+
+	FightHurtRankAck rank 		= 1;		//排名
+	int32 			wave 		= 2;		//第几波
+	int32 			nextTime 	= 3;		//下一波时间
+	int32			monsterTotal= 4;		//怪物总数
+	int32			monsterless = 5;		//怪物剩余
+	int32			fightEndTime = 6;		//活动剩余时间
+}
+
+message MagicTowerBossInfo{
+	string bossName 	= 1;		//boss名字
+	int32  layer 		= 2;		//层数
+	int32  status		= 3;		//状态（0未刷新 1已刷新，2已击杀）
+	int32  refreshTime	= 4;		//刷新时间
+	int32  monsterId 	= 5;		//怪物Id
+	int32 ownerUseId	= 6;		//归属玩家Id
+	string ownerName	= 7;		//归属玩家名字
+	int32 monsterObjId 	= 8;		//boss场景Id
+}
+
+message MagicTowerFightNtf{
+
+	repeated ShabakeUserScore userScores = 1;		//玩家积分排名
+	repeated MagicTowerBossInfo bossInfos =2; //boss信息		
+}
+
+
+
+message FightUserScoreNtf{
+	int32 score 		= 1;		//积分
+	int32 changeScore 	= 2;		//变化积分
+	int32 rankScore 	= 3;		//排行榜积分
+}
+
+
+message GetFightBossInfosReq{
+}
+
+message GetFightBossInfosAck{
+	repeated FightBossInfoUnit bossInfos = 1;
+}
+
+message FightBossInfoUnit{
+	int32 objId 	= 1;		//怪物场景Id
+	int32 monsterId = 2;		//怪物Id
+	Point point 	= 3;		//移动坐标
+	int32 reliveCD	= 4;		//boss复活倒计时
+	int64 hp		= 5;		//当前血量
+}
+
+
+message BossReliveNtf{
+	int32 objId		= 1;		//boss场景Id
+	int32 reliveCd 	= 2;		//boss复活倒计时
+}

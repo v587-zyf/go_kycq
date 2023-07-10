@@ -1,0 +1,84 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//特戒穿戴
+message RingWearReq{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	int32 bagPos = 3;
+}
+message RingWearAck{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	Ring ring = 3;
+}
+
+//特戒卸掉
+message RingRemoveReq{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+}
+message RingRemoveAck{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	Ring ring = 3;
+}
+
+//特戒强化(ringStrengthen表)
+message RingStrengthenReq{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+}
+message RingStrengthenAck{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	Ring ring = 3;
+}
+
+//特戒强化(ringPhantom表)
+message RingPhantomReq{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+}
+message RingPhantomAck{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	Ring ring = 3;
+}
+
+//技能升级
+message RingSkillUpReq{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	int32 phantomPos = 3;
+	int32 skillId = 4;
+}
+message RingSkillUpAck{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	Ring ring = 3;
+}
+
+//融合
+message RingFuseReq{
+	int32 id = 1;	//融合id
+	int32 bagPos1 = 2; //第一个戒指背包位置
+	int32 bagPos2 = 3; //第二个戒指背包位置
+}
+message RingFuseAck{
+	int32 id = 1; //融合之后的id
+}
+
+//重置技能点
+message RingSkillResetReq{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	int32 phantomPos = 3;
+}
+message RingSkillResetAck{
+	int32 heroIndex = 1;
+	int32 ringPos = 2;
+	Ring ring = 3;
+}

@@ -1,0 +1,50 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//称号激活
+message TitleActiveReq{
+	int32 titleId = 1;
+}
+message TitleActiveAck{
+	Title title = 1;
+}
+
+//称号穿戴
+message TitleWearReq{
+	int32 heroIndex = 1;
+	int32 titleId = 2;
+}
+message TitleWearAck{
+	int32 heroIndex = 1;
+	int32 titleId = 2;	//卸下返回0	
+}
+
+//称号卸下
+message TitleRemoveReq{
+	int32 heroIndex = 1;
+}
+message TitleRemoveAck{
+	int32 heroIndex = 1;
+	int32 titleId = 2;
+}
+
+//称号查看
+message TitleLookReq{
+	int32 titleId = 1;
+}
+message TitleLookAck{
+	int32 titleId = 1;
+}
+
+
+//称号自动激活推送
+message TitleAutoActiveNtf{
+	repeated Title titleList = 1;
+}
+
+//称号过期推送
+message TitleExpireNtf{
+	repeated Title titleList = 1;
+}

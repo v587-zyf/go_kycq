@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+
+//获取排行榜（返回前N名 以及自己排名）
+message RankLoadReq {
+  int32 type = 1;
+}
+
+message RankLoadAck {
+  repeated RankInfo ranks = 1;
+  int32          	self  = 2;			//我的排名
+  int32				type  = 3;
+}
+
+//排行榜膜拜
+message RankWorshipReq {
+}
+
+message RankWorshipAck {
+	GoodsChangeNtf goods = 1;
+}
+

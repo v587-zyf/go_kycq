@@ -1,0 +1,32 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message SpecialEquipChangeReq{
+  int32 heroIndex = 1;	//武将id
+  int32 pos = 2;		//位置
+  int32 bagPos = 3;		//替换装备在背包中的位置
+  int32 type = 4;		//特殊装备类型
+}
+
+message SpecialEquipChangeAck{
+  int32 heroIndex = 1;	//武将id
+  int32 pos = 2;		//位置
+  int32 type = 3;		//特殊装备类型
+  SpecialEquipUnit specialEquip = 4;//装备信息
+  GoodsChangeNtf goods = 5;
+}
+
+message SpecialEquipRemoveReq{
+  int32 heroIndex = 1;	//武将id
+  int32 pos = 2;		//位置
+  int32 type = 3;		//特殊装备类型
+}
+
+message SpecialEquipRemoveAck{
+  int32 heroIndex = 1;	//武将id
+  int32 pos = 2;		//位置
+  int32 type = 3;		//特殊装备类型
+  GoodsChangeNtf goods = 4;
+}

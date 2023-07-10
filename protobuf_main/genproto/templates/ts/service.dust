@@ -1,0 +1,9 @@
+declare module api {
+    module {name} {
+        var r: string;
+        var ReqType: {package}.{request};
+        var ResType: {package}.{response};
+        type ReqType = {package}.{request};
+        type ResType = {package}.{response};
+    }
+}

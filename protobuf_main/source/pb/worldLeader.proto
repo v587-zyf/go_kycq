@@ -1,0 +1,73 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+
+message LoadWorldLeaderReq {
+}
+
+message LoadWorldLeaderAck {
+	int32  nowStageId = 1;
+	int32  guildJoinNum = 2; //门派参与人数	
+	int32  bossHp = 3;
+	map<int32,WorldLeaderInfo> worldLeaderInfoByStage = 4;
+}
+
+message WorldLeaderInfo{
+	int32  guildJoinNum = 1; //门派参与人数	
+}
+
+
+message GetWorldLeaderRankInfoReq{
+	int32      stageId = 1;
+}
+
+
+message GetWorldLeaderRankInfoAck{
+    repeated WorldLeaderRankUnit ranks = 1;
+    int32 bossHp = 2;
+	int32 stageId = 3;
+}
+
+
+//世界首领复活推送
+message WorldLeaderStartNtf {
+
+	int32 stageId = 1;
+	
+}
+
+//世界首领进入校验
+message WorldLeaderEnterReq {
+  int32 stageId = 1;
+}
+
+message WorldLeaderEnterAck {
+  bool  enterState = 1;	
+}
+
+
+
+
+//结束奖励推送
+message WorldLeaderEndRewardNtf {
+   int32 stageId  = 1;    
+   BriefUserInfo owner = 2;
+   int32 rank = 3;
+}
+
+
+message WorldLeaderRankUnit{
+	int32 	rank 		= 1;
+	int32 	guildId 	= 2;
+	string 	guildName 	= 3;
+	int64 	score 		= 4;
+	int32   serverId    = 5;
+	string	serverName	= 6;
+}
+
+//血量推送
+message WorldLeaderBossHpNtf {
+   int32 stageId  = 1;    
+   int32 bossHp = 2;
+}

@@ -1,0 +1,51 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//加载boss信息
+message DarkPalaceLoadReq{
+	int32 floor = 1;	//层数
+}
+message DarkPalaceLoadAck{
+	repeated DarkPalaceBossNtf darkPalaceBoss = 1;
+}
+
+//进入战斗
+message EnterDarkPalaceFightReq{
+	int32 stageId = 1;
+}
+message DarkPalaceFightResultNtf{
+	int32 stageId			= 1;	
+	int32 result 			= 2;	//战斗结果
+	int32 dareNum			= 3;	//奖励次数
+	GoodsChangeNtf goods 	= 4;  	//掉落物品
+	BriefUserInfo winner	= 5;	//归属者名称
+	bool isHelper			= 6;	//是否协助者
+	int32 helpNum			= 7;	//协助次数
+}
+
+//购买次数
+message DarkPalaceBuyNumReq{
+	bool use = 1;	//是否购买并使用
+	int32 buyNum = 2;	//购买次数
+}
+message DarkPalaceBuyNumAck{
+	int32 buyNum = 1;	//已购买次数
+}
+
+//推送boss状态
+message DarkPalaceBossNtf{
+	int32 stageId 		= 1;	//怪物id
+	float blood 		= 2;	//血量
+	int64 reliveTime 	= 3;	//复活时间
+}
+
+//协助
+message EnterDarkPalaceHelpFightReq{}
+message DarkPalaceHelpFightResultNtf{}
+
+//推送暗殿boss挑战次数
+message DarkPalaceDareNumNtf{
+	int32 dareNum = 1;
+}

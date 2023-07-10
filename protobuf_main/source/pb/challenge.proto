@@ -1,0 +1,66 @@
+syntax = "proto3";
+package pb;
+
+message ChallengeInfoReq {
+}
+
+message ChallengeInfoAck {
+ 	map<int32,peopleInfos> challengePeopleInfo = 1; //key:第几轮
+	repeated PeopleInfo BottomUserInfo = 2;      
+	repeated PeopleInfo ApplyUserInfo = 3; //报名玩家信息  
+	repeated PeopleInfo FirstPlayer = 4;      //第一名玩家
+	repeated int32 JoinServer = 5;
+}
+
+//跨服擂台赛报名
+message ApplyChallengeReq{}
+
+message ApplyChallengeAck{
+	repeated PeopleInfo ApplyUserInfo = 1; //报名玩家信息  
+}
+
+//当前轮比赛人员信息
+message ChallengeEachRoundPeopleReq{}
+
+message ChallengeEachRoundPeopleAck{
+	int32    nowRound = 1; //当前第几轮
+	repeated PeopleInfo challengePeopleInfo = 2;
+	repeated PeopleInfo BottomUserInfo = 3; //本服玩家投注情况      
+}
+
+
+message peopleInfos{
+	repeated PeopleInfo peopleInfo = 1;
+}
+
+//下注
+message BottomPourReq{
+	int32 userId = 1;
+}
+
+message BottomPourAck{
+	bool state = 1;
+	repeated PeopleInfo BottomUserInfo = 2; //本服玩家投注情况    
+}
+
+
+message PeopleInfo{
+	string name = 1;
+	string avatar = 2;
+	int32  serverId = 3;
+	int64  combat = 4;
+	int32  userId = 5;
+	string guildName = 6;
+}
+
+
+message ChallengeOpenNtf{
+	bool  isOpen = 1;
+}
+
+
+message ChallengeRoundEndNtf{}
+
+message ChallengeApplyUserInfoNtf{
+	repeated PeopleInfo ApplyUserInfo = 3; //报名玩家信息  
+}

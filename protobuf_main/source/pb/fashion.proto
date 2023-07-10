@@ -1,0 +1,28 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+// 时装升级（激活）
+message FashionUpLevelReq{
+	int32 heroIndex = 1;			//武将索引
+	int32 fashionId = 2;			// 时装id
+}
+
+message FashionUpLevelAck{
+	int32 heroIndex = 1;			//武将索引
+	Fashion fashion = 2;			//时装信息
+}
+
+// 时装穿戴
+message FashionWearReq{
+	int32 heroIndex = 1;			//武将索引
+	int32 fashionId = 2;			//时装id
+	bool isWear	= 3;			//true为穿戴 false未卸下
+}
+
+message FashionWearAck{
+	int32 heroIndex 	= 1;		//武将索引
+	int32 wearFashionId = 2;		//时装信息
+	bool isWear	= 3;				//true为穿戴 false未卸下
+}

@@ -1,0 +1,135 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+
+message EnterGameReq {
+  string openId      = 1;
+  string loginKey    = 2;
+  int32  channel     = 3;
+  int32 serverId 	 = 4;
+  string origin 	 = 5;
+  string ip			 = 6;	//服务器用登录IP
+  string deviceId	 = 7;   //设备编号
+}
+
+message EnterGameAck {
+  UserLoginInfo user           = 1;
+  int32         ts             = 2;  // 服务器时间
+  string        version        = 3;  // 服务器版本
+  int32			openServerDay  = 4;	 //开服天数
+  int32         openServerTime = 5;  //开服时间
+  int32			realServerId   = 6;	 //服务器Id
+  string		realServerName = 7;	 //服务器名字
+  repeated int32 closeFuncIds  = 8;	//关闭的模块
+  int32         mergeOpenServerDay = 9; //合服后 主服务器的开服天数
+  int32         mergeOpenServerTime = 10;  //合服后主服开服时间
+  map<int32,BriefServerInfo> crossBriefServerInfo = 11; //跨服组下简要服务器信息
+}
+
+message CreateUserReq {
+  int32  sex      = 1; // Sex
+  string nickName = 2;
+  string avatar   = 3; // 头像
+  int32  job = 4;		//职业
+}
+
+message CreateUserAck {
+  UserLoginInfo user = 1;
+  string failReason = 2;
+}
+
+message RandNameReq{
+  int32 sex = 1;
+}
+
+message RandNameAck{
+  repeated string names = 1;
+}
+
+message CreateHeroReq {
+  int32  sex    = 1; // Sex
+  int32  job 	= 2; //职业
+}
+
+message CreateHeroAck {
+  HeroInfo hero = 1;
+}
+
+message KickUserNtf {
+  string reason = 1;
+}
+
+//玩家武将属性
+message UserPropertyNtf {
+  map<int32,HeroProp> heroProps = 1;
+  int64 userCombat = 2;	//玩家总战力
+}
+
+message DebugAddGoodsReq {
+  repeated int32 id    = 1;
+  repeated int32 count = 2;
+  repeated string args = 3;
+}
+message DebugAddGoodsAck {
+  int32 result  = 1;
+}
+
+message ChangeFightModelReq{
+  int32 fightModel = 1;
+}
+
+message ChangeFightModelAck{
+  int32 fightModel = 1;
+}
+
+message ChangeHeroNameReq{
+	int32 heroIndex = 1;
+	string name = 2;
+}
+
+message ChangeHeroNameAck{
+	HeroInfo heroInfo = 1;
+}
+
+
+message UserRechargeNumNtf{
+	int32 rechargeNum = 1;
+	int32 redPacketNum = 2;
+	int32 dailyRecharge = 3;
+}
+
+message UserRedPacketGetNumNtf{
+	int32 redPacketGetNum = 1;
+}
+
+message UserOnlineNtf{
+  int32 userId = 1;
+  int64 onlineTime = 2;
+}
+
+message UserOffLineNtf{
+  int32 userId = 1;
+  int64 offLintTime = 2;
+}
+
+message VipCustomerReq{}
+message VipCustomerAck{
+  bool flag = 1;
+}
+
+message UserInGameOkReq{
+}
+
+message CrossFightOpenNtf{
+  int32 stageId = 1;
+}
+
+message UserSubscribeReq{
+	int32 subscribeId = 1;
+}
+
+message UserSubscribeAck{
+	int32 subscribeId = 1;
+}

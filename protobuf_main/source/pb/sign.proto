@@ -1,0 +1,36 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//签到
+message SignReq{}
+
+message SignAck{
+	SignInfo signInfo = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//补签
+message SignRepairReq{
+	int32 repairDay = 1;	//补签哪一天
+}
+
+message SignRepairAck{
+	SignInfo signInfo = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//累计奖励
+message CumulativeSignReq{
+	int32 cumulativeDay = 1;
+}
+
+message CumulativeSignAck{
+	SignInfo signInfo = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//签到周期第一天推送
+message SignResetNtf{
+	SignInfo signInfo = 1;
+}

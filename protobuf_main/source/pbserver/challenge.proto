@@ -1,0 +1,16 @@
+syntax = "proto3";
+package pbserver;
+
+message ChallengeSendLoseRewardNtf {
+  int32 roundIndex = 1;
+  repeated int32  loseUers = 2; 
+  int32 winUserId  = 3;
+  repeated int32  winUsers = 4;
+}
+
+
+message ChallengeAppuserUpNtf{
+	int32 crossFsId = 1;
+}
+
+message ChallengeAppuserUpToGsNtf{}

@@ -1,0 +1,85 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//圣兽load
+message HolyBeastLoadInfoReq{}
+
+message HolyBeastLoadInfoAck{
+	map<int32,HolyBeastInfos> holyBeastInfos = 1;
+}
+
+
+//圣兽激活
+message HolyBeastActivateReq{
+	int32 heroIndex = 1;
+	int32 type = 2;  //圣兽的类型
+}
+
+message HolyBeastActivateAck{
+	map<int32,HolyBeastInfos> holyBeastInfos = 1;
+	int32 HolyPoint = 2; //圣灵点
+}
+
+
+//圣兽升星
+message HolyBeastUpStarReq{
+	int32 heroIndex = 1;
+	int32 type = 2;  //圣兽的类型
+}
+
+message HolyBeastUpStarAck{
+	map<int32,HolyBeastInfos> holyBeastInfos = 1;
+	int32 HolyPoint = 2; //圣灵点
+}
+
+//增加圣灵点
+message HolyBeastPointAddReq{
+	int32 heroIndex = 1;
+	int32 useItemId = 2;
+	int32 count = 3;
+}
+
+message HolyBeastPointAddAck{
+	int32 heroIndex = 1;
+	int32 HolyPoint = 2; //圣灵点
+	GoodsChangeNtf goods = 3;
+}
+
+//特殊属性选择
+message HolyBeastChoosePropReq{
+	int32 heroIndex = 1;
+	int32 type = 2;  //圣兽的类型
+	int32 index = 3; //选的属性的索引
+}
+
+message HolyBeastChoosePropAck{
+	map<int32,HolyBeastInfos> holyBeastInfos = 1;
+}
+
+
+//重置
+message HolyBeastRestReq{
+    int32 heroIndex = 1;
+	int32 type = 2;  //圣兽的类型
+}
+
+message HolyBeastRestAck{
+	map<int32,HolyBeastInfos> holyBeastInfos = 1;
+	int32 HolyPoint = 2; //圣灵点
+	GoodsChangeNtf goods = 3;
+}
+
+message HolyBeastInfos{
+	repeated HolyBeastInfo holyBeastInfo  = 1;
+	int32 allPonts = 2;//圣灵点
+	int32 heroIndex = 3;
+}
+
+
+message HolyBeastInfo{
+	int32 type = 1; //圣兽类型
+	int32 star = 2; //多少星
+	map<int32,int32> chooseProperty = 3; //自己选择的属性 k:星数 v:选择对应技能的下标
+}
+

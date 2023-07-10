@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pb;
+
+message MiJiUpReq{
+	int32 id = 1;	//秘籍Id
+}
+message MiJiUpAck{
+    int32 id = 1;	//秘籍Id
+	int32 lv = 2;
+}

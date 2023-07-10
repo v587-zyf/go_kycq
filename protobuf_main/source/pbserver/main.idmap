@@ -1,0 +1,121 @@
+package pbserver
+pbfiles "*.proto"
+
+1 ErrorAck 1
+2 HandShakeReq 1
+3 HandShakeAck 0
+
+5 HandCloseNtf 0
+
+
+
+
+////////////////////
+// LoginServer相关协议，编号1000-2000
+////////////////////
+
+1000 LoginKeyVerifyReq 1
+1001 LoginKeyVerifyAck 1
+1002 LoginKeyVerifyUpdateReq 1
+
+
+////////////////////
+// FightServerServer相关协议，编号2001-3000
+////////////////////
+
+2001 GSMessageToFS 1
+2002 FSMessageToGS 1
+2003 FSCallMessageToGS 1
+2004 GSCallMessageToFS 1
+2005 GsRouteMessageToFight 1
+
+2011 FSCreateFightReq 1
+2012 FSCreateFightAck 0
+2013 FSEnterFightReq 1
+2014 FSEnterFightAck 0
+2015 FSLeaveFightReq 1
+2016 FSLeaveFightAck 0
+2017 FSUpdateUserInfoNtf 1
+2018 GSToFsUpdateUserFightModel 1
+2019 GsToFSUserReliveReq 1
+2020 FSToGsUserReliveAck 0
+2021 GsToFSCheckUserReliveReq 1
+2022 FsToGSCheckUserReliveAck 0
+2023 GSTOFSCheckFightReq 1
+2024 GSTOFSGetFightIdReq 1
+2025 GsToFsUpdateUserElfReq 1
+2026 GsToFsFightNpcEventReq 1
+
+2126 GsTOFsPickUpReq 1
+2127 FsTOGsPickUpAck 0
+2128 FSAddItemReq 1
+2129 FSAddItemAck 0
+2130 GsToFsPickRedPacketInfo 1
+2031 FSFightEndNtf 1
+2132 UserDropReq 1
+2133 UserDropAck 0
+2134 FsRandomDeliveryNtf 1
+2135 GsToFsUseItemNtf 1
+2136 GsToFsGmReq 1
+2140 FsSkillUseNtf 0
+2141 FsTOGsClearSkillCdNtf 1
+2042 FsResidentFightNtf 1
+2043 GsToFsResidentFightReq 0
+2150 GsToFsGetCheerNumReq 1
+2152 GsToFsCheerReq 1
+2154 GsToFsGetPotionCdReq 1
+2156 GsToFsUsePotionReq 1
+2158 GsToFsCollectionReq 1
+2160 FsToGsCollectionNtf 0
+2161 GsToFsCollectionCancelReq 1
+2162 GsToFsUseFitReq 1
+2164 GsToFsFitCacelReq 1
+2166 GsToFsUpdatePetReq 1
+2170 GsToFsUseCutTreasureReq 1
+2171 GsToFsCheckForHelpReq 1
+2172 GsToFsChangeToHelperReq 1
+2173 GsToFsFightNumChangeReq 1
+2174 GsToFsFightScoreLessReq 1
+2175 GsToFsGamedbReloadReq 1
+2176 FsToGsShabakeKillBossNtf 1
+2177 FsToGsActorKillNtf 1
+
+2201 WorldBossStatusNtf 1
+2202 FSContinueFightReq 1
+2203 FsFieldBossInfoNtf 1
+2210 ExpStageKillMonsterNtf 1
+2211 MiningNewFightInfoReq 1
+2212 HangUpKillWaveNtf 1
+2213 GuildbonfireExpAddNtf 1
+2214 PaodianGoodsAddNtf 1
+2220 WorldLeaderFightEndNtf 1
+2221 WorldLeaderFightRankNtf 1
+2222 FsFieldBossDieUserInfoNtf 1
+2223 MagicTowerGetUserInfoReq 1
+2224 DaBaoKillMonsterNtf 1
+2225 DaBaoResumeEnergyReq 1
+
+2230 BossFamilyBossInfoReq 1
+
+
+////////////////////
+// CCrossCenter相关协议，编号3001-4000
+////////////////////
+3001 SyncUserInfoNtf 1
+3100 CCSToGsCrossFsIdChangeNtf 0
+3101 ChallengeSendLoseRewardNtf 0
+3102 ChallengeAppuserUpNtf 0
+3103 GsToCcsBackGuildInfoNtf 0
+3104 CcsToGsBroadShaBakeFirstGuildInfo 0
+3105 ChallengeAppuserUpToGsNtf 0
+
+3200 RechageCcsToGsReq 1
+3201 RechageGsToCcsAck 0
+3202 RechargeApplyReq 1
+3205 BanInfoCcsToGsReq 1
+3210 MailSendCCsToGsReq 1
+3215 FuncStateUpdateReq 1
+3216 UpAnnouncementNowReq 1
+3217 UpPaoMaDengNowReq 1
+3218 SetDayRechargeNumNtf 1
+

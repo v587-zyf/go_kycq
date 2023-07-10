@@ -1,0 +1,15 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//累计充值礼包领取
+message RechargeAllGetReq{
+	int32 id = 1;
+}
+
+message RechargeAllGetAck{
+	repeated int32 rechargeGetGetIds = 1;
+	int32 rechargeAll = 2;
+	GoodsChangeNtf goods = 3;
+}

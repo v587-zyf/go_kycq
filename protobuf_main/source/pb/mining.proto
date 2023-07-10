@@ -1,0 +1,116 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//获取挖矿数据
+message MiningLoadReq{}
+message MiningLoadAck{
+	MiningInfo mining = 1;
+}
+
+//升级矿工
+message MiningUpMinerReq{
+	bool isMax = 1;
+}
+message MiningUpMinerAck{
+	int32 miner = 1;
+	int32 luck = 2;
+	bool isUp = 3;
+}
+
+//购买次数
+message MiningBuyNumReq{}
+message MiningBuyNumAck{
+	int32 buyNum = 1;
+}
+
+//开始挖矿
+message MiningStartReq{}
+message MiningStartAck{
+	int64 workTime = 1;
+	int32 workNum = 2;
+}
+
+//掠夺
+message MiningRobReq{
+	int32 id = 1;	//数据id
+}
+message MiningRobAck{
+	int32 result 	= 2;		//战斗结果
+	GoodsChangeNtf goods = 1;  	//物品变化
+	int32 robNum 	= 3;		//掠夺次数(已有)
+}
+message MiningRobFightAck{
+	int32 id = 1;
+}
+
+//夺回奖励
+message MiningRobBackReq{
+	int64 id = 1;	//被掠夺的时间
+}
+message MiningRobBackAck{
+	int32 result = 2;			//战斗结果
+	GoodsChangeNtf goods = 1;  	//物品变化
+}
+message MiningRobBackFightAck{
+	int64 id = 1;
+}
+
+//被掠夺列表
+message MiningRobListReq{}
+message MiningRobListAck{
+	map<int64,MiningRob> mineRob = 1;	//id,信息
+}
+
+//挖矿列表
+message MiningListReq{}
+message MiningListAck{
+	map<int64,MiningListInfo> miningList = 1;	//id,信息
+}
+
+//领取奖励加载
+message MiningDrawLoadReq{}
+message MiningDrawLoadAck{
+	bool status = 1;	//是否被掠夺
+	int64 robId = 2;	//掠夺用户id
+	string robName = 3;	//掠夺用户昵称
+	int64 robTime = 4;	//掠夺时间
+	int64 rId	= 5;	//掠夺记录id
+}
+
+//领取奖励
+message MiningDrawReq{}
+message MiningDrawAck{
+	GoodsChangeNtf goods = 1;	//物品变化
+}
+
+//进入矿洞
+message MiningInReq{}
+message MiningInAck{}
+
+message MiningInfo{
+	int64 workTime 	= 1;	//挖矿开始时间
+	int32 workNum 	= 2;	//挖矿次数(已有)
+	int32 robNum 	= 3;	//掠夺次数(已有)
+	int32 buyNum 	= 4;	//购买次数(已有)
+	int32 miner		= 5;	//矿工等级
+	int32 luck		= 6;	//幸运值
+}
+
+message MiningRob{
+	string name 	= 1;	//用户名称
+	int64 combat 	= 2;	//用户战斗力
+	int32 miner 	= 3;	//矿工等级
+	int64 robTime	= 4;	//抢夺时间
+	int64 id		= 5;	//id
+}
+
+message MiningListInfo{
+	int32 uid 		= 1;	//用户id
+	string name 	= 2;  	//昵称
+	int64 combat 	= 3;	//战斗力
+	int64 time 		= 4;	//时间
+	int32 miner 	= 5;	//矿工等级
+	int64 id		= 6;	//挖矿记录id
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+
+//获取每日排行榜
+message DailyRankLoadReq {}
+
+message DailyRankLoadAck {
+  repeated RankInfo ranks = 1;
+  int32          	self  = 2;			//我的排名
+  int32				type  = 3;
+  int64             selfScore = 4;
+  repeated int32 haveGetIds = 5;
+  map<int32,int32> buyGiftInfos = 6;
+}
+
+message DailyRankGetMarkRewardReq{
+	int32 id = 1;
+}
+
+message DailyRankGetMarkRewardAck{
+	int32 id = 1;
+	repeated int32 haveGetIds = 2;
+}
+
+
+message DailyRankBuyGiftReq{
+	int32 id = 1;
+}
+
+message DailyRankBuyGiftAck{
+	int32 id = 1;
+	map<int32,int32> buyGiftInfos = 2;
+}
+
+

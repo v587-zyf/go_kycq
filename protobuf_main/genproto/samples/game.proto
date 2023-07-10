@@ -1,0 +1,115 @@
+syntax = "proto3";
+package pb;
+
+
+enum Cmd {
+  PingId = 5;
+  LoginReqId = 11;
+  NoAuthMaxId = 100;
+  LoginRspId = 411;
+}
+
+message Item {
+  required int32 item_id = 1;
+}
+
+
+message Skill {
+  required int32 skill_id = 1;
+  required int32 level = 2;
+  optional int32 duration_left = 3;
+  optional int32 duration = 4;
+  optional int32 cd_left = 5;
+  optional int32 cd = 6;
+}
+
+message Invest {
+  required int32 invest_id = 1;
+  required int32 level = 2;
+  required int32 dps = 3;
+  optional double pocket = 4;
+  optional bool marketed = 5;
+  optional int32 locked_duration = 6;
+}
+
+message MerchantItem {
+  required int32 merchant_item_id = 1;
+  required string name = 2;
+  required string desc = 3;
+  optional int32 count = 4;
+  optional int32 duration = 5;
+  optional int32 type = 6;
+  optional float price = 7;
+}
+
+message MetaInfo {
+  optional int32 relive_id = 1;
+  optional double cur_atk = 2;
+  optional double cur_dps = 3;
+  optional float cir = 4;
+  optional float cr = 5;
+  optional float market_ratio = 6;
+  // optional int32 duration = 7;
+}
+
+message Header {
+  required int32 cmd_id = 1;
+  required int32 trans_id = 2;
+  required int32 code = 3;
+}
+
+message ErrorInfo {
+  required int32 code = 1;
+  required string message = 2;
+}
+
+message LoginReq {
+  optional string game_key = 1;
+  optional int32 login_type = 2;
+  optional string login_ticket = 3;
+  optional int64 timestamp = 4;
+  optional string nonce = 5;
+  optional string signature = 6;
+  optional string open_id = 7;
+}
+
+message LoginRsp {
+  required int64 user_id = 1;
+  optional string nick_name = 2;
+  optional string token = 3;
+}
+
+message UserInfoReq {
+  required int64 user_id = 1;
+  optional string token = 2;
+}
+
+message UserInfoRsp {
+  optional double all_money = 1;
+  optional double money = 2;
+  optional int32 diamond = 3;
+  optional int32 level = 4;
+  optional int32 titled_invest_id = 5;
+  repeated int32 equipments = 6 [packed=true];
+  repeated Item items = 7;
+  repeated Invest invests = 8;
+  repeated Skill skills = 9;
+  repeated MerchantItem merchant_items = 10;
+  optional MetaInfo meta_info = 11;
+}
+
+message UpdateProfileReq {
+  optional string nick_name = 1;
+  optional string newbie_step = 2;
+}
+
+message Ping {
+  optional int64 timestamp = 1;
+}
+
+
+service user {
+  rpc login(LoginReq) returns(LoginRsp);
+}
+
+

@@ -1,0 +1,45 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//传世装备穿戴
+message ChuanShiWearReq{
+	int32 heroIndex = 1;
+	int32 bagPos	= 2;	//背包位置
+}
+message ChuanShiWearAck{
+	int32 heroIndex = 1;
+	int32 equipPos	= 2;	//装备位置
+	int32 equipId	= 3;	//装备id
+}
+
+//传世装备卸下
+message ChuanShiRemoveReq{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+}
+message ChuanShiRemoveAck{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+}
+
+//传世装备分解
+message ChuanShiDeComposeReq{
+	int32 bagPos = 1;
+}
+message ChuanShiDeComposeAck{
+  	GoodsChangeNtf goods = 1;
+}
+
+//传世装备强化
+message ChuanshiStrengthenReq{
+	int32 heroIndex = 1;
+	int32 equipPos 	= 2;
+	int32 stone		= 3; //不是用石头传0，枚举ChuanShiStrengthenStone
+}
+message ChuanshiStrengthenAck{
+	int32 heroIndex = 1;
+	int32 equipPos  = 2;
+	int32 lv		= 3;
+	bool isUp 		= 4; //强化结果
+}

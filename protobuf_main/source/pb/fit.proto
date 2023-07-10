@@ -1,0 +1,92 @@
+syntax = "proto3";
+package pb;
+
+//合体升级
+message FitUpLvReq{
+	int32 fitId = 1;	//合体id(目前只有1)
+}
+message FitUpLvAck{
+	int32 fitId = 1;
+	int32 fitLvId = 2;	//fitLevel表id中的等级
+}
+
+//合体技能升级
+message FitSkillUpLvReq{
+	int32 fitSkillId = 1;
+}
+message FitSkillUpLvAck{
+	int32 fitSkillId = 1;
+	int32 fitSkillLv = 2;
+}
+
+//合体技能升星
+message FitSkillUpStarReq{
+	int32 fitSkillId = 1;
+}
+message FitSkillUpStarAck{
+	int32 fitSkillId = 1;
+	int32 fitSkillStar = 2;
+}
+
+//合体技能替换
+message FitSkillChangeReq{
+	int32 fitSkillId = 1;
+	int32 fitSkillSlot = 2;
+}
+message FitSkillChangeAck{
+	int32 fitSkillId = 1;
+	int32 fitSkillSlot = 2;
+}
+
+//合体技能重置
+message FitSkillResetReq{
+	int32 fitSkillId = 1;
+}
+message FitSkillResetAck{
+	int32 fitSkillId = 1;
+	int32 fitSkillLv = 2;
+	int32 fitSkillStar = 3;
+}
+
+//合体时装升级
+message FitFashionUpLvReq{
+	int32 fitFashionId = 1;
+}
+message FitFashionUpLvAck{
+	int32 fitFashionId = 1;
+	int32 fitFashionLv = 2;
+}
+
+//合体时装穿戴
+message FitFashionChangeReq{
+	int32 fitFashionId = 1;
+}
+message FitFashionChangeAck{
+	int32 fitFashionId = 1;
+}
+
+//合体技能激活
+message FitSkillActiveReq{
+	int32 fitSkillId = 1;
+}
+message FitSkillActiveAck{
+	int32 fitSkillId = 1;
+}
+
+//
+message FitEnterReq{
+
+}
+
+message FitEnterAck{
+	int32 cdStartTime = 1;
+	int32 cdEndTime = 2;
+}
+
+message FitCancleReq{
+
+}
+
+message FitCancleAck{
+
+}

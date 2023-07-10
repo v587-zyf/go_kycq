@@ -1,0 +1,68 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//升级技能
+message SkillUpLvReq{
+	int32 heroIndex = 1;
+	int32 skillId 	= 3;
+}
+message SkillUpLvAck{
+	int32 heroIndex = 1;
+	int32 skillType = 2;
+	SkillUnit skill = 3;
+}
+
+//换技能位置
+message SkillChangePosReq{
+	int32 heroIndex = 1;
+	int32 pos		= 2;
+	int32 skillId	= 3;
+}
+message SkillChangePosAck{
+	int32 heroIndex = 1;
+	int32 skillType = 2;
+	map<int32,int32> skillBags = 3;//位置，技能id
+}
+
+//技能装备、卸下
+message SkillChangeWearReq{
+	int32 heroIndex = 1;
+	int32 skillId 	= 2;
+}
+message SkillChangeWearAck{
+	int32 heroIndex = 1;
+	int32 skillType = 2;
+	map<int32,int32> skillBags = 3;//位置，技能id
+}
+
+//重置
+message SkillResetReq{
+	int32 heroIndex = 1;
+	int32 skillType = 2;
+}
+message SkillResetAck{
+	int32 heroIndex = 1;
+	int32 skillType = 2;
+	map<int32,int32> skillBags = 3;//位置，技能id
+	repeated SkillUnit skills = 4;
+}
+
+//使用技能
+message SkillUseReq{
+	int32 heroIndex = 1;
+	int32 skillId = 2;
+}
+
+//cd推送
+message SkillUseNtf{
+	int32 heroIndex = 1;
+	int32 skillId 	= 2;
+	int64 startTime = 3;
+	int64 endTime 	= 4;
+}
+
+message ClearSkillCdNtf{
+	int32 heroIndex = 1;
+}

@@ -1,0 +1,51 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//内功升星
+message InsideUpStarReq{
+	int32 heroIndex = 1;
+}
+message InsideUpStarAck{
+	int32 heroIndex = 1;
+	InsideInfo insideInfo = 2;
+}
+
+//内功升阶
+message InsideUpGradeReq{
+	int32 heroIndex = 1;
+}
+message InsideUpGradeAck{
+	int32 heroIndex = 1;
+	InsideInfo insideInfo = 2;
+	bool res = 3;
+}
+
+//内容升重
+message InsideUpOrderReq{
+	int32 heroIndex = 1;
+}
+message InsideUpOrderAck{
+	int32 heroIndex = 1;
+	InsideInfo insideInfo = 2;
+}
+
+//内功技能激活、升级
+message InsideSkillUpLvReq{
+	int32 heroIndex = 1;
+	int32 skillId = 2;
+}
+message InsideSkillUpLvAck{
+	int32 heroIndex = 1;
+	InsideInfo insideInfo = 2;
+}
+
+//内功一键升级
+message InsideAutoUpReq{
+	int32 heroIndex = 1;
+}
+message InsideAutoUpAck{
+	int32 heroIndex = 1;
+	InsideInfo insideInfo = 2;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//九重魔塔结算
+message MagicTowerEndNtf{
+	int32 rank = 1;
+}
+
+//获取玩家当前分数
+message MagicTowerGetUserInfoReq{
+}
+//获取玩家当前分数
+message MagicTowerGetUserInfoAck{
+	int32 score =1;			//积分
+	int32 isGetAward = 2;	//是否领取过奖励
+}
+
+//获取玩家当前分数
+message MagicTowerlayerAwardReq{
+}
+//获取玩家当前分数
+message MagicTowerlayerAwardAck{
+	GoodsChangeNtf goods= 1;  //物品变化
+}

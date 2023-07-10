@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pb;
+
+//公会活动开启推送
+message GuildActivityOpenNtf{
+	int32 guildActivityId = 1;
+	int64 endTime = 2;
+}
+
+//获取公会活动开启信息
+message GuildActivityLoadReq{
+	int32 guildActivityId = 1;
+}
+message GuildActivityLoadAck{
+	int32 guildActivityId = 1;
+	int64 endTime 		  = 2;
+	bool isClose		  = 3;
+}

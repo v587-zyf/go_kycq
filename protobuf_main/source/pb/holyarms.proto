@@ -1,0 +1,39 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+// 神兵激活
+message HolyActiveReq{
+	int32 id = 1;
+}
+message HolyActiveAck{
+	Holy holy = 1;
+}
+
+// 神兵升级
+message HolyUpLevelReq{
+	int32 id = 1;
+	int32 itemId = 2;
+}
+message HolyUpLevelAck{
+	Holy holy = 1;
+}
+
+// 神兵技能激活
+message HolySkillActiveReq{
+	int32 hid = 1;
+	int32 hlv = 2;
+}
+message HolySkillActiveAck{
+	Holy holy = 1;
+}
+
+// 神兵技能升级
+message HolySkillUpLvReq{
+	int32 hid = 1;
+	int32 hlv = 2;
+}
+message HolySkillUpLvAck{
+	Holy holy = 1;
+}

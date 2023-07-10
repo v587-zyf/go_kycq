@@ -1,0 +1,17 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message ClearReq{
+	int32 heroIndex = 1;
+	int32 pos		= 2;	//部位
+	int32 propIndex	= 3;	//属性下标(初始化传-1)
+}
+
+message ClearAck{
+	int32 heroIndex = 1;
+	int32 pos		= 2;
+	EquipClearArr equipClear = 3;
+	GoodsChangeNtf goods = 4;
+}

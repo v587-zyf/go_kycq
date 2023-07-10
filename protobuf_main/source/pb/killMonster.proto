@@ -1,0 +1,98 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//本服击杀
+message KillMonsterUniLoadReq{}
+message KillMonsterUniLoadAck{
+	repeated KillMonsterUniInfo list = 1;
+}
+
+//本服击杀奖励
+message KillMonsterUniFirstDrawReq{
+	int32 stageId = 1;
+}
+message KillMonsterUniFirstDrawAck{
+	int32 stageId 		 = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//本服奖励
+message KillMonsterUniDrawReq{
+	int32 stageId = 1;
+}
+message KillMonsterUniDrawAck{
+	int32 stageId 	= 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//本服击杀推送
+message KillMonsterUniKillNtf{
+	int32 stageId 		= 1;
+	int32 klillUserId 	= 2; //击杀玩家id
+	string killUserName	= 3; //击杀玩家
+}
+
+//个人首通
+message KillMonsterPerLoadReq{}
+message KillMonsterPerLoadAck{
+	repeated KillMonsterPerInfo list = 1;
+}
+
+//个人首通奖励
+message KillMonsterPerDrawReq{
+	int32 stageId = 1;
+}
+message KillMonsterPerDrawAck{
+	int32 stageId 		 = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//个人首通推送
+message KillMonsterPerKillNtf{
+	int32 stageId = 1;
+}
+
+//里程碑
+message KillMonsterMilLoadReq{}
+message KillMonsterMilLoadAck{
+	repeated KillMonsterMilInfo list = 1;
+}
+
+//里程碑领取
+message KillMonsterMilDrawReq{
+	int32 type = 1;
+}
+message KillMonsterMilDrawAck{
+	int32 type 		 	 = 1;
+	int32 level			 = 2;
+	GoodsChangeNtf goods = 3;
+}
+
+//里程碑推送
+message KillMonsterMilKillNtf{
+	int32 stageId = 1;
+	int32 killNum = 2; //击杀次数
+}
+
+message KillMonsterUniInfo{
+	int32 stageId 		 = 1;
+	int32 klillUserId 	 = 2; //击杀玩家id
+	string killUserName  = 3; //击杀玩家
+	bool serverFirstKill = 4; //是否领取本服首杀奖励
+	bool serverKill		 = 5; //是否领取本服奖励
+}
+
+message KillMonsterPerInfo{
+	int32 stageId 	= 1;
+	bool kill		= 2; //是否击杀
+	bool receive		= 3; //是否领取
+}
+
+message KillMonsterMilInfo{
+	int32 type 		= 1;
+	int32 level		= 2;
+	int32 killNum 	= 3; //击杀次数
+	bool receive	= 4; //是否领取
+}

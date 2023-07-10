@@ -1,0 +1,59 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//加载列表
+message AncientBossLoadReq{
+	int32 area = 1;	//区域
+}
+message AncientBossLoadAck{
+	repeated AncientBossNtf ancientBoss = 1;
+}
+
+//购买次数
+message AncientBossBuyNumReq{
+	bool use = 1;		//是否购买并使用
+	int32 buyNum = 2;	//购买次数
+}
+message AncientBossBuyNumAck{
+	int32 buyNum = 1;	//已购买次数
+}
+
+// 战斗
+message EnterAncientBossFightReq {
+	int32 stageId = 1;
+}
+message EnterAncientBossFightAck {
+	int32 stageId = 1;
+	int32 dareNum = 2;
+}
+message AncientBossFightResultNtf{
+	int32 stageId 			= 1;	//关卡ID
+	int32 result 			= 2;	//战斗结果
+	int32 dareNum			= 3;	//讨伐次数
+	BriefUserInfo winner 	= 4;	//归属者名称
+	GoodsChangeNtf goods 	= 5;	//掉落物品
+}
+
+//归属列表
+message AncientBossOwnerReq{
+	int32 stageId = 1;
+}
+message AncientBossOwnerAck{
+	int32 stageId = 1;
+	repeated AncientBossOwnerInfo list = 2;
+}
+
+message AncientBossOwnerInfo{
+	string name = 1;
+	int64 time	= 2;
+}
+
+message AncientBossNtf{
+	int32 stageId 		= 1;
+	float blood 		= 2;
+	int64 reliveTime 	= 3;
+	int32 area			= 4;
+	int32 userCount		= 5; //争夺人数
+}

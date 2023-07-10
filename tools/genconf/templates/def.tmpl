@@ -1,0 +1,101 @@
+var Data;
+(function (Data) {
+    function objd(p) {
+        Object.defineProperty(p, "obj", {
+            get: function() { return this._; },
+            set: function(value) {
+                this._ = typeof value == 'string' ? JSON.parse(value) : value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+    }
+    function d(p, name, getter) {
+        Object.defineProperty(p, name, {
+            get: getter,
+            enumerable: true,
+            configurable: true
+        });
+    }
+    {{range .Structs}}
+    var {{.Name}} = (function() {
+        function {{.Name}}(o) {
+            this.obj = o;
+        }
+        var p = {{.Name}}.prototype;
+        objd(p);{{$name := .Name}}
+        {{range $i, $field := .Fields}}
+        d(p, "{{$field.ExportName}}", function() {
+            {{if $field.IsArrayStruct -}}
+            var obj = this._[{{$i}}];
+            var len = obj.length;
+            var arr = [];
+            for (var i = 0; i < len; i++) {
+                arr.push(new {{$field.DeepStruct.Name}}(obj[i]));
+            }
+            return arr;
+            {{- else if $field.IsStruct -}}
+            return new {{$field.ClientExportType}}(this._[{{$i}}]);
+            {{- else -}}
+            return this._[{{$i}}];
+            {{- end}}
+        });
+        {{end}}
+        return {{.Name}};
+    }());
+    Data.{{.Name}} = {{.Name}};
+    {{end}}
+
+    function _getData(collection, dataType) {
+        return function(index) {
+            var t = collection[index];
+            if (t instanceof dataType)
+                return t;
+            if (t == null)
+                return null;
+            var obj = new dataType(t);
+            collection[index] = obj;
+            return obj;
+        }
+    }
+
+    function _buildGetter() {
+        {{- range .Fields -}}
+        {{- if .ExportStruct}}
+        {{if not .IsOnDemandGroup}}
+        if (Data.{{if .IsExportMap}}{{.ExportMapName}}{{else}}{{.ExportArrayName}}{{end}}) Data.get{{.ExportStruct.Name}}{{if ne .OnDemandGroupName ""}}Sync{{end}} = _getData(Data.{{if .IsExportMap}}{{.ExportMapName}}{{else}}{{.ExportArrayName}}{{end}}, Data.{{.ExportStruct.Name}});
+        {{end}}
+        {{- end}}
+        {{- end}}
+    }
+
+    var buildData = function(data) {
+        var arrmap = data.__arrmap__ || {};
+        delete data.__arrmap__;
+        {{range .Fields -}}
+        {{if and .IsExportMap .IsExportArray}}
+        if (data.{{.ExportArrayName}}) {
+            var arr = data.{{.ExportArrayName}};
+            var values = {};
+            if (arrmap.{{.ExportArrayName}}) {
+                arrmap.{{.ExportArrayName}}.forEach(function(key, i) {
+                    values[key] = arr[i];
+                });
+            } else {
+                arr.forEach(function(item) {
+                    values[item[{{.MapKeyIndex}}]] = item;
+                });
+            }
+            data.{{.ExportMapName}} = values;
+        }
+        {{- end}}
+        {{- end}}
+
+        for (var key in data) {
+            Data[key] = data[key];
+        }
+        _buildGetter(data);
+    }
+    Data.buildData = buildData;
+})(Data || (Data = {}));
+window.Data = Data;

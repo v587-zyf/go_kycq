@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//领取礼包
+message FirstRechargeRewardReq{
+	int32 day = 1;
+}
+message FirstRechargeRewardAck{
+	int32 day = 1;
+	GoodsChangeNtf goods = 2;  	//物品变化
+}
+
+//推送已首充
+message FirstRechargeNtf{
+	bool isRecharge = 1;
+	int64 openDay	= 2;	//购买开始时间
+}

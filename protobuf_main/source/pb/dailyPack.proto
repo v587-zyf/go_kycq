@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message DailyPackBuyReq{
+	int32 id = 1;
+}
+message DailyPackBuyAck{
+	int32 id = 1;
+	int32 buyNum = 2;
+	GoodsChangeNtf goods = 3;
+}

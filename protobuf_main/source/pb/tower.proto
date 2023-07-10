@@ -1,0 +1,58 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//试炼塔信息
+message OpenTowerReq {}
+message OpenTowerAck {
+	int32 	towerLv 	= 1;	//试练塔层数
+	bool 	dayAward 	= 2;	//每日奖励是否领取
+	int32 	lotteryNum 	= 3;	//已抽奖次数
+	int32 	lotterId 	= 4;	//目前抽奖id
+	bool rankReward		= 5;	//排行奖励是否领取
+}
+
+//每日奖励
+message ToweryDayAwardReq {}
+message ToweryDayAwardAck {
+	bool dayAward = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//抽奖
+message TowerLotteryReq{}
+message TowerLotteryAck{
+	int32 lotteryNum 	= 1;
+	int32 lotteryId 	= 2;
+	GoodsChangeNtf goods = 4;
+}
+
+//战斗
+message EnterTowerFightReq {}
+message TowerFightResultNtf {
+	int32 result 	= 1; //战斗结果
+	int32 towerLv 	= 2; //下一层数
+	GoodsChangeNtf goods = 3;  //掉落物品
+}
+
+//下一层
+message TowerFightContinueReq{}
+
+//试炼塔碾压
+message TowerSweepReq{}
+message TowerSweepAck{
+	int32 towerLv = 1;
+	GoodsChangeNtf goods = 2;
+}
+
+//排行奖励
+message TowerRankRewardReq{}
+message TowerRankRewardAck{
+	bool rankReward		= 1;
+	GoodsChangeNtf goods = 2;
+}
+
+message TowerLvNtf{
+	int32 towerLv = 1;
+}

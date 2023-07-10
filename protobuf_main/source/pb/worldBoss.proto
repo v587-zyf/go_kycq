@@ -1,0 +1,15 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+// 战斗
+message EnterWorldBossFightReq {
+	int32 stageId = 1;	//关卡id
+}
+
+message WorldBossFightResultNtf{
+	int32 stageId = 1;	//关卡id
+	int32 rank = 2;		//排名
+	GoodsChangeNtf goods = 3;  	//掉落物品
+}

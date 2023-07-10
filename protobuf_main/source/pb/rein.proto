@@ -1,0 +1,43 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message ReinActiveReq{
+}
+
+message ReinActiveAck{
+	Rein rein = 1;	//转生信息
+}
+
+message ReincarnationReq{
+
+}
+
+message ReincarnationAck{
+	Rein rein = 1;	//转生信息
+}
+
+message ReinCostBuyReq{
+	int32 id = 1;	//reinCost表id
+	int32 num = 2;	//购买个数
+	bool use = 3;	//购买并使用
+}
+
+message ReinCostBuyAck{
+	Rein rein = 1;			//转生信息
+	ReinCost reinCost = 2;	//转生修为丹信息
+}
+
+message ReinCostUseReq{
+	int32 id = 1;	//reinCost表id
+}
+
+message ReinCostUseAck{
+	Rein rein = 1;			//转生信息
+	ReinCost reinCost = 2;	//转生修为丹信息
+}
+
+message ReinCostBuyNumRefNtf{
+	repeated ReinCost reinCost = 1;
+}

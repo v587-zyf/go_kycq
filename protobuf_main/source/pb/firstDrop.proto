@@ -1,0 +1,55 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+
+message FirstDropLoadReq {
+   int32 types = 1;   //活动类型 firstDrop表 type
+}
+
+message FirstDropLoadAck {
+    int32  types  = 1;
+	map<int32,int32> GetDropItemInfo = 2;     //key:id value:1(已领取) 0(未领取)  玩家掉落物品领取状态   
+	map<int32,int32> AllDropItemGetCount = 3; //key:id value:领取次数 掉落道具全区服玩家领取次数记录(只记firstDrop表 count>0的道具)
+}
+
+message GetFirstDropAwardReq {
+    int32  id = 1;  //firstDrop表id
+}
+
+message GetFirstDropAwardAck {
+	int32 types = 1;
+	map<int32,int32> GetDropItemInfo = 2;     //玩家掉落物品领取状态
+	map<int32,int32> DropItemGetCount = 3;    //掉落道具全区服玩家领取次数记录(只记firstDrop表 count>0的道具)
+	GoodsChangeNtf goods= 4;  //物品变化
+}
+
+
+message GetAllFirstDropAwardReq {
+	int32 types = 1;
+}
+
+message GetAllFirstDropAwardAck {
+    int32  types = 1;
+	map<int32,int32> GetDropItemInfo = 2;     //玩家掉落物品领取状态
+	map<int32,int32> DropItemGetCount = 3;    //掉落道具全区服玩家领取次数记录(只记firstDrop表 count>0的道具)
+	GoodsChangeNtf goods= 4;  //物品变化
+}
+
+
+message GetAllRedPacketReq {
+	repeated int32 infos = 1; //itemid,count,....
+}
+
+message GetAllRedPacketAck {
+	int32 usePacketNum  = 1;
+}
+
+message GetAllFirstDropAwardNtf {
+	map<int32,int32> DropItemGetCount = 1;    //掉落道具全区服玩家领取次数记录(只记firstDrop表 count>0的道具)
+}
+
+message FirstDropRedPointNtf {
+	repeated int32 items = 1;    //掉落道具全区服玩家领取次数记录(只记firstDrop表 count>0的道具)
+}
+

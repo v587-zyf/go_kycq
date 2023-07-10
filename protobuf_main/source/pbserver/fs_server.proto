@@ -1,0 +1,589 @@
+syntax = "proto3";
+package pbserver;
+
+import "common.proto";
+
+enum FSFightType {
+  Boss            = 0;
+}
+
+//gs请求到指定战斗
+message GsRouteMessageToFight{
+	int32 fightId = 1;		//战斗id
+	int32 cmdId  = 2;		//请求的命令Id
+	bytes msgData = 3;		//请求数据
+}
+
+
+message FSCreateFightReq {
+  int32       stageId     	= 1;
+  bytes       cpData   		= 2;
+}
+
+message FSCreateFightAck {
+  uint32 fightId = 1;
+}
+
+//gs->fs申请同步常驻战斗id
+message GsToFsResidentFightReq{
+	int32 serverId =1;		//服务器Id
+}
+
+//fs->gs推送所有常驻战斗id
+message FsResidentFightNtf{
+	map<int32,uint32> residentFights = 1;	//常驻战斗（srageId->fightId）
+	map<int32,FsFieldBossInfoNtf> fieldBossFightInfo = 2;//野外boss信息
+}
+
+
+
+//fs->gs 野外boss血量 复活时间
+message FsFieldBossInfoNtf{
+	int32 stageId 		= 1;	//关卡Id
+	float hp 			= 2;	//血量
+	int64 reliveTime 	= 3; 	//复活时间
+	int32 userCount		= 4;	//玩家数量
+}
+
+//战斗继续
+message FSContinueFightReq {
+  int32     stageId	= 1;
+}
+
+message FSFightEndNtf {
+	int32 fightType 		= 1;		//战斗类型
+	int32 stageId			= 2;		//配置Id
+	repeated int32 winners 	= 3;		//胜利者
+	repeated int32 losers 	= 4; 		//失败者
+	int32 useTime			= 5;		//战斗耗时
+	bytes    cpData   		= 6;		//附属数据
+}
+
+
+message FSEnterFightReq {
+  User   fightUser 	= 1;	//玩家数据
+  int32  enterType	= 2;	//进入类型（0 主动进入，1复活进入）
+}
+
+message FSEnterFightAck {
+	bool refuse = 1;
+}
+
+message FSUpdateUserInfoNtf{
+	Actor userInfo = 1;				//玩家数据
+}
+
+message FSUpdateUserInfoAck {
+	bool refuse = 1;
+}
+
+message GsToFsUpdateUserElfReq{
+	int32 userId = 1;
+	ElfInfo elf = 2;
+}
+
+message FsToGsUpdateUserElfAck{
+	bool result = 1;
+}
+
+message FSLeaveFightReq {
+  uint32 actorSessionId = 1;
+  uint32 reason  = 2; // 0代表断线，1代表主动退出
+}
+
+message FSLeaveFightAck {
+}
+
+
+message GSToFsUpdateUserFightModel{
+	int32 userId 		= 1;		//玩家Id
+	int32 figthModel 	= 2;		//战斗模式
+}
+
+
+message GsToFSUserReliveReq {
+	int32 userId = 1;
+	int32 reliveType = 2;
+}
+message FSToGsUserReliveAck {
+	int32 reliveTimes 			= 1;	//复活次数
+	int32 reliveByIngotTimes 	= 2;	//元宝复活次数
+
+}
+
+message GsToFSCheckUserReliveReq {
+	int32 userId = 1;
+}
+message FsToGSCheckUserReliveAck {
+	bool	isDie 				= 1;	//是否死亡
+	int32	reliveTimes 		= 2;	//复活次数
+	int32	reliveByIngotTimes 	= 3;	//元宝复活次数
+}
+
+message FSGetFightIdReq {
+	FSFightType fightType = 1;
+}
+
+message FSGetFightIdAck {
+	uint32 fightId = 1;
+}
+
+message User {
+  uint32 sessionId 		  	= 1; // gs端对应的sessionId, 0代表是机器人
+  uint32 locatedServerId  	= 2; // 玩家所在服务器Id(合服后为合服后服务器Id)
+  Actor  userInfo	      	= 3;
+  int32  teamId 		  	= 4; //阵营
+  int32  fightModel			= 5; //战斗模式
+  int32  birthArea			= 6; //出生区域
+  int32  userType	  		= 7; //玩家类型（0：真实玩家 1：玩家数据假人，2：配置表假人）
+  int32  toHelpUserId		= 8; //被帮助玩家Id
+}
+
+
+message UserDropReq {
+	int32 fightType  	= 1;			//战斗类型
+	int32 stageId 		= 2;			//关卡Id
+	int32 userId 		= 3;			//玩家
+}
+
+message UserDropAck {
+	repeated ItemUnit items = 1;			//玩家掉落物品
+}
+
+message FSAddItemReq {
+	int32 		userId = 1;			//玩家id
+	map<int32,int32> items = 2; 	//要使用的道具
+	int32 		OpType = 3;			//消耗途径
+}
+
+message FSAddItemAck {
+	bool isSuccess	= 1;			//是否添加成功
+}
+
+
+message GsTOFsPickUpReq{			//拾取请求
+	int32 useId				= 1;		//拾取玩家Id
+	repeated int32 objIds 	= 2;		//客户端请求来的拾取物品Id(战斗中唯一Id)
+	bool isPick				= 3;		//是否拾取
+}
+
+message FsTOGsPickUpAck{			//拾取返回
+	map<int32,ItemUnitForPickUp> items = 1;	//拾取的道具
+	bool isPick				= 2;			//是否拾取
+}
+
+message GsToFsPickRedPacketInfo{
+	int32 			userId 			= 1;		//玩家Id
+	ActorRedPacket 	redPacket		= 2;		//红包拾取信息
+}
+
+
+//玩家技能使用
+message FsSkillUseNtf{
+	int32 useId 					= 1; //玩家Id
+	int32 heroIndex 				= 2; //武将
+	int32 skillId 					= 3; //技能Id
+	int64 cdStartTime 				= 4; //技能开始时间
+	int64 cdStopTime 				= 5; //技能结束时间
+	repeated int32 killMonsterIds 	= 6; //击杀怪物Id
+	int32 killUserNum				= 7; //击杀玩家数量
+}
+
+message FsToGsActorKillNtf{
+	int32 killer				= 1;	//击杀玩家Id
+	int32 beKiller				= 2;	//被击杀者id（玩家ID/怪物id）
+	bool isPlayer				= 3;	//被击杀者是否是玩家
+}
+
+//清理武将技能CD
+message FsTOGsClearSkillCdNtf{
+	int32 userId = 1;
+	int32 heroIndex = 2;
+}
+
+message FsRandomDeliveryNtf{
+	int32 userId	= 1;		//玩家Id
+	bool rand		= 2;		//是否随机
+}
+
+//game推送fs使用道具
+message GsToFsUseItemNtf{
+	int32 userId = 1;		//玩家ID
+	int32 itemId = 2;		//道具id
+}
+
+//检查战斗是否存在
+message GSTOFSCheckFightReq{
+	int32 fightId = 1;
+}
+
+message FSTOGSCheckFightAck{
+	int32 fightId = 1;
+}
+
+//获取战斗ID
+message GSTOFSGetFightIdReq{
+	int32 stageId = 1;
+}
+
+message FSTOGSGetFightIdAck{
+	int32 fightId = 1;
+}
+
+message GsToFsGetCheerNumReq{
+	int32 userId = 1;			//玩家
+}
+
+message FsToGsGetCheerNumAck{
+	int32 userId = 1;			//玩家Id
+	int32 cheerNum = 2;			//鼓舞次数
+	int32 guildCheerNum = 3;	//门派鼓舞次数
+}
+
+message GsToFsCheerReq{
+	int32 userId	= 1;		//玩家Id
+}
+
+message FsToGsCheerAck{
+	bool result		= 1;		//结果
+}
+
+message GsToFsGetPotionCdReq{
+	int32 userId = 1;			//玩家
+}
+
+message FsToGsGetPotionCdAck{
+	int32 userId = 1;			//玩家Id
+	int64 useTime = 2;			//上次使用时间
+}
+
+message GsToFsUsePotionReq{
+	int32 userId	= 1;		//玩家Id
+}
+
+message FsToGsUsePotionAck{
+	bool result		= 1;		//结果
+	int64 useTime	= 2;		//上次使用时间
+}
+
+message GsToFsCollectionReq{
+	int32 userId = 1;		//玩家id
+	int32 objId = 2;		//地图唯一Id
+}
+
+message FsToGsCollectionAck{
+	int64 startTime = 1;	//采集开始时间
+	int64 endTime = 2;		//采集结束时间
+}
+
+
+message GsToFsCollectionCancelReq{
+	int32 userId = 1;		//玩家id
+	int32 objId = 2;		//地图唯一Id
+}
+
+message FsToGsCollectionCancelAck{
+	bool result = 1;		
+}
+
+message FsToGsCollectionNtf{
+	int32 userId 		= 1;		//玩家id
+	int32 stageType 	= 2;		//副本类型
+	map<int32,int32> items = 3;		//获得道具
+}
+
+//使用合体
+message GsToFsUseFitReq{
+	int32 userId = 1;			//玩家Id
+	ActorFit fit = 2;			//合体数据
+}
+
+message FsToGsUseFitAck{
+	bool isSuccess = 1;			//是否成功
+}
+
+message GsToFsFitCacelReq{
+	int32 userId = 1;
+}
+
+message FsToGsFitCacelAck{
+	
+}
+
+message GsToFsUpdatePetReq{
+	int32 userId = 1;
+	ActorPet pet = 2;
+}
+
+message FsToGsUpdatePetAck{
+}
+
+message GsToFsGmReq{
+	int32 userId = 1;
+	string cmd = 2;
+}
+
+message FsToGsGmAck{
+	string result = 1;
+}
+
+message GsToFsUseCutTreasureReq{
+	int32 userId = 1;
+	int32 cutTreasureLv = 2;
+}
+
+message FsToGsUseCutTreasureAck{
+	bool result = 1;
+}
+
+//检查是否可以请求帮助
+message GsToFsCheckForHelpReq{
+	int32 userId = 1;			//玩家
+}
+
+//检查是否可以请求帮助结果
+message FsToGsCheckForHelpResultAck{
+	bool canGetHelp = 1;		//是否可以请求帮助
+}
+
+message GsToFsChangeToHelperReq{
+	int32 userId = 1;		//变更为协助者玩家Id
+	int32 toHelpUserId = 2;	//被协助玩家ID
+}
+
+message GsToFsFightNumChangeReq{
+	int32 userId 			= 1;	//玩家Id
+	int32 fightNumChange 	= 2;	//战斗次数改变
+}
+
+message GsToFsFightNpcEventReq{
+	int32 userId = 1;		//玩家Id
+	int32 npcId = 2;		//Npcid
+}
+
+message FsToGsFightNpcEventAck{
+
+}
+
+message GsToFsGamedbReloadReq{
+
+}
+message GsToFsGamedbReloadAck{
+
+}
+
+////////////////////////功能模块////////////////////////////////////
+
+message WorldBossStatusNtf{
+	int32 stageId = 1;		//关卡Id
+	int32 status = 2;		//状态
+}
+
+message ExpStageKillMonsterNtf{
+	int32 userId = 1;
+}
+
+message PersonFightResult{
+
+	int32 userId = 1;		//玩家Id
+	map<int32,int32> items = 2;	//拾取物品
+	int32 result = 3;		//结果
+}
+
+message VipBossFightResult{
+
+	int32 userId = 1;		//玩家Id
+	map<int32,int32> items = 2;	//拾取物品
+	int32 result = 3;		//结果
+}
+
+message TowerFightResult{
+
+	int32 userId = 1;		//玩家Id
+	map<int32,int32> items = 2;	//拾取物品
+	int32 result = 3;		//结果
+}
+
+message FieldBossResult{
+	bool	sendWinner	= 1;		//是否推送归属者
+	map<int32,ItemUnits> userPickItems = 2;	//玩家拾取的物品
+}
+
+message DarkPalaceBossResult{
+	bool	sendWinner			= 1;		//是否推送归属者
+	map<int32,ItemUnits> userPickItems = 2;	//玩家拾取的物品
+	map<int32,int32> helper 	= 3;		//协助者玩家Id->协助目标玩家Id
+}
+
+message AncientBossResult{
+	bool	sendWinner = 1;			//是否推送归属者
+	map<int32,ItemUnits> userPickItems = 2;	//玩家拾取的物品
+}
+
+message HellBossResult{
+	bool sendWinner = 1;
+	map<int32,ItemUnits> userPickItems = 2;
+	map<int32,int32> helper = 3;
+}
+
+//推送打宝秘境玩家击杀怪物
+message DaBaoKillMonsterNtf{
+	int32 userId 	= 1; //玩家id
+	int32 monsterId = 2; //怪物id
+	int32 energy	= 3; //体力
+}
+
+message DaBaoResumeEnergyReq{
+	int32 userId = 1;
+	int32 energy = 2;
+}
+
+message MiningNewFightInfoReq{
+
+	int32 miningId 	= 1;		//挖矿记录Id
+	int32 miningUserId = 2;		//防守方
+	bool isRetake	= 3;		//是否夺回战
+}
+
+message MiningNewFightInfoAck{
+
+	bool readyOk	= 1;		//是否正确
+}
+
+message MiningFightResultNtf{
+	int32 userId 	= 1;		//攻击方（抢夺者或者夺回者）
+	int32 miningId 	= 2;		//挖矿记录Id
+	int32 miningUserId = 3;		//防守方
+	bool isRetake	= 4;		//是否夺回战
+	int32 result	= 5;		//战斗结果
+}
+
+//推送玩家击杀一波怪物
+message HangUpKillWaveNtf{
+	int32 userId = 1;			//玩家ID
+	int32 stageId = 2;			//关卡Id
+}
+
+//推送玩家击杀挂机BOSS
+message HangUpBossFightEndNtf{
+	int32 userId = 1;			//玩家ID
+	int32 stageId = 2;			//关卡Id
+	int32 result = 3;			//战斗结果
+	map<int32,int32> items = 4;	//拾取物品
+}
+
+message FightTotalData{
+	int64 damage 	= 1;		//伤害
+	int64 beDamage 	= 2;		//承受伤害
+	int64 treat 	= 3;		//治疗
+}
+
+message GuildbonfireExpAddNtf{
+	int32 guildId = 1;				//公会Id
+	repeated int32 userIds = 2;		//增加经验的玩家Id 
+}
+
+message PaodianGoodsAddNtf{
+	int32 stageId = 1;				//stageId
+	map<int32,int32> userIds = 2;		//增加经验的玩家Id 
+}
+
+message ShabakeFightEndNtf{
+	
+	repeated ShabakeRankScore userRank = 1;
+	repeated ShabakeRankScore guildRank = 2;
+}
+
+message ShabakeRankScore {
+	int32 id = 1;			//玩家Id或门派Id
+	int32 score = 2;		//积分
+}
+
+message ShabakeCrossFightEndNtf{
+	
+	repeated ShabakeRankScore serverRank = 1;
+	repeated ShabakeCrossRankScore guildRank = 2;
+}
+
+message ShabakeCrossRankScore {
+	int32 serverId = 1;			//服务器Id
+	int32 guildId = 2;			//门派id
+	int32 score = 3;			//积分
+	repeated int32 users 	= 4;		//玩家
+}
+
+
+//推送世界首领结果
+message WorldLeaderFightEndNtf{
+	int32 stageId = 1;			//关卡Id
+	int32 lastAttacker = 2;		//最后一击玩家
+	repeated WorldLeaderRankUnit ranks = 3;
+}
+
+//推送世界首领排行
+message WorldLeaderFightRankNtf{
+	int32 stageId 		= 1;
+	int32 bossHp 		= 2;
+	repeated WorldLeaderRankUnit ranks = 3;	
+}
+
+message WorldLeaderRankUnit{
+	int32 	rank 		= 1;
+	int32 	guildId 	= 2;
+	string 	guildName 	= 3;
+	int64 	score 		= 4;
+	int32 	serverId 	= 5;
+	repeated int32 users		= 6;
+}
+
+message GuardPillarFightEnd{
+	int32 	wave	 		= 1;
+	repeated int32 users	= 2;
+}
+
+//fs->gs 野外boss玩家死亡时间
+message FsFieldBossDieUserInfoNtf{
+	int32 dieUserId     = 1;	//死亡玩家id
+	int64 dieTime 	    = 2; 	//复活时间
+}
+
+message MagicTowerFightEnd{
+	repeated ShabakeRankScore userRank = 1;
+}
+
+message GsToFsFightScoreLessReq{
+	int32 userId 	= 1;		//玩家ID
+	int32 lessNum = 2;		//扣除积分
+}
+
+message FsToGsFightScoreLessAck{
+	int32 userId 	= 1;			//玩家Id
+	int32 score 	= 2;			//当前积分
+}
+
+//获取玩家当前分数
+message MagicTowerGetUserInfoReq{
+	int32 userId = 1;
+	bool isGetAward = 2;
+}
+//获取玩家当前分数
+message MagicTowerGetUserInfoAck{
+	int32 score =1;			//积分
+	bool isGetAward = 2;	//是否领取过奖励
+	bool canGetAward = 3;	//是否可领取过奖励
+}
+
+
+//推送沙巴克击杀boss
+message FsToGsShabakeKillBossNtf{
+	string  infos = 1;
+}
+
+message BossFamilyBossInfoReq{
+
+	int32 bossFamilyType = 1;
+}
+
+message BossFamilyBossInfoAck{
+	map<int32,int32> bossFamilyInfo = 1;
+}

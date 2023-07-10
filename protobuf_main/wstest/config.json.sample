@@ -1,0 +1,18 @@
+{
+    "name": "",
+    "format": "base64",
+    "port":3501,
+    "loginRouter": "user/login",
+    "sessionField": "sid",
+    "errorMessageType": "pb.Message",
+    "envs":{
+      "innerPVP": {
+        "ws":"ws://192.168.5.25:9950/ws",
+        "http":"http://192.168.5.25:8080"
+      },
+      "Liang":{
+        "ws":"ws://192.168.5.124:9950/ws",
+        "http":"http://192.168.5.124:8080"
+      }
+    }
+}

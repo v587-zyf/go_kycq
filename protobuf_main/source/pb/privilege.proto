@@ -1,0 +1,13 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//购买
+message PrivilegeBuyReq{
+	int32 privilegeId = 1;
+}
+message PrivilegeBuyAck{
+	int32 privilegeId = 1;
+	GoodsChangeNtf goods = 2;
+}

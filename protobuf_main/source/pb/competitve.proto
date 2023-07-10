@@ -1,0 +1,75 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//打开页面
+message CompetitveLoadReq{}
+
+message CompetitveLoadAck{
+	int32 seasonTimes  = 1; //赛季场次
+	int32 sessionWinTimes = 2; //赛季胜场
+	int32 remainChallengeTimes = 3; //剩余挑战次数
+	int32 todayCanBuyTimes = 4; // 今日可购买次数
+	int32 userScore = 5; //玩家积分
+	int32 yestardayReward = 6; //昨日玩家奖励
+	repeated CompetitveRankInfo seasonRank = 7; //赛季排名
+    repeated CompetitveRankInfo lastSeasonRank = 8; //上赛季排名
+	int32   beginTimes = 9; //活动开始时间戳
+	int32 lastSeasonUserRank = 10; //玩家上赛季排名
+	int32 lastSeasonUserRankScore = 11; //玩家上赛季积分
+}
+
+//进入战斗
+message EnterCompetitveFightReq{
+	int32 challengeUid 		= 1; //挑战用户id
+	int32 challengeRanking = 2;	//挑战用户排名
+}
+
+message CompetitveFightNtf{
+	int32 result = 1; //挑战结果
+	GoodsChangeNtf goods = 2;
+	int32 myRank  = 3;	//我的排名
+}
+
+//竞技场挑战次数购买
+message BuyCompetitveChallengeTimesReq{}
+
+message BuyCompetitveChallengeTimesAck{
+	int32 residueTimes = 1;	  //剩余挑战次数
+	int32 todayCanBuyTimes = 2; //今日可购买次数
+	GoodsChangeNtf goods = 4;
+}
+
+//刷新对手
+message RefCompetitveRankReq{}
+
+message RefCompetitveRankAck{
+	BriefUserInfo userInfo = 1;	//用户信息
+	int32 score  = 2;//  玩家积分
+    repeated HeroInfo heros	= 3;	//武将
+}
+
+message CompetitveRankInfo {
+	int32 ranking = 1; //排名
+	string avatar = 2;	//用户信息
+	int32 score = 3; //积分
+	string nickName = 4;
+}
+
+//领取每日奖励
+message GetCompetitveDailyRewardReq{}
+
+message GetCompetitveDailyRewardAck{
+	GoodsChangeNtf goods = 1;
+	int32 haveGetRewardState = 2;
+}
+
+//多倍领取
+message CompetitveMultipleClaimReq{
+	int32 num = 1;
+}
+
+message CompetitveMultipleClaimAck{
+	int32 seasonScore = 1;
+}

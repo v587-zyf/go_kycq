@@ -1,0 +1,60 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//战宠激活
+message PetActiveReq{
+	int32 id = 1;
+}
+message PetActiveAck{
+	int32 id = 1;
+	PetInfo petInfo = 2;
+}
+
+//战宠升级
+message PetUpLvReq{
+	int32 id = 1;
+	int32 itemId = 2;
+	int32 itemNum = 3;
+}
+message PetUpLvAck{
+	int32 id = 1;
+	int32 lv = 2;
+	int32 exp = 3;
+}
+
+//战宠升阶
+message PetUpGradeReq{
+	int32 id = 1;
+}
+message PetUpGradeAck{
+	int32 id = 1;
+	int32 grade = 2;
+}
+
+//战宠突破
+message PetBreakReq{
+	int32 id = 1;
+}
+message PetBreakAck{
+	int32 id = 1;
+	int32 break = 2;
+}
+
+//战宠出战、休息
+message PetChangeWearReq{
+	int32 id = 1;
+}
+message PetChangeWearAck{
+	int32 petId = 1; //已穿戴战宠id,0表示卸下
+}
+
+//战宠附体
+message PetAppendageReq{
+	int32 petId = 1; //战宠id
+}
+message PetAppendageAck{
+	int32 petId = 1; //战宠id
+	int32 lv = 2;	 //等级
+}

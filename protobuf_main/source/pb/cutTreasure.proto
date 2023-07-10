@@ -1,0 +1,14 @@
+syntax = "proto3";
+package pb;
+
+message CutTreasureUpLvReq{}
+message CutTreasureUpLvAck{
+	int32 cutTreasureLv = 1;
+}
+
+message CutTreasureUseReq{}
+message CutTreasureUseAck{
+
+	int32 useTime 	= 1;	//使用时间
+	int32 cdEndTime = 2;	//cd结束时间
+}

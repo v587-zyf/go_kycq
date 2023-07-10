@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pb;
+import "shabakeCross.proto";
+
+message ShaBaKeInfoReq{}
+
+message ShaBaKeInfoAck{
+  repeated Info WinGuildUserInfo = 1;
+  string firstGuildName = 2;
+  int32  isEnd = 3;
+  int32  winGuildServerId = 4;
+}
+
+
+// 战斗
+message EnterShaBaKeFightReq {}
+
+message ShaBaKeFightResultNtf{
+	int32 rank = 1;		//公会排名
+	int32 userRank = 2; //个人排名
+}
+
+message ShabakeIsOpenNtf{
+	bool isOpen = 1;
+}

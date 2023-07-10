@@ -1,0 +1,30 @@
+syntax = "proto3";
+package pb;
+
+
+message PreviewFunctionLoadReq {}
+
+message PreviewFunctionLoadAck {
+	repeated int32 haveBuyIds = 1;
+	repeated int32 havePointIds = 2; //前端展示红点用
+}
+
+
+
+message PreviewFunctionGetReq {
+    int32 id  = 1;
+}
+
+message PreviewFunctionGetAck {
+	int32 id  = 1;
+	repeated int32 haveBuyIds = 2;
+	repeated int32 havePointIds = 3; //前端展示红点用
+}
+
+message PreviewFunctionPointReq{
+	int32 id = 1;
+}
+
+message PreviewFunctionPointAck{
+	repeated int32 havePointIds = 1; //前端展示红点用
+}

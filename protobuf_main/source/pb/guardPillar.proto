@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//守卫龙柱进入
+message EnterGuardPillarReq{
+	int32 stageId = 1;
+}
+
+//守卫龙柱结算
+message GuardPillarResultNtf{
+	int32 stageId 	= 1;
+	int32 rounds 	= 2;	//波数
+	int32 rank 		= 3;	//伤害排名
+	GoodsChangeNtf roundGoods = 4;	//波数奖励
+	GoodsChangeNtf rankGoods = 5;	//伤害排行奖励
+}

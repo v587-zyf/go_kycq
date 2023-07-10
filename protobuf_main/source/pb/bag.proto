@@ -1,0 +1,125 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message BagInfoReq{
+
+}
+
+message BagInfoNtf{
+	int32 bagMax		= 1;	//背包格子数量
+	repeated Item items = 2;   //物品信息
+	int32 haveBuyTimes = 3; //购买了几次扩容背包
+}
+
+//背包扩容
+message BagSpaceAddReq{
+}
+
+message BagSpaceAddAck{
+	int32 bagMax	= 1;		//背包格子
+}
+
+
+//背包整理
+message BagSortReq{
+}
+
+message BagSortAck{
+	repeated Item items = 1;   //物品信息
+}
+
+//使用宝箱
+message GiftUseReq{
+	int32 itemId =1;		//道具Id
+	int32 position = 2;		//道具位置
+	
+}
+
+message GiftUseAck{
+	int32 result = 1;		//道具使用结果
+}
+
+//装备回收
+message EquipRecoverReq{
+	repeated int32 positions= 1 ; //装备位置
+}
+
+message EquipRecoverAck{
+  	GoodsChangeNtf goods= 1;  //物品变化
+}
+
+
+message ItemUseReq{
+
+	int32 itemId = 1;
+	int32 itemNum = 2;
+	int32 heroIndex = 3;
+}
+
+message ItemUseAck {
+	GoodsChangeNtf goods= 1;  //物品变化
+}
+
+
+
+//装备销毁
+message EquipDestroyReq{
+    int32 positions= 1 ; //装备位置
+	int32 count   = 2; //回收的数量
+}
+
+message EquipDestroyAck{
+  	GoodsChangeNtf goods= 1;  //物品变化
+}
+
+
+//仓库相关协议
+
+message WarehouseInfoReq{
+
+}
+
+message WarehouseInfoNtf{
+	int32 bagMax		= 1;	//背包格子数量
+	repeated Item items = 2;   //物品信息
+	int32 haveBuyTimes = 3; //购买了几次扩容仓库背包
+}
+
+//仓库扩容
+message WareHouseSpaceAddReq{
+}
+
+message WareHouseSpaceAddAck{
+	int32 bagMax	= 1;		//背包格子
+}
+
+//仓库移入物品
+message WarehouseAddReq{
+    repeated int32 positions= 1 ; //装备位置
+}
+
+
+message WarehouseAddAck{
+	repeated Item items = 1;   //物品信息
+}
+
+//仓库移出物品
+message WarehouseShiftOutReq{
+    repeated int32 positions= 1 ; //装备位置
+}
+
+
+message WarehouseShiftOutAck{
+	repeated Item items = 1;   //物品信息
+    GoodsChangeNtf goods= 2;  //物品变化
+}
+
+//仓库整理
+message WarehouseSortReq{}
+
+message WarehouseSortAck{
+	repeated Item items = 1;   //物品信息
+}
+

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//天赋升级
+message TalentUpLvReq{
+	int32 heroIndex = 1;
+	int32 id		= 2;	//talent表id
+	bool isMax		= 3;	//升至满级
+}
+message TalentUpLvAck{
+	int32 heroIndex = 1;
+	int32 id		= 2;	//talent表id
+	TalentInfo talentInfo = 3;
+}
+
+//天赋重置
+message TalentResetReq{
+	int32 heroIndex = 1;
+	int32 id = 2;		//talentWay表id(所有填-1)
+}
+message TalentResetAck{
+	int32 heroIndex = 1;
+	int32 id		= 2;	//talentWay表id
+	TalentInfo talentInfo = 3;
+}

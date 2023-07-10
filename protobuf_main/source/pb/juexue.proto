@@ -1,0 +1,14 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+
+// 绝学升级
+message JuexueUpLevelReq{
+	int32 id 		= 1;	//绝学id
+}
+
+message JuexueUpLevelAck{
+	Juexue juexue 	= 1;	//绝学信息
+}

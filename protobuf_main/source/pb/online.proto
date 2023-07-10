@@ -1,0 +1,24 @@
+syntax = "proto3";
+package pb;
+
+//获取在线奖励信息
+message GetOnlineAwardInfoReq {
+	
+}
+
+//获取在线奖励信息
+message GetOnlineAwardInfoAck {
+	int32 onlineTime 			= 1;	//今日在线时间
+	repeated int32 getAwardId 	= 2;	//已领奖Id
+}
+
+//领取在线奖励
+message GetOnlineAwardReq {
+	int32 awardId  = 1;				//在线奖励Id
+}
+
+//领取在线奖励
+message GetOnlineAwardAck {
+	
+	repeated int32 getAwardId 	= 1;	//已领奖Id
+}

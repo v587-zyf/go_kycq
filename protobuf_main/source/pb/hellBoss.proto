@@ -1,0 +1,47 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+//加载信息
+message HellBossLoadReq{
+	int32 floor = 1;
+}
+message HellBossLoadAck{
+	int32 floor = 1;
+	repeated HellBossNtf list = 2;
+}
+
+//购买次数
+message HellBossBuyNumReq{
+	bool use 	 = 1; //是否购买并使用
+	int32 buyNum = 2; //购买次数
+}
+message HellBossBuyNumAck{
+	int32 buyNum = 1;
+}
+
+//推送挑战次数
+message HellBossDareNumNtf{
+	int32 dareNum = 1;
+}
+
+//战斗
+message EnterHellBossFightReq{
+	int32 stageId = 1;
+}
+message HellBossFightResultNtf{
+	int32 stageId			= 1;	
+	int32 result 			= 2;	//战斗结果
+	int32 dareNum			= 3;	//奖励次数
+	GoodsChangeNtf goods 	= 4;  	//掉落物品
+	BriefUserInfo winner	= 5;	//归属者名称
+	bool isHelper			= 6;	//是否协助者
+	int32 helpNum			= 7;	//协助次数
+}
+
+message HellBossNtf{
+	int32 stageId 		= 1;	//怪物id
+	float blood 		= 2;	//血量
+	int64 reliveTime 	= 3;	//复活时间
+}

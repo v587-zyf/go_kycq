@@ -1,0 +1,301 @@
+extends layout
+
+block css
+  link(rel='stylesheet', href='css/bootstrap.min.css')
+  link(rel='stylesheet', href='css/jquery.jsonview.min.css')
+  link(rel='stylesheet', href='css/style.css')
+  link(rel='stylesheet', href='css/jquery-ui.css')
+append js
+  script(src='js/jquery.min.js')
+  script(src='js/jquery-ui.min.js')
+  script(src='js/bootstrap.min.js')
+  script(src='js/jquery.jsonview.min.js')
+  script(src='js/lodash.min.js')
+  script(src='js/long.js')
+  script(src='js/bytebuffer.js')
+  script(src='js/protobuf.js')
+  script(src='js/jsoneditor.min.js')
+  script(src='js/jquery.smart_autocomplete.js')
+  script(src='js/qs_score.js')
+
+
+block content
+  nav.navbar.navbar-inverse(role="navigation")
+    .navbar-header
+      a.navbar-brand #{title} Proto Test
+      a(class="navbar-brand" href='help.html' target="_blank") Help
+
+  .container
+    .row
+      .col-sm-3.sidebar
+        .panel-group#accordion
+          .form-group
+            select#selectLogin.form-control
+              option(value="") 请选择服务器
+              each wsUrl , k in config.envs
+                option(value=k) #{k}
+              input#commandf(placeholder="搜索协议").form-control
+
+          each actions, group in categories
+            .panel.panel-default(data-toggle="collapse" data-parent="#accordion" href="#service"+group)
+              .panel-heading
+                h4.panel-title #{group}
+            div(id="service"+group).panel-collapse.collapse.in
+              .panel-body
+                ul.nav.nav-pills.nav-stacked.myscrollable
+                  each action in actions
+                    li: a(id=group+"_"+action).action= action
+      .col-sm-9
+        a#contentHeader 返回上一条命令
+        hr(style="margin-bottom:5px !important; margin-top:5px !important;")
+        #requestArea
+        #responseArea
+  script.
+
+    var allCommonds = !{JSON.stringify(categories['commands'])}
+    //- $("#commandf").autocomplete(
+    //- {
+    //-   source:allCommonds,
+    //-   autoFocus : true,
+    //-   select :function (e,ui){
+    //-     var value = ui.item.value;
+    //-     var elmt = $("#commands_"+value)
+    //-     if (elmt){
+    //-       elmt.click()
+    //-       $("#commandf").blur()
+    //-     }
+
+    //-   }
+    //- }
+    //- )
+    $("#commandf").smartAutoComplete({
+      source:allCommonds,
+      filter: function(term, source){
+        var filtered_and_sorted_list =  $.map(source, function(item){
+          var score = item.toLowerCase().score(term.toLowerCase());
+          if(score > 0)
+            return { 'name': item, 'value': score }
+          }).sort(function(a, b){ return b.value - a.value });
+
+          return $.map(filtered_and_sorted_list, function(item){
+            return item.name;
+          });
+        }
+      }
+    )
+    $("#commandf").bind({
+      itemSelect :function (e,item){
+        var value = item.innerHTML;
+        var elmt = $("#commands_"+value)
+        if (elmt){
+          elmt.click()
+          $("#commandf").blur()
+        }
+      }
+    })
+
+    var baseUrl = "";
+    var session = "";
+    var format = "#{format}";
+    var builder, ProtoBuf, idMap, nameMap;
+    var transSeqId = 1;
+    var ws;
+    var config = !{JSON.stringify(config)};
+    var envsObj = config.envs;
+
+    function startAWs(selectedWsUrl){
+      if (!selectedWsUrl)
+        return;
+      if (ws != null)
+        ws.close();
+      ws = new WebSocket(selectedWsUrl);
+      ws.onerror = function(e) {
+        console.log(e);
+      };
+      ws.onclose = function(){
+        $('#responseArea').JSONView({error:"connect closed"});
+      }
+      ws.onopen = function() {
+        ws.binaryType = 'arraybuffer';
+        $('#responseArea').JSONView({message:"connect opened->"+selectedWsUrl});
+      }
+      ws.onmessage = function(e) { onRecvWsMessage(e.data) }
+    }
+
+    $(function() {
+      $('#contentHeader').on('click',backLatestReq)
+      $('.action').on('click', onActionClick);
+      ProtoBuf = dcodeIO.ProtoBuf;
+      ProtoBuf.Util.fetch('js/proto.json', function(content) {
+        var obj = JSON.parse(content)
+        builder = ProtoBuf.loadJson(obj, null, 'js/proto.json');
+        idMap = obj.idMap || {};
+        nameMap = {};
+        for (var key in idMap) {
+          nameMap[idMap[key]] = +key;
+        }
+      })
+
+
+      $('#selectLogin').change(function(e){
+        e.preventDefault();
+        var env = $(this).val();
+        if(env && env.length>0){
+          startAWs(envsObj[env].ws);
+          baseUrl = envsObj[env].http;
+        }
+      })
+    });
+
+        //- $('#responseArea').JSONView({name: e.target.id, a:'1', b:'2', c: {d:1}});
+
+    function pushHistory(cmd){
+      var historyCmdsStr = localStorage.getItem("wstest_history_cmds")
+      var historyCmds = []
+      if (historyCmdsStr && historyCmdsStr.length>0){
+        historyCmds = historyCmdsStr.split(",")
+      }
+      if (historyCmds[0]==cmd){
+        return
+      }
+      historyCmds.unshift(cmd)
+      localStorage.setItem("wstest_history_cmds",historyCmds.join(","))
+    }
+    function popHistory(){
+      var historyCmdsStr = localStorage.getItem("wstest_history_cmds")
+      if (historyCmdsStr && historyCmdsStr.length>0){
+        var historyCmds = historyCmdsStr.split(",")
+        var latestCmd = historyCmds.shift()
+        localStorage.setItem("wstest_history_cmds",historyCmds.join(","))
+        return latestCmd
+      }
+      return ""
+    }
+    function backLatestReq(){
+      var latestCmd = popHistory()
+      if (latestCmd && latestCmd.length>0){
+        var elmt = $("#commands_"+latestCmd)
+        if (elmt){
+          elmt.click()
+        }
+      }
+    }
+    function onActionClick(e) {
+      var strs = e.target.id.split('_');
+      //$('#contentHeader').text(e.target.id.replace('_', '/'));
+      $.ajax({url:"info?service="+strs[0]+"&action="+strs[1]}).done(function(data) {
+        $("#responseArea").html('');
+        $paramForm = $("#requestArea");
+        $paramForm.html(data);
+        $paramForm.find("#submit").on('click', function(e) {
+          var params = {};
+          $paramForm.find('.form-control').each(function() {
+            var self = $(this);
+            var pbtype = self.attr('pbtype');
+            var name = self.attr('name');
+            var value = self.val();
+            if (value !== "") {
+              params[name] = pbtype === "string" ? value : +value;
+            }
+
+            if (pbtype==="bool" && value){
+              params[name] = value.toLowerCase().trim()=='true' || !!+value
+            }
+          })
+          if (strs[0] == 'commands'){
+            //直接取jsoneditor 的数据
+            params = editor.getValue();
+            localStorage.setItem(strs[1],JSON.stringify(params,null,2))
+            pushHistory(strs[1])
+            commandRequest(strs[1], params);
+          }else{
+            actionRequest(strs[0]+"/"+strs[1], params);
+          }
+        });
+      }).fail(function(jqXHR, textStatus) {
+        $("#requestArea").html(textStatus);
+      });
+    }
+
+    // 直接发送ws协议
+    function commandRequest(command, param) {
+      console.log("client >> server: " + command);
+      console.dir(param);
+      var id = nameMap[command];
+      var buf = new dcodeIO.ByteBuffer();
+      buf.writeUint16(id);
+      buf.writeUint32(transSeqId++);
+      buf.writeUint32(0);
+
+      var ReqType = builder.build('pb.' + command);
+      var data = new ReqType(param);
+      buf.append(data.encode());
+      buf.flip();
+      ws.send(buf.toArrayBuffer());
+    }
+
+    function onRecvWsMessage(data) {
+      var buf = dcodeIO.ByteBuffer.wrap(data);
+      var cmdId = buf.readUInt16()
+      var transId = buf.readUInt32()
+      var code = buf.readUint32()
+      var command = idMap[cmdId];
+      if (!command){
+        console.log("miss command for Msg " + cmdId + " :buf :"+buf)
+        return;
+      }
+      var AckType = builder.build('pb.' + command);
+      var ack = AckType.decode(buf);
+
+      var obj = JSON.parse(ack.encodeJSON()); // 去除Message类型，变成Object
+      console.log("client << server:" + command)
+      if (transId > 0)
+        $('#responseArea').JSONView(obj);
+      console.dir(obj);
+      if (command=="LoginAck"){
+        var old = localStorage.getItem("EnterGameReq")
+        var enterGameObj={}
+        if (old && old.length>0){
+          enterGameObj = JSON.parse(old)
+        }
+        enterGameObj.openId=obj.openId
+        enterGameObj.loginKey=obj.loginKey
+        localStorage.setItem("EnterGameReq",JSON.stringify(enterGameObj,null,2))
+        commandRequest("GetServerListReq",{appId:"",isTest:0})
+      }
+      if (command=="GetServerListAck"){
+        var serverId = 1
+        commandRequest("GetServerAddrReq",{serverId:serverId})
+      }
+      if (command=="GetServerAddrAck"){
+        var addr = "ws://"+obj.addr.trim()+"/ws"
+        startAWs(addr)
+      }
+    }
+
+    // service方式发送
+    function actionRequest(action, param) {
+      $form = $('#requestArea form')
+      var reqType = $form.attr('request');
+      var resType = $form.attr('response');
+      var ReqType = builder.build('pb.' + $form.attr('request'));
+      var p = new ReqType(param);
+      $.post({url: baseUrl + action + '?_sid=' + session}, {p: p.encode().toBase64()}).done(function(data, __, jqXHR) {
+        if (jqXHR.status != 200 && jqXHR.status != 266) {
+          $("#responseArea").html(jqXHR.status + '<br>' + jqXHR.responseText);
+          return;
+        }
+        var errMsgType = config.errorMessageType || 'pb.Msg';
+        var ResType = jqXHR.status == 200 ? builder.build('pb.' + $form.attr('response')) : builder.build(errMsgType);
+        var message = ResType.decode(data, 'base64');
+
+        var obj = JSON.parse(message.encodeJSON()); // 去除Message类型，变成Object
+
+        if (action == config.loginRouter && config.sessionField)
+          session = _.get(obj, config.sessionField);
+
+        $("#responseArea").JSONView(message.encodeJSON());
+      }).fail(function(jqXHR, textStatus) {
+        $("#responseArea").html(textStatus);
+      })
+    }

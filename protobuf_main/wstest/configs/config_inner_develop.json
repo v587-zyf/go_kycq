@@ -1,0 +1,12 @@
+{
+    "name": "",
+    "format": "base64",
+    "port":3501,
+    "wsUrls":{
+      "innerDev": "ws://192.168.5.25:9951/ws",
+      "Liang":"ws://192.168.5.124:9950/ws",
+      "Wang":"ws://192.168.5.127:9950/ws",
+      "zhanglingshuang":"ws://192.168.5.176:9951/ws",
+      "wangqiang":"ws://192.168.5.170:9950/ws"
+    }
+}

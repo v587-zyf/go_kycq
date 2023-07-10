@@ -1,0 +1,43 @@
+syntax = "proto3";
+package pb;
+
+
+
+message GuildBonfireLoadReq{}
+
+message GuildBonfireLoadAck{
+   float expAddPercent = 1; //篝火经验总加成
+   repeated WoodPeople peopleList = 2; //木材投放次数
+}
+
+
+
+message GuildBonfireAddExpReq{
+	int32 consumptionType = 1;
+}
+
+message GuildBonfireAddExpAck{
+   float expAddPercent = 1; //篝火经验总加成
+   repeated WoodPeople  peopleList = 2; //木材投放次数
+}
+
+
+message WoodPeople {
+	string nickName = 1; //昵称
+	string avatar = 2; //头像
+	int32 times  = 3; //投放次数 
+	int32 types = 4;
+}
+
+
+//进入战斗
+message EnterGuildBonfireFightReq{}
+
+message GuildBonfireFightNtf{
+	int32 result = 1; //挑战结果
+}
+
+
+message GuildBonfireOpenStateNtf{
+	bool isOpen = 1;
+}

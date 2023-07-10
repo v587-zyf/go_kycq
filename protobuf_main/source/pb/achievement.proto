@@ -1,0 +1,50 @@
+syntax = "proto3";
+package pb;
+
+
+message AchievementLoadReq{
+}
+
+message AchievementLoadAck{
+	repeated AchievementInfo achievementInfo = 1; //成就信息
+	int32  allPoint = 2;  //成就积分
+	repeated int32  Medal = 3; //激活的勋章
+}
+
+
+//领奖
+message AchievementGetAwardReq{
+	repeated int32 id = 1;//cfg id
+}
+
+message AchievementGetAwardAck{
+	repeated AchievementInfo achievementInfo = 1; //成就信息
+	int32  allPoint = 2;  //成就积分
+}
+
+
+//激活徽章
+message ActiveMedalReq{
+  int32 id = 1;
+}
+
+message ActiveMedalAck{
+	int32  allPoint = 1;  //成就积分
+	repeated int32  Medal = 2; //激活的勋章
+}
+
+
+
+
+message AchievementInfo{
+    int32   conditionType = 1;
+	int32   canGetId = 2; //-1表示这个类型的奖励领到头了
+	int32   process = 3; //当前任务完成的数量
+	int32   isGetAllAward = 4; //是否领完当前conditionType所有的奖励
+}
+
+message AchievementTaskInfoNtf{
+	int32 taskId = 1;
+	int32 process = 2;
+	int32 conditionType = 3;
+}

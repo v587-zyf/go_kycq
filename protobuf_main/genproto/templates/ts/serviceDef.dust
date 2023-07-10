@@ -1,0 +1,5 @@
+    {name}: {
+        r: "{controller}/{action}",
+        ReqType: {package}.{request},
+        ResType: {package}.{response},
+    },

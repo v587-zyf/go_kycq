@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+//成长基金购买
+message GrowFundBuyReq{}
+message GrowFundBuyAck{
+	bool isBuy = 1;
+}
+
+//成长基金领取
+message GrowFundRewardReq{
+	int32 id  = 1;
+}
+message GrowFundRewardAck{
+	int32 id = 1;
+	GoodsChangeNtf goods = 2;
+}

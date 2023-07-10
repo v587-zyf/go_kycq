@@ -1,0 +1,163 @@
+syntax = "proto3";
+package pb;
+
+import "common.proto";
+
+message AuctionInfoReq {
+    int32 auctionType = 1; // 拍卖类型，1-世界拍卖, 2-门派拍卖
+}
+
+message AuctionInfoNtf {
+    int32 auctionType = 1; // 拍卖类型
+    repeated AuctionItemInfo auctionInfos = 2;
+}
+
+// 竞拍物品信息
+message AuctionItemInfo {
+    int64 auctionId = 1; // 拍卖id
+    int32 itemId = 2; // 神器itemId
+    int64 auctionTime = 3; // 开始拍卖的时间
+    int32 auctionDuration = 4; // 拍卖时长
+    int32 nowBidPrice = 5; // 现在竞拍价格
+    int64 nowBidUserId = 6; // 现在竞拍玩家id
+    int32 auctionType = 7; // 拍卖类型 1-世界， 2-门派 3-全区服
+    string nowBidderNickname = 8; // 现在竞拍者的昵称
+    string nowBidderAvatar = 9; // 现在竞拍者的头像
+    int32 auctionSrc = 10; // 拍卖物品来源 0-玩家，1-门派流拍到世界，2-门派拍卖，3-系统拍卖
+	repeated int32 bidGuildId = 12; //可竞拍门派
+	int32 dropState = 13; //掉落状态 是从哪里掉落的
+	repeated int32 haveBidUsers = 14; //竞拍过的玩家
+	int64  finBidTimes = 15;//成交时间
+	int32  itemCount = 16;  //上架数量
+	int32  putAwayPrice = 17; //上架价格
+}
+
+// 竞拍物品信息请求
+message BidInfoReq {
+    int32 auctionId = 1;
+    int32 auctionType = 2;
+}
+
+// 竞拍物品信息结果ntf
+message BidInfoNtf {
+    int32 auctionType = 1;
+    AuctionItemInfo auctionInfo = 2;
+}
+
+// 竞拍请求
+message BidReq {
+    int32 auctionType = 1;
+    int64 auctionId = 2;
+    int32 isBuyNow = 3; // 是否是一口价，0-否，1-是（目的是和一口价统一协议）
+}
+
+// 竞拍结果ntf
+message BidNtf {
+    int32 auctionType = 1;
+    AuctionItemInfo auctionInfo = 2;
+    int32 code = 3; // 1-成功，2-价格达到一口价，直接购买 3-道具已拍卖，4-价格已更新，5-元宝不足，6-其他异常, 7-不在竞拍时间内, 8-您当前竞价最高, 9-竞价低于起拍价
+	int32 isBuyNow = 4; // 是否是一口价，0-否，1-是（目的是和一口价统一协议）
+	int32 auctionId = 5;
+}
+
+// 我的竞拍物品req
+message MyBidReq {}
+
+// 我的竞拍物品ntf
+message MyBidNtf {
+    repeated AuctionItemInfo myBidInfos = 1; // 我的竞拍物品信息
+}
+
+// 竞拍物品价格更新ntf
+message BidItemUpdateNtf {
+    AuctionItemInfo newInfo = 1;
+    int32 itemStatus = 2; // 1-竞拍中，2-竞拍时间到，售出， 3-一口价售出
+	int32 lastBidUserId = 3;			//上一个竞拍的玩家id
+	int32 auctionId = 4;
+	int32 auctionType = 5;
+}
+
+// 拍卖物品req
+message AuctionPutawayItemReq {
+    int32 itemId = 1; 
+	int32 count  = 2;
+	int32 position = 3; //背包位置
+	int32 price   = 4;  //自选价格
+}
+
+// 拍卖物品ntf
+message AuctionPutawayItemNtf {
+    AuctionItemInfo auctionInfos = 1;
+    int32 code = 2; // 1-success, 2-fail, 操作数据库失败， 3-没找到配置信息， 4-背包中无此神器, 5-不能拍卖，6-不在上架时间内
+	GoodsChangeNtf goods = 3;
+}
+
+
+
+// 竞拍成功公告
+message BidSuccessInfo {
+    string nickname = 1; // 竞拍玩家昵称
+    string bidItemName = 2; // 竞拍物品名字
+}
+
+message BidSuccessNoticeNtf {
+    repeated BidSuccessInfo noticeInfos = 1;
+}
+
+
+//拍卖次数购买
+message AuctionBuyTimesReq{
+	int32 itemId = 1;
+
+}
+message AuctionBuyTimesAck{
+	int32 CanBuyTimes = 1;  
+	GoodsChangeNtf goods = 2;
+}
+
+
+
+// 我的竞拍物品req
+message MyPutAwayItemInfoReq {}
+
+// 我的竞拍物品ntf
+message MyPutAwayItemInfoAck {
+    repeated AuctionItemInfo myBidInfosNotInBid = 1; // 我的上架非竞拍中物品信息最近30条
+	repeated AuctionItemInfo myBidInfosInBid = 2; // 我的上架正在竞拍中物品信息
+}
+
+// 我竞拍过物品的信息
+message MyBidInfoItemReq {}
+
+// 我竞拍过物品的信息
+message MyBidInfoItemAck {
+    repeated AuctionBidInfo myBidInfos = 1; // 我的上架非竞拍中物品信息
+}
+
+// 竞拍物品信息
+message AuctionBidInfo {
+    int64	Id            =1;   
+    int32	UserId        =2; //竞拍的玩家id
+    int32	AuctionId     =3; //门派or世界拍卖行对应表id)
+    int32	AuctionType   =4; //拍卖行类型 1:世界拍卖行 2:门派拍卖行
+    int32	ItemId         =5;//物品id
+    int64	FirstBidTime   =6;//第一次竞拍的时间
+    int64	FinallyBidTime =7;//最后竞拍的时间
+    int32	State          =8;//竞拍状态 1:竞拍中 2:已售出 3:流拍
+    int64	ExpireTime     =9;//数据删除时间，物品售出或者流拍后数据保留7天
+	int32   ItemCount      =10;//数量
+}
+
+message RedPointStateNtf{
+	int32 type  = 1; //红点类型
+	int32 isBright = 2; //是否亮
+}
+
+
+message ConversionGoldIngotReq{
+   int32  num = 1; // 兑换数量
+}
+
+message ConversionGoldIngotAck{
+	int32 haveUseRecharge = 1; //已使用掉的充值额度
+}

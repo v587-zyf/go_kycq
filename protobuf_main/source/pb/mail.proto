@@ -1,0 +1,61 @@
+syntax = "proto3";
+package pb;
+import "common.proto";
+
+message MailReadReq {
+  int32 id = 1;
+}
+message MailReadAck {
+  int32 id = 1;
+}
+message MailRedeemReq {
+  int32 id = 1;
+}
+message MailRedeemAck {
+  int32 id = 1;
+  GoodsChangeNtf goodsChanges = 2;
+  MailNtf mail = 3;
+}
+message MailRedeemAllReq {
+}
+message MailRedeemAllAck {
+  repeated int32 ids = 1;
+  GoodsChangeNtf goodsChanges = 2;
+  repeated MailNtf mail = 3;
+}
+
+message MailNtf {
+  int32    id          = 1;
+  int32    type        = 2;
+  string   sender      = 3;
+  string   title       = 4;
+  string   Content     = 5;
+  int32    status      = 6;
+  int32    expireAt    = 7;
+  int32    createdAt   = 8;
+  int32    redeemedAt  = 9;
+  repeated string args = 11;
+  repeated itemUnit items  = 12;
+}
+
+message MailLoadReq {
+}
+
+message MailLoadAck {
+  repeated MailNtf mails = 1;
+}
+
+message MailDeleteReq {
+  int32 id = 1;
+}
+
+message MailDeleteAck {
+  MailNtf mail = 1;
+}
+
+message MailDeleteAllReq {
+}
+
+message MailDeleteAllAck {
+  repeated MailNtf mails = 1;
+}
